@@ -1,4 +1,3 @@
-"use"
 import Footer from '@/components/footer'
 import HeaderOne from '@/components/header/headerOne'
 
