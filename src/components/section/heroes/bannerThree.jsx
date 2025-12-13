@@ -19,11 +19,11 @@ const BannerThree = () => {
                 <div className='container'>
                     <div className="absolute top-1/2 -translate-y-1/2">
                         <h1 className='text-white [font-size:_clamp(60px,10vw,150px)] font-extrabold leading-[90%]'>
-                            Shaping Interior <br />
-                            <TextTyped text={['Excellence', 'Sophistication', 'Elegance', 'Brilliance', 'Harmony']} />
+                            Всего за 55 дней <br />
+                            <span className={"text-[#253B2F]"}><TextTyped text={['Свой  дом', 'Своя  баня', 'Под  ключ', 'Без  стройки', 'В  любой  сезон']} /></span>
                         </h1>
                         <Link href={"/project-archive"} className='mt-16 inline-block'>
-                            <ButtonFill className={`sm:px-10 px-4 after:left-0 after:bg-secondary text-primary-foreground border-secondary hover:text-secondary-foreground`}> Explore Our Portfolio <RightArrow width={"35"} height={"22"}/> </ButtonFill>
+                            <ButtonFill className={`sm:px-10 px-4 after:left-0 after:bg-secondary text-primary-foreground border-secondary hover:text-secondary-foreground`}> Выбрать дом <RightArrow width={"35"} height={"22"}/> </ButtonFill>
                         </Link>
                     </div>
                 </div>

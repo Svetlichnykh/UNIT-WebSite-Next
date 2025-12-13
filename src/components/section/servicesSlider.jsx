@@ -20,11 +20,11 @@ const ServicesSlider = ({ text_muted, bg_muted }) => {
         <section className='pt-20'>
             <div className='container-fluid'>
                 <SectionTitle
-                    sectionName={"Services"}
-                    sectionTitle={"Explore Our Design Offerings"}
-                    sectionDesc={"Exploring Excellence in Every Meticulous Design Detail"}
+                    sectionName={"Сервис"}
+                    sectionTitle={"Полный сервис «одного окна»"}
+                    sectionDesc={"Мы делимся нашим опытом бесплатно и помогаем от участка до новоселья"}
                     link={"/services"}
-                    button_text={"View All Services"}
+                    button_text={"Оставить заявку"}
                     text_muted={text_muted}
                     bg_muted={bg_muted}
                 />
