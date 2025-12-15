@@ -26,18 +26,5 @@ export const galleryData = [
         img: img_3,
         link: "/project-single"
     },
-    {
-        id: "04",
-        img_title: "Rustic Comfort",
-        img_desc: "Exploring Excellence in Every Meticulous Design Detail Exploring Excellence in Every Meticulous Design Detail",
-        img: img_4,
-        link: "/project-single"
-    },
-    {
-        id: "05",
-        img_title: "Urban Living Space",
-        img_desc: "Exploring Excellence in Every Meticulous Design Detail Exploring Excellence in Every Meticulous Design Detail",
-        img: img_5,
-        link: "/project-single"
-    },
+
 ]

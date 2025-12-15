@@ -5,24 +5,41 @@
 html {
     scroll-behavior: smooth;
 }
+/* eslint-disable */
+@font-face {
+    font-family: "Montserrat-bold";
+    src: url("/fonts/Montserrat-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Gotham Pro";
+    src: url("/fonts/Gotham Pro.woff2") format("woff2");
+}
+/* eslint-enable */
 
 body {
     background-color: var(--background);
-    font-family: var(--plus-jakarta-sans), serif;
+    font-family: Gotham Pro, serif;
     font-size: 18px;
     line-height: 160%;
     font-weight: 400;
 }
 
+h1, h2, h3 {
+    font-family: "Montserrat-bold", serif !important;
+}
+
 @layer base {
     :root {
+
+        --family: "Montserrat-bold", serif;
         --background: #F9FFFC;
 
-        --primary: #253B2F;
-        --primary-foreground: #253B2F;
+        --primary: #2c2c2a;
+        --primary-foreground: #2c2c2a;
 
-        --secondary: #D2E0D9;
-        --secondary-foreground: #D2E0D9;
+        --secondary: #fbb900;
+        --secondary-foreground: #fbb900;
 
         --muted: #32393E;
 
@@ -42,8 +59,8 @@ body {
         --primary: #253B2F;
         --primary-foreground: #fff;
 
-        --secondary: #D2E0D9;
-        --secondary-foreground: #D2E0D9;
+        --secondary: #fbb900;
+        --secondary-foreground: #fbb900;
 
         --rgba-color: rgba(255, 255, 255, 0.20);
         --primary-rgba: rgb(108, 117, 125, 0.20);
