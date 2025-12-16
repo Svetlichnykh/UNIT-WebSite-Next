@@ -62,18 +62,18 @@ const ProjectsSlider = ({ text_muted, bg_muted }) => {
                                 <SwiperSlide key={id}>
                                     <div className='bg-cover bg-no-repeat pb-[70px] lg:pt-[758px] pt-[500px] max-w-[1550px] after:contents-[""] after:absolute after:top-0 after:right-0 after:w-full after:h-full after:bg-bottom-liner after:z-[1] after:max-w-[1550px] ml-auto' style={{ backgroundImage: `url(${project_img.src})` }}>
                                         <div className='flex xl:justify-end justify-center -mt-36 xl:-mt-0 5xl:gap-20 3xl:gap-14 sm:gap-10 gap-4 max-w-[1166px] relative z-10 ml-auto pr-7.5'>
-                                            <h6 className='flex flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Clients:
-                                                <span className='text-lg font-normal'>{client}</span>
+                                            <h6 className='font-[family-name:var(--family)] flex flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Clients:
+                                                <span className='font-[family-name:var(--family)] text-lg font-normal font-[family-name:var(--family-gotham)]'>{client}</span>
                                             </h6>
 
-                                            <h6 className='sm:flex hidden flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Area:
-                                                <span className='text-lg font-normal'>{area}</span>
+                                            <h6 className='font-[family-name:var(--family)] sm:flex hidden flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Area:
+                                                <span className='text-lg font-normal font-[family-name:var(--family-gotham)]'>{area}</span>
                                             </h6>
-                                            <h6 className='sm:flex hidden flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap '>Project year:
-                                                <span className='text-lg font-normal'>{project_year}</span>
+                                            <h6 className='font-[family-name:var(--family)] sm:flex hidden flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap '>Project year:
+                                                <span className='text-lg font-normal font-[family-name:var(--family-gotham)]'>{project_year}</span>
                                             </h6>
-                                            <h6 className='flex flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Project type:
-                                                <span className='text-lg font-normal'>{project_type}</span>
+                                            <h6 className='font-[family-name:var(--family)] flex flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Project type:
+                                                <span className='text-lg font-normal font-[family-name:var(--family-gotham)]'>{project_type}</span>
                                             </h6>
                                             <Link href={"/project-archive"} className='4xl:block hidden'>
                                                 <ButtonOutline className="border-secondary text-secondary-foreground sm:px-10 px-3 whitespace-nowrap hover:border-primary">View Gallery</ButtonOutline>

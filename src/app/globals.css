@@ -25,13 +25,13 @@ body {
     font-weight: 400;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: "Montserrat-bold", serif !important;
 }
 
 @layer base {
     :root {
-
+        --family-gotham: "GothamPro", serif;
         --family: "Montserrat-bold", serif;
         --background: #F9FFFC;
 

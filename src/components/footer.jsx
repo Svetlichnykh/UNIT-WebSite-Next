@@ -6,20 +6,20 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     return (
         <footer className=' container-fluid  mx-auto '>
-            <div className=' bg-secondary '>
+            <div className=' bg-[#DDDDDD] '>
                 <div className='container'>
                     <div className='grid lg:grid-cols-3 grid-cols-1 items-center pt-[100px] pb-20'>
                         <div>
                             <Link href={""} className='text-primary-foreground'>
                                 <Logo height={"30"} width={"218"} />
                             </Link>
-                            <h5 className='xl:text-2xl text-xl font-semibold text-primary-foreground leading-160 pt-2.5 pb-3'>Shaping Interior Excellence</h5>
+                            <h5 className='font-[family-name:var(--family)] xl:text-2xl text-xl font-semibold text-primary-foreground leading-160 pt-2.5 pb-3'>Shaping Interior Excellence</h5>
                             <SocialMediaList />
                         </div>
                         <div className='mt-12 lg:mt-0 flex gap-x-10'>
                             <span className='h-[198px] w-[1px] bg-primary block my-2.5'></span>
                             <div>
-                                <h5 className='text-2xl font-extrabold block text-primary-foreground leading-160 '>Address Spain:</h5>
+                                <h5 className='font-[family-name:var(--family)] text-2xl font-extrabold block text-primary-foreground leading-160 '>Address Spain:</h5>
                                 <span className='w-[99px] h-[1px] bg-primary block my-2.5'></span>
                                 <div className=''>
                                     <p className='text-xl font-bold text-primary-foreground'>Architronix, </p>
@@ -35,7 +35,7 @@ const Footer = () => {
                         <div className='mt-12 lg:mt-0 flex gap-x-10'>
                             <span className='h-[198px] w-[1px] bg-primary block my-2.5'></span>
                             <div>
-                                <h5 className='text-2xl font-extrabold inline-block text-primary-foreground leading-160 '>Address USA:</h5>
+                                <h5 className='font-[family-name:var(--family)] text-2xl font-extrabold inline-block text-primary-foreground leading-160 '>Address USA:</h5>
                                 <span className='w-[99px] h-[1px] bg-primary block my-2.5'></span>
                                 <div className='mt-[18px]'>
                                     <p className='text-xl font-bold text-primary-foreground'>Architronix Inc, </p>
