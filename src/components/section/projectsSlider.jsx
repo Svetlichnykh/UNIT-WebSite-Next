@@ -33,7 +33,7 @@ const ProjectsSlider = ({ text_muted, bg_muted }) => {
             <div className='container-fluid '>
                 <SectionTitle
                     sectionName={"Проекты"}
-                    sectionTitle={"Реализованные проекты"}
+                    sectionTitle={"Другие проекты"}
                     sectionDesc={"Выполним индивидуальные заказы под любые запросы"}
                     button_text={"Раздел для партнеров"}
                     link={"/project-archive"}
@@ -63,7 +63,7 @@ const ProjectsSlider = ({ text_muted, bg_muted }) => {
                                     <div className='bg-cover bg-no-repeat pb-[70px] lg:pt-[758px] pt-[500px] max-w-[1550px] after:contents-[""] after:absolute after:top-0 after:right-0 after:w-full after:h-full after:bg-bottom-liner after:z-[1] after:max-w-[1550px] ml-auto' style={{ backgroundImage: `url(${project_img.src})` }}>
                                         <div className='flex xl:justify-end justify-center -mt-36 xl:-mt-0 5xl:gap-20 3xl:gap-14 sm:gap-10 gap-4 max-w-[1166px] relative z-10 ml-auto pr-7.5'>
                                             <h6 className='font-[family-name:var(--family)] flex flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Clients:
-                                                <span className='font-[family-name:var(--family)] text-lg font-normal font-[family-name:var(--family-gotham)]'>{client}</span>
+                                                <span className='text-lg font-normal font-[family-name:var(--family-gotham)]'>{client}</span>
                                             </h6>
 
                                             <h6 className='font-[family-name:var(--family)] sm:flex hidden flex-col text-2xl font-bold leading-160 text-secondary-foreground whitespace-nowrap'>Area:
@@ -89,10 +89,10 @@ const ProjectsSlider = ({ text_muted, bg_muted }) => {
                     <div className={cn(`project-pagination 3xl:max-w-[673px] max-w-[500px] w-full bg-primary xl:px-10 px-7 xl:pt-25 xl:pb-[150px] py-16 relative z-[1] xl:mt-[-271px] mt-[-100px] ${bg_muted}`)}> </div>
                     <div className='flex items-end sm:gap-5 gap-2'>
                         <div onClick={() => swiperRef.current?.slidePrev()}>
-                            <ButtonFill className={"rotate-180 h-[75px] w-[75px] sm:px-3 px-3 after:bg-secondary border-secondary hover:border-primary hover:bg-primary hover:text-secondary text-primary-foreground "}><RightArrow width={"35"} height={"22"} /></ButtonFill>
+                            <ButtonFill className={"rotate-180 h-[75px] w-[75px] sm:px-3 px-3 after:bg-secondary border-secondary hover:border-primary hover:bg-primary hover:text-secondary text-primary-foreground font-[family-name:var(--family)]"}><RightArrow width={"35"} height={"22"} /></ButtonFill>
                         </div>
                         <div onClick={() => swiperRef.current?.slidePrev()}>
-                            <ButtonFill className={cn(`h-[75px] hover:border-primary sm:px-10 px-3 after:left-0 after:${bg_muted}`)}>Next Project <RightArrow width={"35"} height={"22"} /></ButtonFill>
+                            <ButtonFill className={cn(`h-[75px] hover:border-primary sm:px-10 px-3 after:left-0 after:${bg_muted} text-white font-[family-name:var(--family)]`)}> Следующий <RightArrow width={"35"} height={"22"} /></ButtonFill>
                         </div>
                     </div>
                 </div>

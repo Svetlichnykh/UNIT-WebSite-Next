@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import DropDownMenu from './dropDownMenu'
 import MegaMenu from './megaMenu'
@@ -30,7 +31,7 @@ const BottomNavbar = ({ linkColor }) => {
             <div className='bottom-navbar flex justify-between items-center'>
                 <div>
                     <Link href="/" className={cn(`logo text-primary-foreground ${linkColor}`)}>
-                        <Logo height={"31"} width={"219"} />
+                        <Image width={"50"} height={"30"} src={"/UnitLogoOne.PNG"} alt="1" />
                     </Link>
                 </div>
                 <nav>
