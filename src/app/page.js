@@ -1,20 +1,20 @@
-import AboutOne from '@/components/section/about/aboutOne'
-import BlogSlider from '@/components/section/blogSlider'
-import Feedback from '@/components/section/feedback'
-import Gallery from '@/components/section/gallery'
-import BannerThree from '@/components/section/heroes/bannerThree'
-import ProjectsSlider from '@/components/section/projectsSlider'
-import ServicesSlider from '@/components/section/servicesSlider'
-import ShopSlider from '@/components/section/shopSlider'
-import Testimonial from '@/components/section/testimonial'
-import VideoPortfolio from '@/components/section/videoPortfolio'
-import TeamCardOne from '@/components/ui/cards/teamCardOne'
-import Counter from '@/components/ui/counter'
-import SectionTitle from '@/components/ui/sectionTitle'
-import { blogData } from '@/lib/fackData/blogData'
-import { productData } from '@/lib/fackData/productData'
-import { teamData } from '@/lib/fackData/teamData'
-import { cardSlideAnimation } from '@/lib/utils'
+import AboutOne from "@/components/section/about/aboutOne";
+import BlogSlider from "@/components/section/blogSlider";
+import Feedback from "@/components/section/feedback";
+import Gallery from "@/components/section/gallery";
+import BannerThree from "@/components/section/heroes/bannerThree";
+import ProjectsSlider from "@/components/section/projectsSlider";
+import ServicesSlider from "@/components/section/servicesSlider";
+import ShopSlider from "@/components/section/shopSlider";
+import Testimonial from "@/components/section/testimonial";
+import VideoPortfolio from "@/components/section/videoPortfolio";
+import TeamCardOne from "@/components/ui/cards/teamCardOne";
+import Counter from "@/components/ui/counter";
+import SectionTitle from "@/components/ui/sectionTitle";
+import { blogData } from "@/lib/fackData/blogData";
+import { productData } from "@/lib/fackData/productData";
+import { teamData } from "@/lib/fackData/teamData";
+import { cardSlideAnimation } from "@/lib/utils";
 
 export const metadata = {
   title: "Architronix -- Home-3",
@@ -51,35 +51,29 @@ const Home3 = () => {
       </section>
        --------- start team section */}
 
-
       <ProjectsSlider />
       <Testimonial />
 
+      {/* -------- blog slider start */}
+      <section className="pt-20">
+        <div className="container-fluid">
+          <SectionTitle
+            sectionName={"Блог"}
+            sectionTitle={"Полезная информация"}
+            sectionDesc={"Здесь Вы можете найти решение возникших вопросов"}
+          />
+        </div>
+        <div className="container lg:pt-30 2sm:pt-20 pt-14">
+          <BlogSlider data={blogData.slice(0, 4)} />
+        </div>
+      </section>
+      {/* -------- blog slider end */}
 
-        {/* -------- blog slider start */}
-        <section className='pt-20'>
-            <div className='container-fluid'>
-                <SectionTitle
-                    sectionName={"Блог"}
-                    sectionTitle={"Полезная информация"}
-                    sectionDesc={"Здесь Вы можете найти решение возникших вопросов"}
-                />
-            </div>
-            <div className='container lg:pt-30 2sm:pt-20 pt-14'>
-                <BlogSlider data={blogData.slice(0, 4)} />
-            </div>
-        </section>
-        {/* -------- blog slider end */}
+      <Feedback />
 
-        <Feedback />
-
-        {/*<ShopSlider data={productData.slice(0, 5)} />*/}
-
-
-      
-
+      {/*<ShopSlider data={productData.slice(0, 5)} />*/}
     </>
-  )
-}
+  );
+};
 
-export default Home3
+export default Home3;

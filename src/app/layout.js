@@ -7,10 +7,10 @@ import HeaderThree from "@/components/header/headerThree";
 import Footer from "@/components/footer";
 
 const plus_jakarta_sans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--plus-jakarta-sans',
-})
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--plus-jakarta-sans",
+});
 
 export const metadata = {
   title: "Architronix",
@@ -23,7 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${plus_jakarta_sans.variable}`} suppressHydrationWarning={true}>
+      <body
+        className={`${plus_jakarta_sans.variable}`}
+        suppressHydrationWarning={true}
+      >
         <div id="page-wrapper" className="!relative ">
           {/* ------ body line start */}
           <div className="w-full h-full fixed -z-[1] top-0 left-0 right-0 mx-auto page-lines">
@@ -38,9 +41,9 @@ export default function RootLayout({ children }) {
           {/* ------ body line end */}
           <ProgressCircle />
           <LayoutChildren>
-              <HeaderThree />
+            <HeaderThree />
             {children}
-              <Footer/>
+            <Footer />
           </LayoutChildren>
         </div>
       </body>
