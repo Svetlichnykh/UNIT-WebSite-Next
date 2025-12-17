@@ -1,10 +1,7 @@
-
-import PreLoading from '@/components/ui/preLoading'
+import PreLoading from "@/components/ui/preLoading";
 
 const Loading = () => {
-    return (
-        <PreLoading />
-    )
-}
+  return <PreLoading />;
+};
 
-export default Loading
+export default Loading;

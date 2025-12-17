@@ -1,15 +1,14 @@
-import Footer from '@/components/footer'
-import HeaderThree from '@/components/header/headerThree'
-
+import Footer from "@/components/footer";
+import HeaderThree from "@/components/header/headerThree";
 
 const Layout = ({ children }) => {
-    return (
-        <div>
-            <HeaderThree />
-            {children}
-            <Footer/>
-        </div>
-    )
-}
+  return (
+    <div>
+      <HeaderThree />
+      {children}
+      <Footer />
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;
