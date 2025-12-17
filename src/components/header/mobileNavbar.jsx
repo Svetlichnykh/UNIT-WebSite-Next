@@ -12,6 +12,7 @@ import Offcanvas from "./offCanvas";
 import Cart from "./cart";
 import { useSelector } from "react-redux";
 import useOverflowHidden from "@/hooks/useOverflowHidden";
+import Image from "next/image";
 
 const MobileNavbar = () => {
   const { products } = useSelector((state) => state.addToCart);
@@ -39,7 +40,12 @@ const MobileNavbar = () => {
         <div className="container-fluid ">
           <div className="flex items-center justify-between py-4">
             <Link href={"/"} className="text-primary-foreground">
-              <Logo height={"31"} width={"219"} />
+              <Image
+                width={"100"}
+                height={"35"}
+                src={"/UnitLogoTwo.png"}
+                alt=""
+              />
             </Link>
             <div>
               <nav

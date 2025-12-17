@@ -46,7 +46,7 @@ const Gallery = ({ text_muted, bg_muted }) => {
                     {img_title}
                   </Link>
                   <p
-                    className={`text-secondary-foreground font-semibold 3xl:max-w-[421px] 2xl:max-w-80 transition-all duration-700 3xl:min-w-[420px] xl:min-w-80 min-w-72 overflow-hidden  ${expendItem === id ? "opacity-100" : "sm:opacity-0 opacity-100"}`}
+                    className={`text-white font-semibold 3xl:max-w-[421px] 2xl:max-w-80 transition-all duration-700 3xl:min-w-[420px] xl:min-w-80 min-w-72 overflow-hidden  ${expendItem === id ? "opacity-100" : "sm:opacity-0 opacity-100"}`}
                   >
                     {img_desc}
                   </p>

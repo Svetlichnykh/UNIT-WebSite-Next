@@ -1,10 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DropDownMenu from "./dropDownMenu";
 import MegaMenu from "./megaMenu";
-import Logo from "@/assets/icons/logo";
 import Search from "@/assets/icons/search";
 import { menuList } from "@/lib/fackData/menuList";
 import Offcanvas from "./offCanvas";
@@ -20,25 +19,50 @@ const BottomNavbar = ({ linkColor }) => {
   const { products } = useSelector((state) => state.addToCart);
   const [offcanvaseActive, setOffcanvaseActive] = useState(false);
   const [cartActive, setCartActive] = useState(false);
-
+  const LogoLink = useRef(null)
   useStickyHeader(linkColor);
   const pathName = usePathname();
   useActiveNavLink(pathName);
 
-  return (
+    const [isWhite, setIsWhite] = useState(true);
+
+    useEffect(() => {
+        if (!LogoLink.current) return;
+
+        const el = LogoLink.current;
+
+        const observer = new MutationObserver(() => {
+            setIsWhite(el.classList.contains("text-white"));
+        });
+
+        observer.observe(el, {
+            attributes: true,
+            attributeFilter: ["class"],
+        });
+
+        // начальное значение
+        setIsWhite(el.classList.contains("text-white"));
+
+        return () => observer.disconnect();
+    }, []);
+
+
+
+    return (
     <>
       <div className="bottom-navbar flex justify-between items-center">
         <div>
           <Link
+              ref={LogoLink}
             href="/"
             className={cn(`logo text-primary-foreground ${linkColor}`)}
           >
-            <Image
-              width={"50"}
-              height={"30"}
-              src={"/UnitLogoOne.PNG"}
-              alt="1"
-            />
+              <Image
+                  width={"120"}
+                  height={"35"}
+                  src={isWhite ? "/UnitLogoOne.png" : "/UnitLogoTwo.png"}
+                  alt=""
+              />
           </Link>
         </div>
         <nav>
