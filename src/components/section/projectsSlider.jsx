@@ -39,7 +39,7 @@ const ProjectsSlider = ({ text_muted, bg_muted }) => {
           text_muted={text_muted}
         />
       </div>
-      <div className="container-fluid relative lg:pt-30 2sm:pt-20 pt-14">
+      <div className="container-fluid relative lg:pt-30 2sm:pt-20 pt-14 max-w-[1920px]">
         <Swiper
           slidesPerView={1}
           loop

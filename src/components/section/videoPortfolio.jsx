@@ -1,8 +1,9 @@
 import Link from "next/link";
 import RightArrow from "@/assets/icons/rightArrow";
-import SectionTitle from "../ui/sectionTitle";
 import { cn } from "@/lib/utils";
 import ButtonOutline from "../ui/buttons/buttonOutline";
+import video_thumb from "@/assets/images/video-image.jpg";
+import VideoPlay from "@/components/ui/videoPlay";
 
 const VideoPortfolio = ({ text_muted, bg_muted, after_bg_muted }) => {
   return (
@@ -10,7 +11,7 @@ const VideoPortfolio = ({ text_muted, bg_muted, after_bg_muted }) => {
       {/* <div className='container-fluid '>
                 <SectionTitle sectionName={"Video"} sectionTitle={"Visual Design Odyssey"} sectionDesc={"Where Imagination Takes Flight, and Excellence Blossoms"} bg_muted={bg_muted} text_muted={text_muted} />
             </div> */}
-      <div className="container-fluid lg:pt-30 2sm:pt-20 pt-14">
+      <div className="container-fluid lg:pt-30 2sm:pt-20 pt-14 max-w-[1920px]">
         <div
           className={cn(
             ` relative after:contents-[""] after:absolute after:left-0 after:top-0 after:max-w-[1320px] after:w-full z-[1] after:h-full after:bg-primary ${after_bg_muted} pt-[90px] pb-[110px]`,
@@ -57,6 +58,7 @@ const VideoPortfolio = ({ text_muted, bg_muted, after_bg_muted }) => {
                 </ButtonOutline>
               </Link>
             </div>
+            <VideoPlay img={"/previewImage.png"} videoSrc="/video.mp4" />
           </div>
         </div>
       </div>

@@ -1,16 +1,16 @@
 "use client";
+
 import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import PlayIcon from "@/assets/icons/playIcon";
-import ModalVideo from "react-modal-video";
-import "/node_modules/react-modal-video/scss/modal-video.scss";
 import useOverflowHidden from "@/hooks/useOverflowHidden";
 import { cardSlideAnimation } from "@/lib/utils";
 
-const VideoPlay = ({ img }) => {
+const VideoPlay = ({ img, videoSrc = "/video.mp4" }) => {
   const [isOpen, setOpen] = useState(false);
   useOverflowHidden(isOpen);
+
   return (
     <>
       <motion.div
@@ -23,29 +23,61 @@ const VideoPlay = ({ img }) => {
         <Image
           src={img}
           loading="lazy"
-          placeholder="blur"
-          alt="video"
-          width={"auto"}
-          height={"auto"}
+          alt="video preview"
+          width={698}
+          height={400}
           className="w-full max-w-[698px] mx-auto h-full"
         />
-        <ModalVideo
-          channel="youtube"
-          youtube={{ mute: 0, autoplay: 0 }}
-          isOpen={isOpen}
-          videoId="lfDZJqSrIuk"
-          onClose={() => setOpen(false)}
-        />
 
+        {/* Play button */}
         <div
           onClick={() => setOpen(true)}
-          className=" md:w-[109px] md:h-[109px] w-24 h-24 rounded-full text-primary-foreground absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#D9D9D9]/[.78] cursor-pointer flex justify-center items-center"
+          className="md:w-[109px] md:h-[109px] w-24 h-24 rounded-full
+                     absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                     bg-[#D9D9D9]/[.78] cursor-pointer flex justify-center items-center"
         >
           <span className="ml-2.5">
-            <PlayIcon width={"30"} height={"36"} />
+            <PlayIcon width="30" height="36" />
           </span>
         </div>
       </motion.div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+            onClick={() => setOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.95 }}
+              className="relative w-full max-w-4xl px-4"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close button */}
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute -top-10 right-0 text-white text-3xl"
+                aria-label="Close video"
+              >
+                ×
+              </button>
+
+              <video
+                src={videoSrc}
+                controls
+                autoPlay
+                className="w-full rounded-xl bg-black"
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

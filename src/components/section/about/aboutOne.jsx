@@ -67,7 +67,7 @@ const AboutOne = ({ text_muted, bg_muted }) => {
                       <svg
                         ref={ref}
                         strokeWidth="1"
-                        className={`h-[65px] w-20 relative -top-2 left-3 xl:text-6xl text-5xl mb-3 lg:mb-0 inline-block font-extrabold leading-120 text-primary-foreground ${inView ? "animate-text-line-animation stroke-primary stroke-dasharray-1000 stroke-dashoffset-1000" : " fill-transparent stroke-primary "}`}
+                        className={`h-[65px] w-24 relative -top-2 left-3 xl:text-6xl text-5xl mb-3 lg:mb-0 inline-block font-extrabold leading-120 text-primary-foreground ${inView ? "animate-text-line-animation stroke-primary stroke-dasharray-1000 stroke-dashoffset-1000" : " fill-transparent stroke-primary "}`}
                       >
                         <text
                           className={

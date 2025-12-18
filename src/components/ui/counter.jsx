@@ -37,7 +37,7 @@ const Counter = ({ text_muted, bg_muted }) => {
                   )}
                 >
                   <SlotCounter
-                    charClassName={"  font-[family-name:var(--family)]"}
+                    charClassName={"pl-[5px]  font-[family-name:var(--family)]"}
                     startValue={0}
                     value={count}
                     debounceDelay={5000}
