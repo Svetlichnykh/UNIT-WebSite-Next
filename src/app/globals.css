@@ -333,3 +333,9 @@ h4 {
     max-width: 1320px;
   }
 }
+
+@media (min-width: 1920px) {
+    .project-limiter {
+        width: 1800px;
+    }
+}

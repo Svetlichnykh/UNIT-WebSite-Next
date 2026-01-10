@@ -20,7 +20,7 @@ const ProjectCardOne = ({
   cardVariants,
 }) => {
   return (
-    <div className="xl:max-w-[95%] w-full mx-auto relative overflow-hidden ">
+    <div className="xl:max-w-[95%] w-full mx-auto relative overflow-hidden project-limiter">
       <div className="container">
         <div className="flex lg:flex-row flex-col items-center lg:pb-[170px] pb-25 ">
           <div className={`${order} lg:w-1/2 `}>
