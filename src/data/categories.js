@@ -2,12 +2,12 @@ export const Categories = {
   "panel-houses": {
     title: "Панельно-каркасные дома",
     description: "Home Version 3 description",
-    heroImage: "/img/home-3.jpg",
+    heroImage: "/img/home-3.webp",
     houses: [
       {
         id: 1,
         project_name: "МКЦ-06",
-        project_img: "/categories-photos/МКЦ-06.jpg",
+        project_img: "/categories-photos/МКЦ-06.webp",
         project_desc: "Краткое описание",
         project_area: "66.3",
         project_bedrooms: "2",
@@ -17,7 +17,7 @@ export const Categories = {
       {
         id: 2,
         project_name: "МКЦ-08",
-        project_img: "/categories-photos/МКЦ-08.jpg",
+        project_img: "/categories-photos/МКЦ-08.webp",
         project_desc: "Краткое описание",
         project_area: "75",
         project_bedrooms: "3",
@@ -27,7 +27,7 @@ export const Categories = {
       {
         id: 3,
         project_name: "МКЦ-24",
-        project_img: "/categories-photos/МКЦ-24.jpg",
+        project_img: "/categories-photos/МКЦ-24.webp",
         project_desc: "Краткое описание",
         project_area: "86.5",
         project_bedrooms: "3",
@@ -37,7 +37,7 @@ export const Categories = {
       {
         id: 4,
         project_name: "МКЦ-02",
-        project_img: "/categories-photos/МКЦ-02.jpg",
+        project_img: "/categories-photos/МКЦ-02.webp",
         project_desc: "Краткое описание",
         project_area: "105.5",
         project_bedrooms: "3",
@@ -49,12 +49,12 @@ export const Categories = {
   "suburban-houses": {
     title: "Загородные дома",
     description: "Описание для первой страницы",
-    heroImage: "/img/home-1.jpg",
+    heroImage: "/img/home-1.webp",
     houses: [
       {
         id: 1,
         project_name: "МД-01",
-        project_img: "/categories-photos/МД-01.jpg",
+        project_img: "/categories-photos/МД-01.webp",
         project_desc: "Краткое описание",
         project_area: "26.6",
         project_bedrooms: "1",
@@ -64,7 +64,7 @@ export const Categories = {
       {
         id: 2,
         project_name: "МД-02",
-        project_img: "/categories-photos/МД-02.jpg",
+        project_img: "/categories-photos/МД-02.webp",
         project_desc: "Краткое описание",
         project_area: "34.4",
         project_bedrooms: "1",
@@ -74,7 +74,7 @@ export const Categories = {
       {
         id: 3,
         project_name: "МД-03",
-        project_img: "/categories-photos/МД-03.jpg",
+        project_img: "/categories-photos/МД-03.webp",
         project_desc: "Краткое описание",
         project_area: "47.6",
         project_bedrooms: "1",
@@ -84,7 +84,7 @@ export const Categories = {
       {
         id: 4,
         project_name: "МД-04",
-        project_img: "/categories-photos/МД-04.jpg",
+        project_img: "/categories-photos/МД-04.webp",
         project_desc: "Краткое описание",
         project_area: "39.9",
         project_bedrooms: "1",
@@ -94,7 +94,7 @@ export const Categories = {
       {
         id: 5,
         project_name: "МД-05",
-        project_img: "/categories-photos/МД-05.jpg",
+        project_img: "/categories-photos/МД-05.webp",
         project_desc: "Краткое описание",
         project_area: "51.3",
         project_bedrooms: "2",
@@ -104,7 +104,7 @@ export const Categories = {
       {
         id: 6,
         project_name: "МД-06",
-        project_img: "/categories-photos/МД-06.jpg",
+        project_img: "/categories-photos/МД-06.webp",
         project_desc: "Краткое описание",
         project_area: "53.4",
         project_bedrooms: "2",
@@ -114,7 +114,7 @@ export const Categories = {
       {
         id: 7,
         project_name: "МД-07",
-        project_img: "/categories-photos/МД-07.jpg",
+        project_img: "/categories-photos/МД-07.webp",
         project_desc: "Краткое описание",
         project_area: "54",
         project_bedrooms: "2",
@@ -126,12 +126,12 @@ export const Categories = {
   "bath-houses": {
     title: "Банные дома",
     description: "Bathrooms category",
-    heroImage: "/img/bathrooms.jpg",
+    heroImage: "/img/bathrooms.webp",
     houses: [
       {
         id: 1,
         project_name: "МБ-20",
-        project_img: "/categories-photos/МБ-20.jpg",
+        project_img: "/categories-photos/МБ-20.webp",
         project_desc: "Краткое описание",
         project_area: "40",
         project_bedrooms: "0",
@@ -141,7 +141,7 @@ export const Categories = {
       {
         id: 2,
         project_name: "МБ-21",
-        project_img: "/categories-photos/МБ-21.jpg",
+        project_img: "/categories-photos/МБ-21.webp",
         project_desc: "Краткое описание",
         project_area: "48",
         project_bedrooms: "0",
@@ -151,7 +151,7 @@ export const Categories = {
       {
         id: 3,
         project_name: "МБ-22",
-        project_img: "/categories-photos/МБ-22.jpg",
+        project_img: "/categories-photos/МБ-22.webp",
         project_desc: "Краткое описание",
         project_area: "42",
         project_bedrooms: "1",
@@ -161,7 +161,7 @@ export const Categories = {
       {
         id: 4,
         project_name: "МБ-23",
-        project_img: "/categories-photos/МБ-23.jpg",
+        project_img: "/categories-photos/МБ-23.webp",
         project_desc: "Краткое описание",
         project_area: "60",
         project_bedrooms: "2",
@@ -171,7 +171,7 @@ export const Categories = {
       {
         id: 5,
         project_name: "МБ-24",
-        project_img: "/categories-photos/МБ-24.jpg",
+        project_img: "/categories-photos/МБ-24.webp",
         project_desc: "Краткое описание",
         project_area: "60",
         project_bedrooms: "1",
