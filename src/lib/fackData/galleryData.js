@@ -1,8 +1,6 @@
 import img_1 from "@/assets/images/gallery-1.jpg";
 import img_2 from "@/assets/images/gallery-2.jpg";
 import img_3 from "@/assets/images/gallery-3.jpg";
-import img_4 from "@/assets/images/gallery-4.jpg";
-import img_5 from "@/assets/images/gallery-5.jpg";
 
 export const galleryData = [
   {
@@ -11,7 +9,7 @@ export const galleryData = [
     img_desc:
       "Идеальный вариант для постоянного проживания в своем доме со всеми преимуществами привычной нам квартиры",
     img: img_1,
-    link: "/project-single",
+    link: "/category/panel-houses",
   },
   {
     id: "02",
@@ -19,7 +17,7 @@ export const galleryData = [
     img_desc:
       "Отличный вариант для дома «выходного дня» и отдыха. Когда хочется иметь загородный дом и отдохнуть от повседневной суеты",
     img: img_2,
-    link: "/project-single",
+    link: "/category/suburban-houses",
   },
   {
     id: "03",
@@ -27,6 +25,6 @@ export const galleryData = [
     img_desc:
       "Замечательный вариант для гостевого дома рядом с основным, когда хочется не просто баню, а еще и всю инфраструктуру рядом",
     img: img_3,
-    link: "/project-single",
+    link: "/category/bath-houses",
   },
 ];

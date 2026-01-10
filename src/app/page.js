@@ -5,16 +5,11 @@ import Gallery from "@/components/section/gallery";
 import BannerThree from "@/components/section/heroes/bannerThree";
 import ProjectsSlider from "@/components/section/projectsSlider";
 import ServicesSlider from "@/components/section/servicesSlider";
-import ShopSlider from "@/components/section/shopSlider";
 import Testimonial from "@/components/section/testimonial";
 import VideoPortfolio from "@/components/section/videoPortfolio";
-import TeamCardOne from "@/components/ui/cards/teamCardOne";
 import Counter from "@/components/ui/counter";
 import SectionTitle from "@/components/ui/sectionTitle";
 import { blogData } from "@/lib/fackData/blogData";
-import { productData } from "@/lib/fackData/productData";
-import { teamData } from "@/lib/fackData/teamData";
-import { cardSlideAnimation } from "@/lib/utils";
 
 export const metadata = {
   title: "Architronix -- Home-3",
@@ -23,7 +18,19 @@ export const metadata = {
 const Home3 = () => {
   return (
     <>
-      <BannerThree />
+      <BannerThree
+        text={"Всего за 55 дней"}
+        button={true}
+        buttonText={"Выбрать дом"}
+        buttonHref={"/project-archive"}
+        textArray={[
+          "Свой  дом",
+          "Своя  баня",
+          "Под  ключ",
+          "Без  стройки",
+          "В  любой  сезон",
+        ]}
+      />
       <AboutOne />
       <Counter />
       <Gallery />

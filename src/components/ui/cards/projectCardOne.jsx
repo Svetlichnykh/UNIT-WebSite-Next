@@ -9,11 +9,11 @@ import { staticBluarDataUrl } from "@/lib/staticBluarDataUrl";
 const ProjectCardOne = ({
   order,
   position,
-  project_year,
+  project_area,
   project_desc,
   project_img,
-  location,
-  project_type,
+  project_price,
+  project_bedrooms,
   project_name,
   link,
   imageVariants,
@@ -39,8 +39,8 @@ const ProjectCardOne = ({
                   placeholder="blur"
                   blurDataURL={staticBluarDataUrl}
                   alt="project-img-1"
-                  width={"auto"}
-                  height={"auto"}
+                  width={"4000"}
+                  height={"2500"}
                   className=" h-full"
                 />
               </motion.div>
@@ -63,26 +63,26 @@ const ProjectCardOne = ({
               <ul className="mb-9">
                 <li className="flex  items-center mb-[6px]">
                   <span className="inline-block font-extrabold min-w-32 text-secondary-foreground">
-                    Year:
+                    Площадь:
                   </span>
                   <span className="font-medium text-secondary-foreground">
-                    {project_year}
+                    {project_area} м<sup>2</sup>
                   </span>
                 </li>
                 <li className="flex  items-center mb-[6px]">
                   <span className="inline-block font-extrabold min-w-32 text-secondary-foreground">
-                    Category:
+                    Спальни:
                   </span>
                   <span className="font-medium text-secondary-foreground">
-                    {project_type}
+                    {project_bedrooms >= 1 ? `${project_bedrooms} шт.` : "нет"}
                   </span>
                 </li>
                 <li className="flex  items-center mb-[6px]">
                   <span className="inline-block font-extrabold min-w-32 text-secondary-foreground">
-                    Location
+                    Стоимость:
                   </span>
                   <span className="font-medium text-secondary-foreground">
-                    {location}
+                    от {project_price} ₽
                   </span>
                 </li>
               </ul>
@@ -92,7 +92,7 @@ const ProjectCardOne = ({
                     "border-secondary text-primary-foreground hover:text-secondary-foreground after:left-0 after:bg-secondary"
                   }
                 >
-                  View Project <RightArrow width={"35"} height={"22"} />
+                  Подробнее <RightArrow width={"35"} height={"22"} />
                 </ButtonFill>
               </Link>
             </div>

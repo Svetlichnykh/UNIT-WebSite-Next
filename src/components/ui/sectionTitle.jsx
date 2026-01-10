@@ -80,7 +80,14 @@ const SectionTitle = ({
                 `text-primary-foreground lg:text-[35px] sm:text-3xl text-2xl font-semibold mt-4 max-w-[690px] md:mb-0 mb-7 !leading-160 ${text_muted}`,
               )}
             >
-              {sectionDesc}
+              {Array.isArray(sectionDesc)
+                ? sectionDesc.map((text, i) => (
+                    <span key={i}>
+                      {text}
+                      <br />
+                    </span>
+                  ))
+                : sectionDesc}
             </h5>
 
             {button_text && (

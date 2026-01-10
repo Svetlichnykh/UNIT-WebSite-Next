@@ -5,7 +5,7 @@ import ButtonFill from "@/components/ui/buttons/buttonFill";
 import RightArrow from "@/assets/icons/rightArrow";
 import BannerVideo from "@/components/section/heroes/BannerVideo";
 
-const BannerThree = () => {
+const BannerThree = ({ text, textArray, button, buttonText, buttonHref }) => {
   return (
     <div className="relative overflow-x-hidden">
       <div className="bg-hero-section bg-no-repeat h-screen bg-center bg-cover">
@@ -13,25 +13,19 @@ const BannerThree = () => {
         <div className="container">
           <div className="absolute top-1/2 -translate-y-1/2">
             <h1 className="text-white [font-size:_clamp(60px,10vw,150px)] font-extrabold leading-[90%]">
-              Всего за 55 дней <br />
-              <TextTyped
-                text={[
-                  "Свой  дом",
-                  "Своя  баня",
-                  "Под  ключ",
-                  "Без  стройки",
-                  "В  любой  сезон",
-                ]}
-              />
+              {text} <br />
+              {textArray && <TextTyped text={textArray} />}
             </h1>
-            <Link href={"/project-archive"} className="mt-16 inline-block">
-              <ButtonFill
-                className={`sm:px-10 px-4 after:left-0 after:bg-secondary text-primary-foreground border-secondary hover:text-secondary-foreground`}
-              >
-                {" "}
-                Выбрать дом <RightArrow width={"35"} height={"22"} />{" "}
-              </ButtonFill>
-            </Link>
+            {button && (
+              <Link href={buttonHref} className="mt-16 inline-block">
+                <ButtonFill
+                  className={`sm:px-10 px-4 after:left-0 after:bg-secondary text-primary-foreground border-secondary hover:text-secondary-foreground`}
+                >
+                  {" "}
+                  {buttonText} <RightArrow width={"35"} height={"22"} />{" "}
+                </ButtonFill>
+              </Link>
+            )}
           </div>
         </div>
       </div>
