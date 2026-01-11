@@ -22,7 +22,7 @@ export const Categories = {
         project_area: "75",
         project_bedrooms: "3",
         project_price: "5 550 000",
-        link: "/category/panel-houses/mkc-08",
+        link: "https://unit-calculator-eta.vercel.app/",
       },
       {
         id: 3,
