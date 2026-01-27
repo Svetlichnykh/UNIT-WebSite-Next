@@ -57,7 +57,7 @@ export default async function Home3({ params }) {
                 project_area,
                 project_bedrooms,
                 project_price,
-                link,
+                slug: houseSlug,
               }) => {
                 if (id % 2 === 0) {
                   return (
@@ -68,7 +68,7 @@ export default async function Home3({ params }) {
                       project_bedrooms={project_bedrooms}
                       project_price={project_price}
                       project_area={project_area}
-                      link={link}
+                      link={`/category/${slug}/${houseSlug}`}
                       project_name={project_name}
                       order={"lg:order-1 order-0"}
                       position={
@@ -87,7 +87,7 @@ export default async function Home3({ params }) {
                       project_bedrooms={project_bedrooms}
                       project_price={project_price}
                       project_area={project_area}
-                      link={link}
+                      link={`/category/${slug}/${houseSlug}`}
                       project_name={project_name}
                       position={
                         "lg:absolute lg:left-0 lg:top-1/2 lg:-translate-y-1/2"
