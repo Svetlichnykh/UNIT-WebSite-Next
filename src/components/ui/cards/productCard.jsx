@@ -39,7 +39,7 @@ const ProductCard = ({
               ` px-[25px] py-2.5 flex items-center gap-2.5 border-white hover:border-primary text-white border-2 whitespace-nowrap relative z-10 overflow-hidden after:absolute after:left-0 after:top-0 after:bottom-0 after:z-[-1] after:bg-primary after:${bg_muted} after:w-0 after:transition-all after:duration-500 hover:after:w-full text-secondary-foreground hover:text-secondary-foreground transition-all duration-500`,
             )}
           >
-            Add Cart <ShopCart height={"24"} width={"24"} />
+            Подробнее
           </button>
         </div>
         <div className="relative after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:transition-all after:duration-500 after:group-hover:w-full after:group-hover:h-full after:group-hover:opacity-100 after:h-0 after:w-0 after:opacity-0 after:flex after:justify-center after:items-center after:bg-[rgba(37,_59,_47,_0.38)] after:group-hover:blur-sm">
@@ -65,12 +65,12 @@ const ProductCard = ({
             <span>{product_name}</span>{" "}
           </Link>
           <p className={cn(`text-2xl text-primary-foreground ${text_muted}`)}>
-            ${price}
+            {price}
           </p>
         </div>
-        <div className="mt-2">
-          <Rating star={rating} />
-        </div>
+        {/*<div className="mt-2">*/}
+        {/*  <Rating star={rating} />*/}
+        {/*</div>*/}
       </div>
     </div>
   );
