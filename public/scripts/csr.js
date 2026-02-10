@@ -1080,86 +1080,143 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".sect-views__image");
-  const container = document.getElementById("views-frame");
-  const frame = document.getElementById("active-frame");
-  const slider = document.querySelector(".sect-views__slider");
-  const roofButtons = document.querySelectorAll(".roof-switch__btn");
+const images = document.querySelectorAll(".sect-views__image");
+const container = document.getElementById("views-frame");
+const frame = document.getElementById("active-frame");
+const slider = document.querySelector(".sect-views__slider");
+const roofButtons = document.querySelectorAll(".roof-switch__btn");
+const arrows = document.querySelectorAll(".sect-views__arrow");
 
-  /* Конфигурация кровли */
-  const roofImages = {
+/* ================= CONFIG ================= */
+
+const viewsOrder = ["back", "left", "front", "right"];
+let currentView = "front";
+
+/* Конфигурация кровли */
+const roofImages = {
     hip: {
-      back: "img/views/view_08_back.png",
-      left: "img/views/view_08_left.png",
-      front: "img/views/view_08_front.png",
-      right: "img/views/view_08_right.png",
+        back: "/img/views/view_08_back.png",
+        left: "/img/views/view_08_left.png",
+        front: "/img/views/view_08_front.png",
+        right: "/img/views/view_08_right.png",
     },
     gable: {
-      back: "img/views/view_09_back.png",
-      left: "img/views/view_09_left.png",
-      front: "img/views/view_09_front.png",
-      right: "img/views/view_09_right.png",
+        back: "/img/views/view_09_back.png",
+        left: "/img/views/view_09_left.png",
+        front: "/img/views/view_09_front.png",
+        right: "/img/views/view_09_right.png",
     },
-  };
+};
 
-  let currentRoof = "hip";
+let currentRoof = "hip";
 
-  /* Перемещение рамки */
-  function moveFrameTo(element) {
+/* ================= CORE ================= */
+
+/* Перемещение рамки */
+function moveFrameTo(element) {
+    if (!element || !container || !frame) return;
+
     const elRect = element.getBoundingClientRect();
     const parentRect = container.getBoundingClientRect();
 
     frame.style.width = `${elRect.width}px`;
     frame.style.height = `${elRect.height}px`;
     frame.style.transform = `translate(
-            ${elRect.left - parentRect.left}px,
-            ${elRect.top - parentRect.top}px
-        )`;
-  }
+    ${elRect.left - parentRect.left}px,
+    ${elRect.top - parentRect.top}px
+  )`;
+}
 
-  /* Установка активного вида */
-  function setActiveView(view) {
+/* Установка активного вида */
+function setActiveView(view) {
     const target = [...images].find((img) => img.dataset.view === view);
     if (!target) return;
 
+    currentView = view;
     moveFrameTo(target);
-  }
+}
 
-  /* Смена кровли */
-  function setRoof(type) {
+/* ================= ROOF ================= */
+
+function setRoof(type) {
     if (!roofImages[type]) return;
 
     currentRoof = type;
 
     images.forEach((img) => {
-      const view = img.dataset.view;
-      img.src = roofImages[type][view];
+        const view = img.dataset.view;
+        img.src = roofImages[type][view];
     });
-  }
 
-  /* Клики по изображениям */
-  images.forEach((img) => {
+    // после смены картинок обязательно пересчитать
+    waitForImages(() => setActiveView(currentView));
+}
+
+/* ================= EVENTS ================= */
+
+/* Клики по изображениям */
+images.forEach((img) => {
     img.addEventListener("click", () => {
-      setActiveView(img.dataset.view);
+        setActiveView(img.dataset.view);
     });
-  });
+});
 
-  /* Клики по кнопкам кровли */
-  roofButtons.forEach((btn) => {
+/* Клики по кнопкам кровли */
+roofButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      roofButtons.forEach((b) => b.classList.remove("is-active"));
-      btn.classList.add("is-active");
-      setRoof(btn.dataset.roof);
+        roofButtons.forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        setRoof(btn.dataset.roof);
     });
-  });
+});
 
-  /* Инициализация после загрузки */
-  window.addEventListener("load", () => {
+/* ===== ARROWS ===== */
+
+arrows.forEach((arrow) => {
+    arrow.addEventListener("click", () => {
+        const dir = arrow.dataset.dir; // prev | next
+        const index = viewsOrder.indexOf(currentView);
+
+        if (index === -1) return;
+
+        let nextIndex =
+            dir === "next" ? index + 1 : index - 1;
+
+        if (nextIndex < 0) nextIndex = viewsOrder.length - 1;
+        if (nextIndex >= viewsOrder.length) nextIndex = 0;
+
+        setActiveView(viewsOrder[nextIndex]);
+    });
+});
+
+/* ================= INIT ================= */
+
+function waitForImages(callback) {
+    let loaded = 0;
+
+    images.forEach((img) => {
+        if (img.complete) {
+            loaded++;
+        } else {
+            img.addEventListener(
+                "load",
+                () => {
+                    loaded++;
+                    if (loaded === images.length) callback();
+                },
+                { once: true }
+            );
+        }
+    });
+
+    if (loaded === images.length) callback();
+}
+
+waitForImages(() => {
     setActiveView("front");
     frame.classList.add("is-ready");
-  });
 });
+
 
 const EXTRA_PRICE = 100000;
 
@@ -1306,3 +1363,4 @@ const initialBtn = document.querySelector('.roof-switch__btn[data-roof="hip"]');
 if (initialBtn) initialBtn.classList.add("is-active");
 
 // === MUTATION OBSERVER — фикс клика по уже выбранной галочке ===+
+
