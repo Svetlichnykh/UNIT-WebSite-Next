@@ -1,0 +1,138 @@
+.slider__slide {
+  width: 100%;
+}
+
+.slider-controls {
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - 25px);
+  display: flex;
+  margin: 0 10px;
+  width: calc(100% - 20px);
+  justify-content: space-between;
+}
+.slider-controls__prev,
+.slider-controls__next {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+.slider-controls__prev:hover,
+.slider-controls__next:hover {
+  cursor: pointer;
+}
+
+.visualization-scheme__wrapper {
+  display: grid;
+  position: relative;
+}
+.visualization-scheme {
+  background-image: url("../img/plan_08_legacy.png");
+  background-size: cover;
+  width: 100%;
+  aspect-ratio: 12 / 11;
+  grid-area: 1 / 1;
+}
+
+.area:hover {
+  cursor: pointer;
+  filter: sepia(0.9) brightness(0.95);
+}
+.area.active {
+  filter: sepia(0.9) brightness(0.95);
+}
+
+.area-kitchen {
+  clip-path: polygon(
+    18.792% 10.318%,
+    65.542% 10.318%,
+    65.542% 54.227%,
+    43% 54.227%,
+    43% 31.318%,
+    41.917% 31.318%,
+    41.917% 39.273%,
+    18.792% 39.273%
+  );
+}
+.area-hall {
+  clip-path: polygon(
+    31.667% 40.636%,
+    41% 40.636%,
+    41% 70.773%,
+    31.667% 70.773%
+  );
+}
+.area-tambur {
+  clip-path: polygon(
+    18.792% 40.636%,
+    30.417% 40.636%,
+    30.417% 53%,
+    18.792% 53%
+  );
+}
+.area-tech {
+  clip-path: polygon(
+    18.792% 54.364%,
+    30.417% 54.364%,
+    30.417% 70.773%,
+    18.792% 70.773%
+  );
+}
+.area-toilet {
+  clip-path: polygon(
+    18.792% 72.182%,
+    40.917% 72.182%,
+    40.917% 87.728%,
+    18.792% 87.728%
+  );
+}
+.area-bedroom-1 {
+  clip-path: polygon(
+    43% 55.591%,
+    65.542% 55.591%,
+    65.542% 87.727%,
+    43% 87.727%
+  );
+}
+.area-bedroom-2 {
+  clip-path: polygon(
+    67.583% 10.318%,
+    89.708% 10.318%,
+    89.708% 44.318%,
+    67.583% 44.318%
+  );
+}
+.area-bedroom-3 {
+  clip-path: polygon(
+    67.583% 45.682%,
+    89.708% 45.682%,
+    89.708% 87.727%,
+    67.583% 87.727%
+  );
+}
+
+@media screen and (max-width: 1600px) {
+  .visualization__section-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .visualization__section-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  .visualization__section,
+  .visualization__section-grid {
+    margin: 0 auto;
+    max-width: 1180px;
+  }
+
+  .sliders {
+    order: 1;
+  }
+  .visualization-scheme__wrapper {
+    order: 2;
+  }
+}

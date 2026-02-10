@@ -9,7 +9,10 @@ import TeamTwo from "@/components/section/team/teamTwo";
 import Feedback from "@/components/section/feedback";
 import Title from "@/components/ui/title";
 import ShopSlider from "@/components/section/shopSlider";
-import {productData} from "@/lib/fackData/productData";
+import { productData } from "@/lib/fackData/productData";
+import Script from "next/script";
+import React from "react";
+import Calculator from "@/components/calculator/Calculator";
 
 export const metadata = {
   title: "Architronix -- Project Single",
@@ -21,12 +24,18 @@ const ProjectSingle = () => {
     <>
       <section className="blog-single">
         <div>
-          <Image src={bg_banner} loading="lazy" placeholder="blur" alt="img"  className={"max-h-[100vh] object-cover"}/>
+          <Image
+            src={bg_banner}
+            loading="lazy"
+            placeholder="blur"
+            alt="img"
+            className={"max-h-[100vh] object-cover"}
+          />
           <div className="container 2sm:mt-[156px] sm:mt-30 mt-20">
             <div className="grid lg:grid-cols-[65%_auto] gap-[38px]">
               <div className="relative after:absolute sm:after:-left-12.5 after:-left-5 after:top-1/2 after:-translate-y-1/2 after:w-[1px] sm:after:h-[130%] after:h-[120%] after:bg-primary sm:ml-12.5 ml-5">
                 <h1 className="text-primary-foreground [font-size:_clamp(48px,7vw,130px)] font-extrabold leading-110">
-                    Дом для большой семьи
+                  Дом для большой семьи
                 </h1>
                 <span className="inline-block w-[300px] h-[1px] bg-primary"></span>
                 <p className="text-2xl sm:text-3xl 2sm:text-4xl !leading-160 text-primary-foreground mt-[18px]">
@@ -78,7 +87,7 @@ const ProjectSingle = () => {
                   </li>
                   <li>
                     <strong className="text-secondary-foreground block text-2xl mb-1.5">
-                        Площадь регистрационная с крыльцом:
+                      Площадь регистрационная с крыльцом:
                     </strong>
                     <span className="text-secondary-foreground block">
                       84 м<sup>2</sup>
@@ -88,10 +97,11 @@ const ProjectSingle = () => {
               </div>
             </div>
           </div>
-            <h1 className={"text-center my-5"}>Калкьулятор</h1>
+          <h1 className={"text-center my-5"}>Калькулятор</h1>
+          <Calculator />
           <ProjectSingleSliderOne />
 
-            <ShopSlider data={productData} />
+          <ShopSlider data={productData} />
         </div>
       </section>
       <Feedback />

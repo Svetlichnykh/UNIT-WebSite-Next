@@ -1,0 +1,25 @@
+.tns-nav {
+  width: fit-content;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px auto 0;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: var(--clr-lighter-gray);
+}
+.tns-nav > button {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border: 3px solid var(--clr-white);
+  border-radius: 50%;
+}
+.tns-nav > button.tns-nav-active {
+  background-color: var(--clr-white);
+}

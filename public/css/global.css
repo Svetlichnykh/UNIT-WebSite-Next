@@ -1,0 +1,10 @@
+/* -------------------------- basic global styles --------------------------- */
+
+.global__body {
+  padding: 0;
+  margin: 0;
+  font-family: Montserrat, sans-serif;
+}
+.global__main {
+  background-color: var(--clr-white);
+}

@@ -1,0 +1,95 @@
+/* -------------------------------- buttons --------------------------------- */
+
+/* --------------------- buttons base ------------------- */
+
+.button {
+  font-size: 18px;
+  color: black;
+  background-color: var(--clr-light-gray);
+  outline: none;
+  border: none;
+  padding: 16px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  font-family: Monsterat, sans-serif;
+  font-weight: 600;
+  box-shadow: 0 5px 10px rgba(0, 11, 48, 0.25);
+}
+.button:hover {
+  box-shadow: 0 10px 20px rgba(0, 11, 48, 0.25);
+}
+.button:active {
+  box-shadow: 0 5px 10px rgba(0, 11, 48, 0.25);
+  background-color: #dddddd;
+}
+
+/* ------------------- buttons variants ----------------- */
+
+.button-yellow {
+  background-color: #ffc500;
+  color: var(--clr-white);
+}
+.button-yellow:active {
+  background-color: #ffc500;
+  color: var(--clr-black);
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - */
+
+.button-yellow-outline {
+  background-color: white;
+  border: 3px solid var(--clr-yellow);
+}
+.button-yellow-outline:hover {
+  background-color: var(--clr-yellow);
+  color: var(--clr-white);
+}
+.button-yellow-outline:active {
+  background-color: var(--clr-yellow);
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - */
+
+.button-yellow-outline.disabled {
+  font-weight: 400;
+  background-color: white;
+  border: 3px solid var(--clr-yellow);
+  box-shadow: none;
+}
+.button-yellow-outline.disabled:hover {
+  background-color: white;
+  border: 3px solid var(--clr-yellow);
+  color: black;
+  box-shadow: none;
+  cursor: default;
+}
+.button-yellow-outline.disabled:active {
+  background-color: white;
+  color: var(--clr-black);
+  border: 3px solid var(--clr-yellow);
+  box-shadow: none;
+}
+.button-yellow-outline.disabled b {
+  font-weight: 700;
+}
+
+/* ------------------- buttons block -------------------- */
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.buttons-right {
+  justify-content: right;
+}
+
+@media screen and (max-width: 600px) {
+  .buttons-right {
+    justify-content: center;
+  }
+}

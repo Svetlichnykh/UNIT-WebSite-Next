@@ -1,0 +1,223 @@
+.section-calculator {
+  background-color: var(--clr-white);
+}
+.section-calculator__section {
+  display: flex;
+  gap: 60px;
+}
+.section-calculator__block {
+}
+.section-calculator-block__house img {
+  width: 100%;
+}
+
+.calculator-terrace-sliders__wrapper {
+  padding: 60px 0;
+}
+.calculator__terrace-sliders {
+  display: flex;
+  gap: 20px;
+}
+.calculator__terrace-slide {
+  width: calc(calc(100% - 20px) / 2);
+}
+.calculator__terrace-slide-img {
+  width: 100%;
+}
+
+.calculator__blocks {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+}
+.calculator__column {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  width: calc(calc(100% - 20px) / 2);
+}
+.calculator__block {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px 30px;
+  background-color: var(--clr-light-gray);
+}
+
+.calculator__block-house {
+  width: calc(56% - 60px);
+}
+.section-calculator-block__house {
+  display: grid;
+}
+.section-calculator-block__house img {
+  grid-area: 1/1;
+}
+
+.calculator__block-choices {
+  width: calc(44%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.calculator__block-choices .calculator__block-radio {
+  gap: 6px;
+}
+.calculator__block-choices .block-choice__title .text {
+  font-size: 14px;
+}
+
+.calculator__block-radio {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.block-choice {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: start;
+  gap: 20px;
+}
+.block-choice .block-choice__title {
+  width: calc(100% - 46px);
+}
+.block__price {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2px;
+}
+.block__price:has(.h4) {
+  border-bottom: 2px solid var(--clr-black);
+}
+.block__price:has(.h5) {
+  border-bottom: 1px solid var(--clr-black);
+}
+
+.calculator__summary {
+  bottom: 0;
+  position: sticky;
+  background-color: var(--clr-light-gray);
+}
+.calculator__summary .section__inner {
+  padding: 15px 0;
+}
+
+.attention {
+  padding-bottom: 30px;
+}
+.attention__text-big {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: 10px;
+}
+.attention__text-small {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+@media screen and (max-width: 1600px) {
+  .section-calculator__section {
+    display: flex;
+    gap: 30px;
+  }
+  .section-calculator__block {
+    width: calc(calc(100% - 30px) / 2);
+  }
+  .section-calculator .h4 {
+    font-size: 20px;
+  }
+  .section-calculator .h5 {
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 1400px) {
+  .calculator__block {
+    padding: 20px;
+  }
+  .section-calculator .h4 {
+    font-size: 18px;
+  }
+  .section-calculator .h5 {
+    font-size: 18px;
+  }
+
+  .block-choice .block-choice__title {
+    width: calc(100% - 40px);
+  }
+}
+@media screen and (max-width: 1200px) {
+  .section-calculator__section {
+    flex-direction: column;
+  }
+  .section-calculator__block {
+    width: 100%;
+  }
+  .calculator__block {
+    padding: 15px;
+  }
+
+  .calculator__blocks {
+    flex-direction: column;
+  }
+  .calculator__column {
+    width: 100%;
+  }
+
+  .calculator__summary .button {
+    padding: 12px 20px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .calculator__terrace-sliders {
+    flex-direction: column;
+  }
+  .calculator__terrace-slide {
+    width: 100%;
+  }
+  .calculator__summary .buttons {
+    flex-direction: column;
+  }
+  .calculator__summary .button {
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .attention__text-big {
+    font-size: 24px;
+  }
+  .attention__text-small {
+    font-size: 18px;
+  }
+
+  .section-calculator .h4 {
+    font-size: 17px;
+  }
+  .section-calculator .h5 {
+    font-size: 17px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .block__price {
+    flex-direction: column;
+  }
+
+  .attention__text-big {
+    font-size: 20px;
+  }
+
+  .section-calculator .h4 {
+    font-size: 16px;
+  }
+  .section-calculator .h5 {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .attention__text-big {
+    font-size: 18px;
+  }
+}

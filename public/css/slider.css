@@ -1,0 +1,116 @@
+/* ---------------------------- slider styles ------------------------------- */
+
+.home-slider__slide {
+  position: relative;
+  height: 600px;
+  transition: height 300ms;
+}
+.slide-image {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.slide-image-1 {
+  background-image: url("../img/slider/slider_1.png");
+}
+.slide-image-2 {
+  background-image: url("../img/slider/slider_2.png");
+}
+.slide-image-3 {
+  background-image: url("../img/slider/slider_3.png");
+}
+.slide-image-4 {
+  background-image: url("../img/slider/slider_4.png");
+}
+.slide-image-5 {
+  background-image: url("../img/slider/slider_5.png");
+}
+.slide-image-6 {
+  background-image: url("../img/slider/slider_6.png");
+}
+.slide-image-7 {
+  background-image: url("../img/slider/slider_7.png");
+}
+.slide-image-8 {
+  background-image: url("../img/slider/slider_8.png");
+}
+.slide-image-9 {
+  background-image: url("../img/slider/slider_9.png");
+}
+.slide-image-10 {
+  background-image: url("../img/slider/slider_10.png");
+}
+.slide-image-11 {
+  background-image: url("../img/slider/slider_11.png");
+}
+.slide-image-12 {
+  background-image: url("../img/slider/slider_12.png");
+}
+
+.home-slider__slide .slide-content {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: calc(100% - 50px);
+  height: calc(100% - 30px);
+  padding: 15px;
+  color: #ffffff;
+  transition: background-color 300ms;
+}
+.home-slider__slide:hover .slide-content {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.home-slider__slide .slide-content .slide-title {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.home-slider__slide .slide-text {
+  font-size: 18px;
+  transition: font-size 300ms;
+}
+.home-slider__slide .slide-text-full {
+  font-size: 0;
+  transition: font-size 300ms;
+}
+.home-slider__slide:hover .slide-text {
+  font-size: 0;
+}
+.home-slider__slide:hover .slide-text-full {
+  font-size: 16px;
+}
+
+.slider-home-section {
+  position: relative;
+}
+.home-slider-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  margin-top: 300px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .home-slider__slide {
+    height: 500px;
+  }
+  .home-slider__slide .slide-text,
+  .home-slider__slide:hover .slide-text-full {
+    font-size: 14px;
+  }
+  .home-slider__slide:hover .slide-text-full br:nth-child(2n) {
+    display: none;
+  }
+}

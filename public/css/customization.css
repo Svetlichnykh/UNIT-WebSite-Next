@@ -1,0 +1,111 @@
+.choice__wrapper {
+}
+
+.choice-buttons {
+  display: flex;
+  gap: 10px;
+}
+.choice-button {
+  display: inline;
+  padding: 12px 30px;
+  color: var(--clr-white);
+  cursor: pointer;
+  transition: 0.3s color;
+  font-weight: 700;
+  font-size: 16px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: var(--clr-yellow);
+  text-transform: uppercase;
+  border: none;
+  border-top: 2px solid var(--clr-light-gray);
+  border-left: 2px solid var(--clr-light-gray);
+  border-right: 2px solid var(--clr-light-gray);
+}
+.choice-button:hover {
+  color: var(--clr-black);
+}
+.choice-button.active {
+  color: var(--clr-black);
+  border-top: 2px solid var(--clr-yellow);
+  border-left: 2px solid var(--clr-yellow);
+  border-right: 2px solid var(--clr-yellow);
+  background-color: var(--clr-white);
+  margin-bottom: -2px;
+  box-shadow: 12px 0 10px -9px var(--clr-black-75);
+}
+.choice-buttons:has(.choice-button:first-child:not(.active)) {
+  margin-left: -2px;
+}
+
+.choice-content {
+  background-color: var(--clr-white);
+  padding: 1px;
+  border: 2px solid var(--clr-yellow);
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  box-shadow: 6px 6px 8px var(--clr-black-75);
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+}
+.item {
+  width: min-content;
+  outline: 2px solid var(--clr-white);
+  border: 2px solid var(--clr-white);
+  border-radius: 12px;
+}
+.item.active {
+  outline-color: var(--clr-lighter-gray);
+}
+.item:hover {
+  cursor: pointer;
+  outline-color: var(--clr-yellow);
+}
+.item .image {
+  width: 130px;
+  height: 130px;
+  border-radius: 10px;
+}
+.item .text {
+  display: block;
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.hidden {
+  transition: 0.6s;
+  display: none;
+}
+
+@media screen and (max-width: 1400px) {
+  .item .image {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .item .image {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media screen and (max-width: 800px) {
+  .item .image {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .choice-content .items {
+    flex-wrap: wrap;
+  }
+  .choice-button {
+    padding: 10px 15px;
+  }
+}

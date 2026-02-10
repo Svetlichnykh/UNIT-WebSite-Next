@@ -12,14 +12,14 @@ import img_11 from "@/assets/images/slider_11.png";
 import img_12 from "@/assets/images/slider_12.png";
 
 export const productData = [
-    {
-        id: 1,
-        product_img: img_1,
-        product_name: "Фундамент",
-        price: "Надежный железобетонный",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    },
+  {
+    id: 1,
+    product_img: img_1,
+    product_name: "Фундамент",
+    price: "Надежный железобетонный",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
   {
     id: 2,
     product_img: img_2,
@@ -36,7 +36,7 @@ export const productData = [
     product_overview:
       "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
   },
-    {
+  {
     id: 4,
     product_img: img_4,
     product_name: "Фасад",
@@ -44,7 +44,7 @@ export const productData = [
     product_overview:
       "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
   },
-    {
+  {
     id: 5,
     product_img: img_5,
     product_name: "Отопление",
@@ -52,60 +52,60 @@ export const productData = [
     product_overview:
       "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
   },
-    {
-        id: 6,
-        product_img: img_6,
-        product_name: "Конструктив модулей",
-        price: "Основа конструкции",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    },
-    {
-        id: 7,
-        product_img: img_7,
-        product_name: "Входная дверь",
-        price: "Коттеджного типа с терморазрывом",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    },
-    {
-        id: 8,
-        product_img: img_8,
-        product_name: "Окна",
-        price: "Энергоэффективные ламинированные",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    },
-    {
-        id: 9,
-        product_img: img_9,
-        product_name: "Утепление",
-        price: "Минеральный утеплитель KNAuf 200-250",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    },
-    {
-        id: 10,
-        product_img: img_10,
-        product_name: "Входная группа",
-        price: "Крыльцо с навесом у входа",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    },
-    {
-        id: 11,
-        product_img: img_11,
-        product_name: "Внутренняя отделка",
-        price: "В комплектации whitebox. Предчистовая",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    },
-    {
-        id: 12,
-        product_img: img_12,
-        product_name: "Водоснабжение",
-        price: "Скрытое водоснобжение и водоотведение",
-        product_overview:
-            "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
-    }
+  {
+    id: 6,
+    product_img: img_6,
+    product_name: "Конструктив модулей",
+    price: "Основа конструкции",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
+  {
+    id: 7,
+    product_img: img_7,
+    product_name: "Входная дверь",
+    price: "Коттеджного типа с терморазрывом",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
+  {
+    id: 8,
+    product_img: img_8,
+    product_name: "Окна",
+    price: "Энергоэффективные ламинированные",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
+  {
+    id: 9,
+    product_img: img_9,
+    product_name: "Утепление",
+    price: "Минеральный утеплитель KNAuf 200-250",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
+  {
+    id: 10,
+    product_img: img_10,
+    product_name: "Входная группа",
+    price: "Крыльцо с навесом у входа",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
+  {
+    id: 11,
+    product_img: img_11,
+    product_name: "Внутренняя отделка",
+    price: "В комплектации whitebox. Предчистовая",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
+  {
+    id: 12,
+    product_img: img_12,
+    product_name: "Водоснабжение",
+    price: "Скрытое водоснобжение и водоотведение",
+    product_overview:
+      "The Ratio Pendant Lamp featurees a wide lampshade, referring  the bold and elegant shape  classic metal penwdants. The lamp to features a spun steel shade with a seweamlessly embedded LED module.",
+  },
 ];

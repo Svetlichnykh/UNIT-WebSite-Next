@@ -1,0 +1,24 @@
+/* ------------------------- basic global settings -------------------------- */
+
+/* --------------------- root colors -------------------- */
+
+:root {
+  /* monochrome */
+  --clr-white: #ffffff;
+  --clr-light-gray: #ececec;
+  --clr-light-gray-25: #c4c3c3;
+  --clr-lighter-gray: #a8a8a8;
+  --clr-gray: #474a51;
+  --clr-black: #000000;
+  --clr-black-25: #000000bf;
+  --clr-black-50: #00000080;
+  --clr-black-75: #0000003f;
+
+  /* main colors */
+  --clr-yellow: #fcb917; /* legacy #FAB91E */
+
+  /* others */
+  --clr-red: #ff0404;
+  --clr-green: #00ff22;
+  --clr-blue: #4400ff;
+}
