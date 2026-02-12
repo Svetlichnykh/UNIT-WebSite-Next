@@ -49,7 +49,7 @@ const ProductCard = ({
             placeholder="blur"
             blurDataURL={staticBluarDataUrl}
             alt={product_name}
-            className="w-full h-full max-h-[506px]"
+            className="w-full h-full max-h-[506px] object-cover"
           />
         </div>
       </div>

@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   const relationsMap = {};
   const baseValues = {};
@@ -62,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
+
 
   // Находим все элементы с атрибутом data-block-template-radio
   document
@@ -244,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //     });
       // }
     });
+
 
   document
     .querySelectorAll('input[type="checkbox"], input[type="radio"]')
@@ -1011,213 +1014,6 @@ document.addEventListener("DOMContentLoaded", function () {
   updateWhatsAppButton();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".sect-views__image");
-  const arrows = document.querySelectorAll(".home-plan__arrow");
-  const container = document.getElementById("views-frame");
-  const frame = document.getElementById("active-frame");
-  const slider = document.querySelector(".sect-views__slider");
-
-  function moveFrameTo(element) {
-    const elRect = element.getBoundingClientRect();
-    const parentRect = container.getBoundingClientRect();
-
-    frame.style.width = `${elRect.width}px`;
-    frame.style.height = `${elRect.height}px`;
-
-    frame.style.transform = `translate(
-      ${elRect.left - parentRect.left}px,
-      ${elRect.top - parentRect.top}px
-    )`;
-  }
-
-  function setActiveView(view) {
-    const target = [...images].find((img) => img.dataset.view === view);
-    if (!target) return;
-
-    moveFrameTo(target);
-
-    arrows.forEach((btn) =>
-      btn.classList.toggle(
-        "home-plan__arrow--active",
-        btn.dataset.view === view,
-      ),
-    );
-
-    if (slider?.tnsInstance) {
-      const index = [...images].indexOf(target);
-      slider.tnsInstance.goTo(index);
-    }
-  }
-
-  // клики по изображениям
-  images.forEach((img) => {
-    img.addEventListener("click", () => {
-      setActiveView(img.dataset.view);
-    });
-  });
-
-  // клики по стрелкам
-  arrows.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      setActiveView(btn.dataset.view);
-    });
-  });
-
-  // синхронизация со слайдером
-  if (slider?.tnsInstance) {
-    slider.tnsInstance.events.on("indexChanged", () => {
-      const index = slider.tnsInstance.info.index;
-      setActiveView(images[index].dataset.view);
-    });
-  }
-
-  // ⏳ инициализация ТОЛЬКО после загрузки изображений
-  window.addEventListener("load", () => {
-    const initialView = "front";
-    setActiveView(initialView);
-    frame.classList.add("is-ready");
-  });
-});
-
-const images = document.querySelectorAll(".sect-views__image");
-const container = document.getElementById("views-frame");
-const frame = document.getElementById("active-frame");
-const slider = document.querySelector(".sect-views__slider");
-const roofButtons = document.querySelectorAll(".roof-switch__btn");
-const arrows = document.querySelectorAll(".sect-views__arrow");
-
-/* ================= CONFIG ================= */
-
-const viewsOrder = ["back", "left", "front", "right"];
-let currentView = "front";
-
-/* Конфигурация кровли */
-const roofImages = {
-    hip: {
-        back: "/img/views/view_08_back.png",
-        left: "/img/views/view_08_left.png",
-        front: "/img/views/view_08_front.png",
-        right: "/img/views/view_08_right.png",
-    },
-    gable: {
-        back: "/img/views/view_09_back.png",
-        left: "/img/views/view_09_left.png",
-        front: "/img/views/view_09_front.png",
-        right: "/img/views/view_09_right.png",
-    },
-};
-
-let currentRoof = "hip";
-
-/* ================= CORE ================= */
-
-/* Перемещение рамки */
-function moveFrameTo(element) {
-    if (!element || !container || !frame) return;
-
-    const elRect = element.getBoundingClientRect();
-    const parentRect = container.getBoundingClientRect();
-
-    frame.style.width = `${elRect.width}px`;
-    frame.style.height = `${elRect.height}px`;
-    frame.style.transform = `translate(
-    ${elRect.left - parentRect.left}px,
-    ${elRect.top - parentRect.top}px
-  )`;
-}
-
-/* Установка активного вида */
-function setActiveView(view) {
-    const target = [...images].find((img) => img.dataset.view === view);
-    if (!target) return;
-
-    currentView = view;
-    moveFrameTo(target);
-}
-
-/* ================= ROOF ================= */
-
-function setRoof(type) {
-    if (!roofImages[type]) return;
-
-    currentRoof = type;
-
-    images.forEach((img) => {
-        const view = img.dataset.view;
-        img.src = roofImages[type][view];
-    });
-
-    // после смены картинок обязательно пересчитать
-    waitForImages(() => setActiveView(currentView));
-}
-
-/* ================= EVENTS ================= */
-
-/* Клики по изображениям */
-images.forEach((img) => {
-    img.addEventListener("click", () => {
-        setActiveView(img.dataset.view);
-    });
-});
-
-/* Клики по кнопкам кровли */
-roofButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-        roofButtons.forEach((b) => b.classList.remove("is-active"));
-        btn.classList.add("is-active");
-        setRoof(btn.dataset.roof);
-    });
-});
-
-/* ===== ARROWS ===== */
-
-arrows.forEach((arrow) => {
-    arrow.addEventListener("click", () => {
-        const dir = arrow.dataset.dir; // prev | next
-        const index = viewsOrder.indexOf(currentView);
-
-        if (index === -1) return;
-
-        let nextIndex =
-            dir === "next" ? index + 1 : index - 1;
-
-        if (nextIndex < 0) nextIndex = viewsOrder.length - 1;
-        if (nextIndex >= viewsOrder.length) nextIndex = 0;
-
-        setActiveView(viewsOrder[nextIndex]);
-    });
-});
-
-/* ================= INIT ================= */
-
-function waitForImages(callback) {
-    let loaded = 0;
-
-    images.forEach((img) => {
-        if (img.complete) {
-            loaded++;
-        } else {
-            img.addEventListener(
-                "load",
-                () => {
-                    loaded++;
-                    if (loaded === images.length) callback();
-                },
-                { once: true }
-            );
-        }
-    });
-
-    if (loaded === images.length) callback();
-}
-
-waitForImages(() => {
-    setActiveView("front");
-    frame.classList.add("is-ready");
-});
-
-
 const EXTRA_PRICE = 100000;
 
 const originalPrices = new WeakMap();
@@ -1362,5 +1158,53 @@ updateBaseHouse();
 const initialBtn = document.querySelector('.roof-switch__btn[data-roof="hip"]');
 if (initialBtn) initialBtn.classList.add("is-active");
 
-// === MUTATION OBSERVER — фикс клика по уже выбранной галочке ===+
 
+let btn__fasad = document.getElementById("btn__fasad");
+let btn__balk = document.getElementById("btn__balk");
+let btn__windows = document.getElementById("btn__windows");
+
+let section__fasad = document.getElementById("section__fasad");
+let section__balk = document.getElementById("section__balk");
+let section__windows = document.getElementById("section__windows");
+
+let tab = 1;
+
+btn__fasad.addEventListener("click", toggleFasad);
+btn__balk.addEventListener("click", toggleBalk);
+btn__windows.addEventListener("click", toggleWindows);
+
+function toggleFasad() {
+  section__fasad.classList.remove("hidden");
+  section__balk.classList.add("hidden");
+  section__windows.classList.add("hidden");
+
+  btn__fasad.classList.add("active");
+  btn__balk.classList.remove("active");
+  btn__windows.classList.remove("active");
+
+  tab = 1;
+}
+
+function toggleBalk() {
+  section__fasad.classList.add("hidden");
+  section__balk.classList.remove("hidden");
+  section__windows.classList.add("hidden");
+
+  btn__fasad.classList.remove("active");
+  btn__balk.classList.add("active");
+  btn__windows.classList.remove("active");
+
+  tab = 2;
+}
+
+function toggleWindows() {
+  section__fasad.classList.add("hidden");
+  section__balk.classList.add("hidden");
+  section__windows.classList.remove("hidden");
+
+  btn__fasad.classList.remove("active");
+  btn__balk.classList.remove("active");
+  btn__windows.classList.add("active");
+
+  tab = 3;
+}

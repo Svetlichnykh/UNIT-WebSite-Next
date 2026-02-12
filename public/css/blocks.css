@@ -358,7 +358,8 @@
   gap: 10px;
 }
 .visual-slider__thumbnails img {
-  height: 85px;
+  width: 85px;
+  object-fit: cover;
   display: block;
   transition: outline-color 300ms;
 }

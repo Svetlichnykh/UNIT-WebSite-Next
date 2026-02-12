@@ -31,7 +31,7 @@ const ProjectSingle = () => {
             alt="img"
             className={"max-h-[100vh] object-cover"}
           />
-          <div className="container 2sm:mt-[156px] sm:mt-30 mt-20">
+          <div className="container 2sm:my-[156px] sm:my-30 my-20">
             <div className="grid lg:grid-cols-[65%_auto] gap-[38px]">
               <div className="relative after:absolute sm:after:-left-12.5 after:-left-5 after:top-1/2 after:-translate-y-1/2 after:w-[1px] sm:after:h-[130%] after:h-[120%] after:bg-primary sm:ml-12.5 ml-5">
                 <h1 className="text-primary-foreground [font-size:_clamp(48px,7vw,130px)] font-extrabold leading-110">
@@ -97,10 +97,11 @@ const ProjectSingle = () => {
               </div>
             </div>
           </div>
-          <h1 className={"text-center my-5"}>Калькулятор</h1>
+
           <Calculator />
           <ProjectSingleSliderOne />
 
+          <ShopSlider data={productData} />
         </div>
       </section>
       <Feedback />

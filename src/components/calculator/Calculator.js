@@ -1,9 +1,457 @@
+"use client";
+
 import React from "react";
 import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
+import { tns } from "tiny-slider/src/tiny-slider";
+import "tiny-slider/dist/tiny-slider.css";
+
+import { useEffect, useRef, useState } from "react";
+
+const viewsOrder = ["back", "left", "front", "right"];
+
+const roofImages = {
+  hip: {
+    back: "/img/views/view_08_back.png",
+    left: "/img/views/view_08_left.png",
+    front: "/img/views/view_08_front.png",
+    right: "/img/views/view_08_right.png",
+  },
+  gable: {
+    back: "/img/views/view_09_back.png",
+    left: "/img/views/view_09_left.png",
+    front: "/img/views/view_09_front.png",
+    right: "/img/views/view_09_right.png",
+  },
+};
+
+const HOUSE_IMAGES = [
+  // default
+  {
+    id: "default",
+    src: "/img/home/default.jpg",
+    alt: "база дома",
+    className: "house__img-default hidden",
+    dataGroup: "default",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "default-gable",
+    src: "/img/home/default-gable.jpg",
+    alt: "база дома",
+    className: "house__img-default hidden",
+    dataGroup: "default",
+    width: 400,
+    height: 400,
+  },
+
+  // фасад
+  {
+    id: "facade__white",
+    src: "/img/home/mkc-08__facade__white.png",
+    alt: "белый фасад",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "facade__gray",
+    src: "/img/home/mkc-08__facade__gray.png",
+    alt: "серый фасад",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "facade__black",
+    src: "/img/home/mkc-08__facade__black.png",
+    alt: "чёрный фасад",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "facade__white-gable",
+    src: "/img/home/mkc-08__facade__white-gable.png",
+    alt: "белый фасад двускатный",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "facade__gray-gable",
+    src: "/img/home/mkc-08__facade__gray-gable.png",
+    alt: "серый фасад двускатный",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "facade__black-gable",
+    src: "/img/home/mkc-08__facade__black-gable.png",
+    alt: "чёрный фасад двускатный",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+
+  // фасад планкен
+  {
+    id: "facade-planken__white",
+    src: "/img/home/mkc-08__facade-planken_white.png",
+    alt: "фасад планкен белый",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "facade-planken__gray",
+    src: "/img/home/mkc-08__facade-planken_gray.png",
+    alt: "фасад планкен серый",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "facade-planken__black",
+    src: "/img/home/mkc-08__facade-planken_black.png",
+    alt: "фасад планкен чёрный",
+    className: "house__img hidden",
+    dataGroup: "fasad",
+    width: 400,
+    height: 400,
+  },
+
+  // планкен
+  {
+    id: "planken__walnut",
+    src: "/img/home/mkc-08__planken__walnut.png",
+    alt: "планкен орех",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "planken__rosewood",
+    src: "/img/home/mkc-08__planken__rosewood.png",
+    alt: "планкен палисандр",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "planken__pine",
+    src: "/img/home/mkc-08__planken__pine.png",
+    alt: "планкен сосна",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "planken__black",
+    src: "/img/home/mkc-08__planken__black.png",
+    alt: "планкен чёрный",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+
+  // планкен двускатные
+  {
+    id: "planken__walnut-gable",
+    src: "/img/home/mkc-08__planken__walnut-gable.png",
+    alt: "планкен орех двускатный",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "planken__rosewood-gable",
+    src: "/img/home/mkc-08__planken__rosewood-gable.png",
+    alt: "планкен палисандр двускатный",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "planken__pine-gable",
+    src: "/img/home/mkc-08__planken__pine-gable.png",
+    alt: "планкен сосна двускатный",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "planken__black-gable",
+    src: "/img/home/mkc-08__planken__black-gable.png",
+    alt: "планкен чёрный двускатный",
+    className: "house__img hidden",
+    dataGroup: "balk",
+    width: 400,
+    height: 400,
+  },
+
+  // окна
+  {
+    id: "windows__graphite",
+    src: "/img/home/mkc-08__windows__graphite.png",
+    alt: "окна графит",
+    className: "house__img hidden",
+    dataGroup: "windows",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "windows__light_wood",
+    src: "/img/home/mkc-08__windows__light-wood.png",
+    alt: "окна светлое дерево",
+    className: "house__img hidden",
+    dataGroup: "windows",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "windows__chocolate",
+    src: "/img/home/mkc-08__windows__chocolate.png",
+    alt: "окна шоколад",
+    className: "house__img hidden",
+    dataGroup: "windows",
+    width: 400,
+    height: 400,
+  },
+
+  // окна двускатные
+  {
+    id: "windows__light_wood-gable",
+    src: "/img/home/mkc-08__windows__light-wood-gable.png",
+    alt: "окна светлое дерево",
+    className: "house__img hidden",
+    dataGroup: "windows",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "windows__graphite-gable",
+    src: "/img/home/mkc-08__windows__graphite-gable.png",
+    alt: "окна антрацит двускатные",
+    className: "house__img hidden",
+    dataGroup: "windows",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "windows__chocolate-gable",
+    src: "/img/home/mkc-08__windows__chocolate-gable.png",
+    alt: "окна шоколад двускатные",
+    className: "house__img hidden",
+    dataGroup: "windows",
+    width: 400,
+    height: 400,
+  },
+
+  // фасадное освещение
+  {
+    id: "fasad-light__white",
+    src: "/img/home/mkc-08__fasad-light_white.png",
+    alt: "фасадное освещение белое",
+    className: "house__img hidden",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "fasad-light__black",
+    src: "/img/home/mkc-08__fasad-light_black.png",
+    alt: "фасадное освещение чёрное",
+    className: "house__img hidden",
+    width: 400,
+    height: 400,
+  },
+];
+
+const CHOICE_IMAGES = [
+  {
+    section: "fasad", // название секции
+    items: [
+      {
+        id: "facade__white",
+        imgSrc: "/img/parts/btn__facade__white.png",
+        alt: "Белый фасад",
+        description: "Белый фасад",
+        color: "red", // Цвет для стилизации
+      },
+      {
+        id: "facade__gray",
+        imgSrc: "/img/parts/btn__facade__gray.png",
+        alt: "Серый фасад",
+        description: "Серый фасад",
+        color: "green",
+      },
+      {
+        id: "facade__black",
+        imgSrc: "/img/parts/btn__facade__black.png",
+        alt: "Чёрный фасад",
+        description: "Чёрный фасад",
+        color: "blue",
+      },
+    ],
+  },
+  {
+    section: "balk", // секция с планкенами
+    hidden: true, // если секция скрыта
+    items: [
+      {
+        id: "planken__walnut",
+        imgSrc: "/img/parts/btn__planken__walnut.png",
+        alt: "Планкен орех",
+        description: "Планкен орех",
+        color: "red",
+      },
+      {
+        id: "planken__rosewood",
+        imgSrc: "/img/parts/btn__planken__rosewood.png",
+        alt: "Планкен палисандр",
+        description: "Планкен палисандр",
+        color: "green",
+      },
+      {
+        id: "planken__pine",
+        imgSrc: "/img/parts/btn__planken__pine.png",
+        alt: "Планкен сосна",
+        description: "Планкен сосна",
+        color: "blue",
+      },
+      {
+        id: "planken__black",
+        imgSrc: "/img/parts/btn__planken__black.png",
+        alt: "Планкен чёрный",
+        description: "Планкен чёрный",
+        color: "blue",
+      },
+    ],
+  },
+  {
+    section: "windows", // секция окон
+    hidden: true,
+    items: [
+      {
+        id: "windows__graphite",
+        imgSrc: "/img/parts/btn__windows__graphite.png",
+        alt: "Окна графит",
+        description: "Окна графит",
+        color: "red",
+      },
+      {
+        id: "windows__light_wood",
+        imgSrc: "/img/parts/btn__windows__light_wood.png",
+        alt: "Окна светлое дерево",
+        description: "Окна светлое дерево",
+        color: "green",
+      },
+      {
+        id: "windows__chocolate",
+        imgSrc: "/img/parts/btn__windows__chocolate.png",
+        alt: "Окна шоколад",
+        description: "Окна шоколад",
+        color: "blue",
+      },
+    ],
+  },
+];
 
 const Calculator = () => {
+  useEffect(() => {
+    if (!slidersRef.current.length) return;
+
+    slidersRef.current.forEach((sliderBlock) => {
+      if (!sliderBlock) return;
+
+      const slider = sliderBlock.querySelector(".visual-slider");
+      const thumbs = sliderBlock.querySelector(".visual-slider__thumbnails");
+
+      if (!slider || slider.dataset.initialized) return;
+
+      const instance = tns({
+        container: slider,
+        items: 1,
+        slideBy: 1,
+        mouseDrag: true,
+        controls: false,
+        nav: true,
+        navContainer: thumbs,
+        navAsThumbnails: true,
+        autoplayButtonOutput: false,
+      });
+
+      slider.dataset.initialized = "true";
+    });
+  }, []);
+
+  const [activeSlider, setActiveSlider] = useState(4); // по умолчанию кухня (как у тебя showSlider(4))
+  const slidersRef = useRef([]);
+
+  const containerRef = useRef(null);
+  const frameRef = useRef(null);
+
+  const [currentView, setCurrentView] = useState("front");
+  const [currentRoof, setCurrentRoof] = useState("hip");
+
+  useEffect(() => {
+    const images = containerRef.current.querySelectorAll(".sect-views__image");
+
+    const onImageLoad = () => {
+      // Когда изображение загружено, делаем расчеты для фрейма
+      const target = [...images].find(
+        (img) => img.dataset.view === currentView,
+      );
+      if (!target) return;
+
+      const elRect = target.getBoundingClientRect();
+      const parentRect = containerRef.current.getBoundingClientRect();
+
+      // Устанавливаем размеры и позицию фрейма
+      frameRef.current.style.width = elRect.width + "px";
+      frameRef.current.style.height = elRect.height + "px";
+      frameRef.current.style.transform = `translate(
+            ${elRect.left - parentRect.left}px,
+            ${elRect.top - parentRect.top}px
+        )`;
+
+      frameRef.current.classList.add("is-ready");
+    };
+
+    // Добавляем слушатель для каждого изображения
+    images.forEach((img) => {
+      if (img.complete) {
+        onImageLoad(); // Если изображение уже загружено
+      } else {
+        img.addEventListener("load", onImageLoad); // Если еще не загружено
+      }
+    });
+
+    return () => {
+      images.forEach((img) => {
+        img.removeEventListener("load", onImageLoad);
+      });
+    };
+  }, [currentView, currentRoof]);
+
   return (
     <section>
       {/* Core styles */}
@@ -27,21 +475,6 @@ const Calculator = () => {
       <link rel="stylesheet" href="/css/lib/tooltips.css" />
       <link rel="stylesheet" href="/css/lib/pannellum.css" />
 
-      {/* External CSS */}
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css"
-      />
-
-      {/* Local scripts */}
-      <Script src="/scripts/tooltips.js" strategy="afterInteractive" />
-      <Script src="/scripts/pannellum.js" strategy="afterInteractive" />
-
-      {/* External scripts */}
-      <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"
-        strategy="afterInteractive"
-      />
       <section className="section">
         <div className="section__inner">
           <h2 className="h2 p-d-20">Планировка дома</h2>
@@ -51,34 +484,49 @@ const Calculator = () => {
               <div
                 className="visualization-scheme area area-bedroom-1"
                 data-tooltip="Детская\n( 10 м² )"
+                onClick={() => setActiveSlider(0)}
               ></div>
+
               <div
                 className="visualization-scheme area area-bedroom-2"
                 data-tooltip="Спальня\n( 10.3 м² )"
+                onClick={() => setActiveSlider(1)}
               ></div>
+
               <div
                 className="visualization-scheme area area-bedroom-3"
                 data-tooltip="Вторая спальня\n( 12.8 м² )"
+                onClick={() => setActiveSlider(2)}
               ></div>
+
               <div
                 className="visualization-scheme area area-hall"
                 data-tooltip="Коридор\n( 3.9 м² )"
+                onClick={() => setActiveSlider(3)}
               ></div>
+
               <div
                 className="visualization-scheme area area-kitchen"
                 data-tooltip="Кухня-Гостиная\n( 9.2 + 14.1 м² )"
+                onClick={() => setActiveSlider(4)}
               ></div>
+
               <div
                 className="visualization-scheme area area-tambur"
                 data-tooltip="Тамбур\n( 2 м² )"
+                onClick={() => setActiveSlider(5)}
               ></div>
+
               <div
                 className="visualization-scheme area area-tech"
                 data-tooltip="Тех. помещение\n( 2.6 м² )"
+                onClick={() => setActiveSlider(6)}
               ></div>
+
               <div
                 className="visualization-scheme area area-toilet"
                 data-tooltip="Туалет\n( 4.7 м² )"
+                onClick={() => setActiveSlider(7)}
               ></div>
 
               <div className="visualization-scheme"></div>
@@ -87,626 +535,94 @@ const Calculator = () => {
                 className="home-plan__nav"
                 aria-label="Навигация по плану дома"
               >
-                <button
-                  className="home-plan__arrow home-plan__arrow--front home-plan__arrow--active"
-                  aria-label="Вид спереди"
-                  data-view="front"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 42 36"
-                    width="42"
-                    height="36"
+                {viewsOrder.map((view) => (
+                  <button
+                    key={view}
+                    className={`home-plan__arrow home-plan__arrow--${view} ${
+                      currentView === view ? "home-plan__arrow--active" : ""
+                    }`}
+                    onClick={() => setCurrentView(view)}
                   >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M21 36L41.7846 0H0.215393L21 36Z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="home-plan__arrow home-plan__arrow--left"
-                  aria-label="Вид слева"
-                  data-view="left"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 42 36"
-                    width="42"
-                    height="36"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M21 36L41.7846 0H0.215393L21 36Z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="home-plan__arrow home-plan__arrow--back"
-                  aria-label="Вид сзади"
-                  data-view="back"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 42 36"
-                    width="42"
-                    height="36"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M21 36L41.7846 0H0.215393L21 36Z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="home-plan__arrow home-plan__arrow--right"
-                  aria-label="Вид справа"
-                  data-view="right"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 42 36"
-                    width="42"
-                    height="36"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M21 36L41.7846 0H0.215393L21 36Z"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 42 36"
+                      width="42"
+                      height="36"
+                    >
+                      <path d="M21 36L41.7846 0H0.215393L21 36Z" />
+                    </svg>
+                  </button>
+                ))}
               </nav>
             </div>
 
             <div className="visualization-sliders__wrapper">
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/bedroom_one__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_one__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_one__03.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_one__04.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_one__05.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
+              {[
+                "bedroom_one",
+                "bedroom_two",
+                "bedroom_three",
+                "hall",
+                "kitchen",
+                "tambur",
+                "tech",
+                "toilet",
+              ].map((room, index) => (
+                <div
+                  key={room}
+                  className="visualization-slider"
+                  style={{ display: activeSlider === index ? "block" : "none" }}
+                  ref={(el) => (slidersRef.current[index] = el)}
+                >
+                  <div className="visual-slider">
+                    {Array.from(
+                      {
+                        length:
+                          room === "hall"
+                            ? 2
+                            : room === "tambur"
+                              ? 3
+                              : room === "kitchen"
+                                ? 7
+                                : 5,
+                      },
+                      (_, i) => (
+                        <Image
+                          key={i}
+                          src={`/img/renders/${room}__0${i + 1}.jpg`}
+                          alt=""
+                          className="slider__slide"
+                          width={400}
+                          height={400}
+                        />
+                      ),
+                    )}
+                  </div>
 
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_one__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_one__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_one__03.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_one__04.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_one__05.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
+                  <div className="visual-slider__thumbnails">
+                    {Array.from(
+                      {
+                        length:
+                          room === "hall"
+                            ? 2
+                            : room === "tambur"
+                              ? 3
+                              : room === "kitchen"
+                                ? 7
+                                : 5,
+                      },
+                      (_, i) => (
+                        <Image
+                          key={i}
+                          src={`/img/thumbnail/thamb__${room}__0${i + 1}.png`}
+                          alt=""
+                          width={400}
+                          height={400}
+                        />
+                      ),
+                    )}
+                  </div>
                 </div>
-              </div>
-
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/bedroom_two__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_two__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_two__03.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_two__04.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_two__05.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_two__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_two__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_two__03.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_two__04.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_two__05.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
-
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/bedroom_three__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_three__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_three__03.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_three__04.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/bedroom_three__05.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_three__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_three__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_three__03.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_three__04.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__bedroom_three__05.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
-
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/hall__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/hall__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__hall__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__hall__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
-
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/kitchen__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/kitchen__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/kitchen__03.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/kitchen__04.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/kitchen__05.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/kitchen__06.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/kitchen__07.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__kitchen__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__kitchen__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__kitchen__03.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__kitchen__04.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__kitchen__05.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__kitchen__06.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__kitchen__07.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
-
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/tambur__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/tambur__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/tambur__03.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__tambur__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__tambur__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__tambur__03.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
-
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/tech__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/tech__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/tech__03.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/tech__04.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/tech__05.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__tech__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__tech__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__tech__03.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__tech__04.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__tech__05.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
-
-              <div className="visualization-slider">
-                <div className="visual-slider">
-                  <Image
-                    src={"/img/renders/toilet__01.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/toilet__02.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/toilet__03.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/toilet__04.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/renders/toilet__05.jpg"}
-                    alt={""}
-                    className="slider__slide"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-
-                <div className="visual-slider__thumbnails">
-                  <Image
-                    src={"/img/thumbnail/thamb__toilet__01.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__toilet__02.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__toilet__03.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__toilet__04.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                  <Image
-                    src={"/img/thumbnail/thamb__toilet__05.png"}
-                    alt={""}
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -747,63 +663,52 @@ const Calculator = () => {
             });
             });`}</Script>
 
-      <Script src={"/scripts/visualization.js"} />
-
       <div className="roof-switch">
         <button
-          className="roof-switch__btn is-active left-button"
-          data-roof="hip"
+          className={`roof-switch__btn left-button ${
+            currentRoof === "hip" ? "is-active" : ""
+          }`}
+          onClick={() => setCurrentRoof("hip")}
         >
           Вальмовая кровля
         </button>
-        <button className="roof-switch__btn right-button" data-roof="gable">
+
+        <button
+          className={`roof-switch__btn right-button ${
+            currentRoof === "gable" ? "is-active" : ""
+          }`}
+          onClick={() => setCurrentRoof("gable")}
+        >
           Двускатная кровля
         </button>
       </div>
+
       <section className="section sect-views">
         <div className="section__inner">
-          <div className="sect-views__frame" id="views-frame">
-            <div className="active-frame" id="active-frame"></div>
+          <div
+            className="sect-views__frame"
+            id="views-frame"
+            ref={containerRef}
+          >
+            <div className="active-frame" id="active-frame" ref={frameRef} />
 
             <div className="sect-views__slider">
-              <Image
-                src={"/img/views/view_08_back.png"}
-                alt={""}
-                className="sect-views__image"
-                data-view="back"
-                width={400}
-                height={400}
-              />
-              <Image
-                src={"/img/views/view_08_left.png"}
-                alt={""}
-                className="sect-views__image"
-                data-view="left"
-                width={400}
-                height={400}
-              />
-              <Image
-                src={"/img/views/view_08_front.png"}
-                alt={""}
-                className="sect-views__image"
-                data-view="front"
-                width={400}
-                height={400}
-              />
-              <Image
-                src={"/img/views/view_08_right.png"}
-                alt={""}
-                className="sect-views__image"
-                data-view="right"
-                width={400}
-                height={400}
-              />
+              {viewsOrder.map((view) => (
+                <Image
+                  key={view}
+                  src={roofImages[currentRoof][view]}
+                  alt=""
+                  className="sect-views__image"
+                  data-view={view}
+                  width={400}
+                  height={400}
+                  onClick={() => setCurrentView(view)}
+                />
+              ))}
             </div>
           </div>
         </div>
       </section>
-
-      <Script src={"/scripts/home.js"} />
 
       <section className="section section-calculator">
         <div className="section__inner section-calculator__inner">
@@ -815,408 +720,18 @@ const Calculator = () => {
                 className="section-calculator-block__house"
                 id="colors-params"
               >
-                <Image
-                  src="/img/home/default.jpg"
-                  alt="база дома"
-                  id="default"
-                  className="house__img-default hidden"
-                  width={400}
-                  height={400}
-                  data-group="default"
-                />
-                <Image
-                  src="/img/home/default-gable.jpg"
-                  alt="база дома"
-                  id="default-gable"
-                  className="house__img-default hidden"
-                  width={400}
-                  height={400}
-                  data-group="default"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade__white.png"
-                  className="house__img hidden"
-                  id="facade__white"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="белый фасад"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade__gray.png"
-                  className="house__img hidden"
-                  id="facade__gray"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="серый фасад"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade__black.png"
-                  className="house__img hidden"
-                  id="facade__black"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="чёрный фасад"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade__white-gable.png"
-                  className="house__img hidden"
-                  id="facade__white-gable"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="белый фасад двускатный"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade__gray-gable.png"
-                  className="house__img hidden"
-                  id="facade__gray-gable"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="серый фасад двускатный"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade__black-gable.png"
-                  className="house__img hidden"
-                  id="facade__black-gable"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="чёрный фасад двускатный"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade-planken_white.png"
-                  className="house__img hidden"
-                  id="facade-planken__white"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="фасад планкен белый"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade-planken_gray.png"
-                  className="house__img hidden"
-                  id="facade-planken__gray"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="фасад планкен серый"
-                />
-                <Image
-                  src="/img/home/mkc-08__facade-planken_black.png"
-                  className="house__img hidden"
-                  id="facade-planken__black"
-                  data-group="fasad"
-                  width={400}
-                  height={400}
-                  alt="фасад планкен чёрный"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__walnut.png"
-                  className="house__img hidden"
-                  id="planken__walnut"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен орех"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__rosewood.png"
-                  className="house__img hidden"
-                  id="planken__rosewood"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен палисандр"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__pine.png"
-                  className="house__img hidden"
-                  id="planken__pine"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен сосна"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__black.png"
-                  className="house__img hidden"
-                  id="planken__black"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен чёрный"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__walnut-gable.png"
-                  className="house__img hidden"
-                  id="planken__walnut-gable"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен орех двускатный"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__rosewood-gable.png"
-                  className="house__img hidden"
-                  id="planken__rosewood-gable"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен палисандр двускатный"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__pine-gable.png"
-                  className="house__img hidden"
-                  id="planken__pine-gable"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен сосна двускатный"
-                />
-                <Image
-                  src="/img/home/mkc-08__planken__black-gable.png"
-                  className="house__img hidden"
-                  id="planken__black-gable"
-                  data-group="balk"
-                  width={400}
-                  height={400}
-                  alt="планкен чёрный двускатный"
-                />
-                <Image
-                  src="/img/home/mkc-08__windows__graphite.png"
-                  alt="окна графит"
-                  className="house__img hidden"
-                  id="windows__graphite"
-                  width={400}
-                  height={400}
-                  data-group="windows"
-                />
-                <Image
-                  src="/img/home/mkc-08__windows__light-wood.png"
-                  alt="окна светлое дерево"
-                  className="house__img hidden"
-                  id="windows__light_wood"
-                  width={400}
-                  height={400}
-                  data-group="windows"
-                />
-                <Image
-                  src="/img/home/mkc-08__windows__chocolate.png"
-                  alt="окна шоколад"
-                  className="house__img hidden"
-                  id="windows__chocolate"
-                  width={400}
-                  height={400}
-                  data-group="windows"
-                />
-                <Image
-                  src="/img/home/mkc-08__windows__light-wood-gable.png"
-                  className="house__img hidden"
-                  id="windows__light_wood-gable"
-                  data-group="windows"
-                  width={400}
-                  height={400}
-                  alt="окна светлое дерево"
-                />
-                <Image
-                  src="/img/home/mkc-08__windows__graphite-gable.png"
-                  className="house__img hidden"
-                  id="windows__graphite-gable"
-                  data-group="windows"
-                  width={400}
-                  height={400}
-                  alt="окна антрацит двускатные"
-                />
-                <Image
-                  src="/img/home/mkc-08__windows__chocolate-gable.png"
-                  className="house__img hidden"
-                  id="windows__chocolate-gable"
-                  data-group="windows"
-                  width={400}
-                  height={400}
-                  alt="окна шоколад двускатные"
-                />
-                <Image
-                  src="/img/home/mkc-08__fasad-light_white.png"
-                  className="house__img hidden"
-                  id="fasad-light__white"
-                  alt="фасадное освещение белое"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__fasad-light_gray.png"
-                  className="house__img hidden"
-                  id="fasad-light__gray"
-                  alt="фасадное освещение серое"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__fasad-light_black.png"
-                  className="house__img hidden"
-                  id="fasad-light__black"
-                  alt="фасадное освещение чёрное"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__fasad-light_white-gable.png"
-                  className="house__img hidden"
-                  id="fasad-light__white-gable"
-                  alt="фасадное освещение белое двускатное"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__fasad-light_gray-gable.png"
-                  className="house__img hidden"
-                  id="fasad-light__gray-gable"
-                  alt="фасадное освещение серое двускатное"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__fasad-light_black-gable.png"
-                  className="house__img hidden"
-                  id="fasad-light__black-gable"
-                  alt="фасадное освещение чёрное двускатное"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__roof_metal.png"
-                  className="house__img hidden"
-                  id="roof__metal"
-                  alt="крыша металл"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__roof_fals.png"
-                  className="house__img hidden"
-                  id="roof__fals"
-                  alt="крыша клик-фальц"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__roof_metal-gable.png"
-                  className="house__img hidden"
-                  id="roof__metal-gable"
-                  alt="крыша металл двускатная"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__roof_fals-gable.png"
-                  className="house__img hidden"
-                  id="roof__fals-gable"
-                  alt="крыша клик-фальц двускатная"
-                  width={400}
-                  height={400}
-                />
-                \
-                <Image
-                  src="/img/home/mkc-08__snow-holders_metal.png"
-                  className="house__img hidden"
-                  id="snow-holders__metal"
-                  alt="снегодержатели металл"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__snow-holders_fals.png"
-                  className="house__img hidden"
-                  id="snow-holders__fals"
-                  alt="снегодержатели фальц"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__snow-holders_metal-gable.png"
-                  className="house__img hidden"
-                  id="snow-holders__metal-gable"
-                  alt="снегодержатели металл двускатные"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__snow-holders_fals-gable.png"
-                  className="house__img hidden"
-                  id="snow-holders__fals-gable"
-                  alt="снегодержатели фальц двускатные"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__water-sliv-system_base.png"
-                  className="house__img hidden"
-                  id="water-sliv-system__base"
-                  alt="водосточная система"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__water-sliv-system_base-gable.png"
-                  className="house__img hidden"
-                  id="water-sliv-system__base-gable"
-                  alt="водосточная система двускатная"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__inner-group_metal.png"
-                  className="house__img hidden"
-                  id="inner-group__metal"
-                  alt="входная группа металл"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__inner-group_fals.png"
-                  className="house__img hidden"
-                  id="inner-group__fals"
-                  alt="входная группа фальц"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__inner-group_metal-gable.png"
-                  className="house__img hidden"
-                  id="inner-group__metal-gable"
-                  alt="входная группа металл двускатная"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__inner-group_fals-gable.png"
-                  className="house__img hidden"
-                  id="inner-group__fals-gable"
-                  alt="входная группа фальц двускатная"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__water-sliv-system_inner-group.png"
-                  className="house__img hidden"
-                  id="water-sliv-system__inner-group"
-                  alt="водосток входной группы"
-                  width={400}
-                  height={400}
-                />
-                <Image
-                  src="/img/home/mkc-08__water-sliv-system_inner-group-gable.png"
-                  className="house__img hidden"
-                  id="water-sliv-system__inner-group-gable"
-                  alt="водосток входной группы двускатный"
-                  width={400}
-                  height={400}
-                />
+                {HOUSE_IMAGES.map((img) => (
+                  <Image
+                    key={img.id}
+                    src={img.src}
+                    alt={img.alt}
+                    id={img.id}
+                    className={img.className}
+                    width={400}
+                    height={400}
+                    data-group={img.dataGroup}
+                  />
+                ))}
               </div>
 
               <div className="choice__wrapper p-t-20 p-d-20">
@@ -1233,66 +748,30 @@ const Calculator = () => {
                 </div>
 
                 <div className="choice-content">
-                  <div className="items fasad" id="section__fasad">
-                    <div className="item color__red" data-img="facade__white">
-                        <Image src={"/img/parts/btn__facade__white.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Белый фасад</span>
-                    </div>
-                    <div className="item color__green" data-img="facade__gray">
-                        <Image src={"/img/parts/btn__facade__gray.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Серый фасад</span>
-                    </div>
-                    <div className="item color__blue" data-img="facade__black">
-                        <Image src={"/img/parts/btn__facade__black.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Чёрный фасад</span>
-                    </div>
-                  </div>
-
-                  <div className="items balk hidden" id="section__balk">
-                    <div className="item color__red" data-img="planken__walnut">
-                        <Image src={"/img/parts/btn__planken__walnut.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Планкен орех</span>
-                    </div>
+                  {CHOICE_IMAGES.map((section) => (
                     <div
-                      className="item color__green"
-                      data-img="planken__rosewood"
+                      key={section.section}
+                      className={`items ${section.section} ${section.hidden ? "hidden" : ""}`}
+                      id={`section__${section.section}`}
                     >
-                        <Image src={"/img/parts/btn__planken__rosewood.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Планкен палисандр</span>
+                      {section.items.map((item) => (
+                        <div
+                          key={item.id}
+                          className={`item color__${item.color}`}
+                          data-img={item.id}
+                        >
+                          <Image
+                            src={item.imgSrc}
+                            alt={item.alt}
+                            className="image"
+                            width={400}
+                            height={400}
+                          />
+                          <span className="text">{item.description}</span>
+                        </div>
+                      ))}
                     </div>
-                    <div className="item color__blue" data-img="planken__pine">
-                        <Image src={"/img/parts/btn__planken__pine.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Планкен сосна</span>
-                    </div>
-                    <div className="item color__blue" data-img="planken__black">
-                        <Image src={"/img/parts/btn__planken__black.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Планкен чёрный</span>
-                    </div>
-                  </div>
-
-                  <div className="items windows hidden" id="section__windows">
-                    <div
-                      className="item color__red"
-                      data-img="windows__graphite"
-                    >
-                        <Image src={"/img/parts/btn__windows__graphite.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Окна графит</span>
-                    </div>
-                    <div
-                      className="item color__green"
-                      data-img="windows__light_wood"
-                    >
-                        <Image src={"/img/parts/btn__windows__light_wood.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Окна светлое дерево</span>
-                    </div>
-                    <div
-                      className="item color__blue"
-                      data-img="windows__chocolate"
-                    >
-                        <Image src={"/img/parts/btn__windows__chocolate.png"} alt={""} className={"image"} width={400} height={400} />
-                      <span className="text">Окна шоколад</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -1502,6 +981,8 @@ const Calculator = () => {
                                     ]
                                 }`}</Script>
             </div>
+
+
           </div>
 
           <div className="calculator-terrace-sliders__wrapper">
@@ -1882,8 +1363,6 @@ const Calculator = () => {
         </div>
       </section>
 
-      <Script src={"/scripts/csr.js"} />
-
       <Script id="my-script3">
         {`function radioReset(name) {
 
@@ -1914,8 +1393,6 @@ const Calculator = () => {
 
             })');`}
       </Script>
-
-      <Script src={"/scripts/tabs.js"} />
     </section>
   );
 };
