@@ -101,7 +101,6 @@ const ProjectSingle = () => {
           <Calculator />
           <ProjectSingleSliderOne />
 
-          <ShopSlider data={productData} />
         </div>
       </section>
       <Feedback />
