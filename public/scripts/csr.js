@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const relationsMap = {};
   const baseValues = {};
@@ -63,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     });
-
 
   // Находим все элементы с атрибутом data-block-template-radio
   document
@@ -246,7 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
       //     });
       // }
     });
-
 
   document
     .querySelectorAll('input[type="checkbox"], input[type="radio"]')
@@ -1157,7 +1154,6 @@ updateBaseHouse();
 // Дополнительно можно сразу отметить кнопку активной для вальмовой
 const initialBtn = document.querySelector('.roof-switch__btn[data-roof="hip"]');
 if (initialBtn) initialBtn.classList.add("is-active");
-
 
 let btn__fasad = document.getElementById("btn__fasad");
 let btn__balk = document.getElementById("btn__balk");

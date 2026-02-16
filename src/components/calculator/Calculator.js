@@ -1,6 +1,6 @@
 "use client";
 //далее изменения
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,112 +11,233 @@ import { useEffect, useRef, useState } from "react";
 import CalculatorBlock from "@/components/calculator-block/Calculator-block";
 
 const blocksData = [
-    {
-        dataTitle: "Платформа",
-        title: "ПЛАТФОРМА",
-        checkboxName: "platform",
-        subTitle: "Необходима при монтаже дома на свайный или ленточный фундамент.",
-        price: 618500,
-        localSumName: "home",
+  {
+    dataTitle: "Платформа",
+    title: "ПЛАТФОРМА",
+    checkboxName: "platform",
+    subTitle: "Необходима при монтаже дома на свайный или ленточный фундамент.",
+    price: 618500,
+    localSumName: "home",
+    relations: [
+      { id: "house-montage", change: "150000" },
+      { id: "house-delivery", change: "60000" },
+    ],
+  },
+  {
+    dataTitle: "Фасад с окрашиванием",
+    title: "ФАСАД С ФАКТУРНЫМ ОКРАШИВАНИЕМ",
+    checkboxName: "fasad-color",
+    subTitle: "выберите цвет",
+    price: 0,
+    default: "forever",
+    localSumName: "home",
+  },
+  {
+    dataTitle: "Фасад с планкеном",
+    title: "ДЕКОР ФАСАДА ПЛАНКЕН",
+    checkboxName: "fasad-planken",
+    subTitle: "выберите цвет",
+    price: 110000,
+    localSumName: "home",
+  },
+  {
+    title: "ОКНА",
+    radioName: "windows",
+    subTitle: "выберите цвет и тип ламинации",
+    default: 1,
+    localSumName: "home",
+    subblocks: [
+      {
+        dataTitle: "Белые окна",
+        optionTitle: "БЕЛЫЕ",
+        optionPrice: 0,
+        optionText: "входит в базовую стоимость",
+      },
+      {
+        dataTitle: "Окна с ламинацией снаружи",
+        optionTitle: "С ЛАМИНАЦИЕЙ СНАРУЖИ",
+        optionPrice: 92000,
+        optionText: "",
+      },
+      {
+        dataTitle: "Окна с ламинацией снаружи и внутри",
+        optionTitle: "С ЛАМИНАЦИЕЙ СНАРУЖИ И ВНУТРИ",
+        optionPrice: 115000,
+        optionText: "",
+      },
+    ],
+  },
+  {
+    title: "КРОВЛЯ",
+    radioName: "roof",
+    subTitle: "выберите тип кровли",
+    default: 1,
+    localSumName: "home",
+    subblocks: [
+      {
+        dataTitle: "Крыша металлочерепица",
+        optionTitle: "МЕТАЛЛОЧЕРЕПИЦА",
+        optionPrice: 0,
+        optionText: "входит в базовую стоимость",
+      },
+      {
+        dataTitle: "Крыша клик-фальц",
+        optionTitle: "КЛИК-ФАЛЬЦ",
+        optionPrice: 35500,
+        optionText: "",
         relations: [
-            { id: "house-montage", change: "150000" },
-            { id: "house-delivery", change: "60000" }
-        ]
-    },
-    {
-        dataTitle: "Фасад с окрашиванием",
-        title: "ФАСАД С ФАКТУРНЫМ ОКРАШИВАНИЕМ",
-        checkboxName: "fasad-color",
-        subTitle: "выберите цвет",
-        price: 0,
-        default: "forever",
-        localSumName: "home"
-    },
-    {
-        dataTitle: "Фасад с планкеном",
-        title: "ДЕКОР ФАСАДА ПЛАНКЕН",
-        checkboxName: "fasad-planken",
-        subTitle: "выберите цвет",
-        price: 110000,
-        localSumName: "home"
-    },
-    {
-        title: "ОКНА",
-        radioName: "windows",
-        subTitle: "выберите цвет и тип ламинации",
-        default: 1,
-        localSumName: "home",
-        subblocks: [
-            { dataTitle: "Белые окна", optionTitle: "БЕЛЫЕ", optionPrice: 0, optionText: "входит в базовую стоимость" },
-            { dataTitle: "Окна с ламинацией снаружи", optionTitle: "С ЛАМИНАЦИЕЙ СНАРУЖИ", optionPrice: 92000, optionText: "" },
-            { dataTitle: "Окна с ламинацией снаружи и внутри", optionTitle: "С ЛАМИНАЦИЕЙ СНАРУЖИ И ВНУТРИ", optionPrice: 115000, optionText: "" }
-        ]
-    },
-    {
-        title: "КРОВЛЯ",
-        radioName: "roof",
-        subTitle: "выберите тип кровли",
-        default: 1,
-        localSumName: "home",
-        subblocks: [
-            { dataTitle: "Крыша металлочерепица", optionTitle: "МЕТАЛЛОЧЕРЕПИЦА", optionPrice: 0, optionText: "входит в базовую стоимость" },
-            {
-                dataTitle: "Крыша клик-фальц",
-                optionTitle: "КЛИК-ФАЛЬЦ",
-                optionPrice: 35500,
-                optionText: "",
-                relations: [
-                    { id: "house-montage", change: "20000" },
-                    { id: "inner-group", change: "6500" }
-                ]
-            }
-        ]
-    },
-    {
-        dataTitle: "Входная группа",
-        title: "ВХОДНАЯ ГРУППА",
-        checkboxName: "inner-group",
-        subTitle: "",
-        price: 89500,
-        localSumName: "home",
-        relations: [
-            { id: "house-montage", change: "50000" },
-            { id: "house-delivery", change: "10000" },
-            { id: "water-sliv-system", change: "14000" }
-        ]
-    },
-    {
-        dataTitle: "Водосточная система",
-        title: "ВОДОСТОЧНАЯ СИСТЕМА",
-        checkboxName: "water-sliv-system",
-        subTitle: "",
-        price: 34500,
-        localSumName: "home",
-        relations: [{ id: "house-montage", change: "25000" }]
-    },
-    {
-        dataTitle: "Снегозадержатели",
-        title: "СНЕГОЗАДЕРЖАТЕЛИ",
-        checkboxName: "snow-holders",
-        subTitle: "",
-        price: 55000,
-        localSumName: "home",
-        relations: [{ id: "house-montage", change: "20000" }]
-    },
-    {
-        dataTitle: "Фасадное освещение",
-        title: "ФАСАДНОЕ ОСВЕЩЕНИЕ",
-        checkboxName: "fasad-light",
-        subTitle: "Только в комплекте с электрикой, выберите тип электрики для Вашего дома",
-        price: 50000,
-        localSumName: "home",
-        relations: [{ id: "house-montage", change: "11200" }]
-    }
+          { id: "house-montage", change: "20000" },
+          { id: "inner-group", change: "6500" },
+        ],
+      },
+    ],
+  },
+  {
+    dataTitle: "Входная группа",
+    title: "ВХОДНАЯ ГРУППА",
+    checkboxName: "inner-group",
+    subTitle: "",
+    price: 89500,
+    localSumName: "home",
+    relations: [
+      { id: "house-montage", change: "50000" },
+      { id: "house-delivery", change: "10000" },
+      { id: "water-sliv-system", change: "14000" },
+    ],
+  },
+  {
+    dataTitle: "Водосточная система",
+    title: "ВОДОСТОЧНАЯ СИСТЕМА",
+    checkboxName: "water-sliv-system",
+    subTitle: "",
+    price: 34500,
+    localSumName: "home",
+    relations: [{ id: "house-montage", change: "25000" }],
+  },
+  {
+    dataTitle: "Снегозадержатели",
+    title: "СНЕГОЗАДЕРЖАТЕЛИ",
+    checkboxName: "snow-holders",
+    subTitle: "",
+    price: 55000,
+    localSumName: "home",
+    relations: [{ id: "house-montage", change: "20000" }],
+  },
+  {
+    dataTitle: "Фасадное освещение",
+    title: "ФАСАДНОЕ ОСВЕЩЕНИЕ",
+    checkboxName: "fasad-light",
+    subTitle:
+      "Только в комплекте с электрикой, выберите тип электрики для Вашего дома",
+    price: 50000,
+    localSumName: "home",
+    relations: [{ id: "house-montage", change: "11200" }],
+  },
+];
+
+const blocksData2 = [
+  {
+    dataTitle: "Терраса - крытая",
+    title: "КРЫТАЯ",
+    checkboxName: "terrace-close",
+    price: 775000,
+    relations: [
+      { id: "house-montage", change: 140000 },
+      { id: "house-delivery", change: 40000 },
+    ],
+  },
+  {
+    dataTitle: "Терраса - открытая",
+    title: "ОТКРЫТАЯ",
+    checkboxName: "terrace-open",
+    price: 230000,
+    relations: [
+      { id: "house-montage", change: 40000 },
+      { id: "house-delivery", change: 25000 },
+    ],
+  },
+  {
+    title: "ЭЛЕКТРОСНАБЖЕНИЕ",
+    radioName: "energy",
+    subblocks: [
+      {
+        dataTitle: "Базовое электроснабжение",
+        optionTitle: "БАЗОВОЕ",
+        optionPrice: 271000,
+      },
+      {
+        dataTitle: "Оптимальное электроснабжение",
+        optionTitle: "ОПТИМАЛЬНОЕ",
+        optionPrice: 408000,
+      },
+    ],
+  },
+  {
+    title: "ОТОПЛЕНИЕ",
+    radioName: "heat",
+    subblocks: [
+      {
+        dataTitle: "Конвекторное отопление",
+        optionTitle: "КОНВЕКТОРНОЕ",
+        optionPrice: 121500,
+      },
+      {
+        dataTitle: "Радиаторное котельное отопление",
+        optionTitle: "РАДИАТОРНОЕ КОТЕЛЬНОЕ",
+        optionPrice: 196000,
+      },
+      {
+        dataTitle: "Отопление тёплым полом",
+        optionTitle: "ТЁПЛЫЙ ПОЛ ВОДЯНОЙ",
+        optionPrice: 1280500,
+        require: [{ id: "fundament-2", alert: "alert_need_fundament" }],
+      },
+    ],
+  },
+  {
+    title: "ВОДОСНАБЖЕНИЕ",
+    radioName: "water",
+    subblocks: [
+      {
+        dataTitle: "Водоснабжение через PPR коллектор",
+        optionTitle: "PPR КОЛЛЕКТОР",
+        optionPrice: 57000,
+      },
+      {
+        dataTitle: "Водоснабжение через металл коллектор",
+        optionTitle: "МЕТАЛЛ КОЛЛЕКТОР",
+        optionPrice: 114000,
+      },
+    ],
+  },
+  {
+    title: "ВЕНТИЛЯЦИЯ",
+    radioName: "air",
+    subblocks: [
+      { dataTitle: "Вентиляция", optionTitle: "БАЗОВАЯ", optionPrice: 26000 },
+    ],
+  },
+  {
+    title: "ФУНДАМЕНТ",
+    radioName: "fundament",
+    subblocks: [
+      {
+        dataTitle: "Фундамент - ЖБ сваи",
+        optionTitle: "ЖБ СВАИ",
+        optionPrice: 240000,
+        require: [{ id: "platform", alert: "alert_need_platform" }],
+      },
+      {
+        dataTitle: "Фундамент - ЖБ плита",
+        optionTitle: "ЖБ ПЛИТА",
+        optionPrice: 1120000,
+      },
+    ],
+  },
 ];
 
 /** Базовая цена и номер телефона похожи на исходный скрипт */
 const BASE_PRICE = 3_826_000;
-const WA_PHONE = "79145445585";
 
 const viewsOrder = ["back", "left", "front", "right"];
 
@@ -485,22 +606,20 @@ const CHOICE_IMAGES = [
 ];
 
 const Calculator = () => {
-// вкладка выбора
-    const [activeTab, setActiveTab] = useState("fasad");
+  // вкладка выбора
+  const [activeTab, setActiveTab] = useState("fasad");
 
-// выбранные элементы
-    const [selectedParts, setSelectedParts] = useState({
-        fasad: null,
-        balk: null,
-        windows: null,
-    });
+  // выбранные элементы
+  const [selectedParts, setSelectedParts] = useState({
+    fasad: null,
+    balk: null,
+    windows: null,
+  });
 
-// helper для -gable
-    const withRoof = (id) =>
-        currentRoof === "gable" ? `${id}-gable` : id;
+  // helper для -gable
+  const withRoof = (id) => (currentRoof === "gable" ? `${id}-gable` : id);
 
-
-    useEffect(() => {
+  useEffect(() => {
     if (!slidersRef.current.length) return;
 
     slidersRef.current.forEach((sliderBlock) => {
@@ -536,187 +655,269 @@ const Calculator = () => {
   const [currentView, setCurrentView] = useState("front");
   const [currentRoof, setCurrentRoof] = useState("hip");
 
-    // inputsState: { id: { id, value, checked, disabled } }
-    const [inputs, setInputs] = useState({});
-    // baseValues: original numbers (to recalc relations each time)
-    const [baseValues, setBaseValues] = useState({});
-    // requirements map (если нужно, берем из данных — в ваших JSON-ах нет require, но поддержка оставлена)
-    const [requirementsMap, setRequirementsMap] = useState({});
+  // inputsState: { id: { id, value, checked, disabled } }
+  const [inputs, setInputs] = useState({});
+  // baseValues: original numbers (to recalc relations each time)
+  const [baseValues, setBaseValues] = useState({});
+  // requirements map (если нужно, берем из данных — в ваших JSON-ах нет require, но поддержка оставлена)
+  const [requirementsMap, setRequirementsMap] = useState({});
+  const isWindowsLaminated =
+    inputs["windows-2"]?.checked || inputs["windows-3"]?.checked;
+  const isPlankenEnabled = inputs["fasad-planken"]?.checked;
 
-    useEffect(() => {
-        const initial = {};
-        const base = {};
-        const reqs = {};
+  useEffect(() => {
+    const initial = {};
+    const base = {};
+    const reqs = {};
 
-        blocksData.forEach((b) => {
-            if (b.subblocks && b.radioName) {
-                b.subblocks.forEach((sub, idx) => {
-                    const id = `${b.radioName}-${idx + 1}`;
-                    const val = parseInt(sub.optionPrice || 0, 10);
-                    base[id] = val;
-                    initial[id] = {
-                        id,
-                        value: val,
-                        checked: b.default === idx + 1
-                    };
-                    // если подблок имеет require / relations, мы могли бы сохранить (в вашем JSON relations есть)
-                    if (sub.require) reqs[id] = sub.require;
-                    if (sub.relations) {
-                        // attach relations in block data (we will read from blocksData when computing)
-                    }
-                });
-            } else if (b.checkboxName) {
-                const id = b.checkboxName;
-                const val = parseInt(b.price || 0, 10);
-                base[id] = val;
-                initial[id] = {
-                    id,
-                    value: val,
-                    checked: b.default === "yes" || b.default === "forever" ? true : false,
-                    disabled: b.default === "forever"
-                };
-                if (b.require) reqs[id] = b.require;
-            }
+    blocksData.forEach((b) => {
+      if (b.subblocks && b.radioName) {
+        b.subblocks.forEach((sub, idx) => {
+          const id = `${b.radioName}-${idx + 1}`;
+          const val = parseInt(sub.optionPrice || 0, 10);
+          base[id] = val;
+          initial[id] = {
+            id,
+            value: val,
+            checked: b.default === idx + 1,
+          };
+          // если подблок имеет require / relations, мы могли бы сохранить (в вашем JSON relations есть)
+          if (sub.require) reqs[id] = sub.require;
+          if (sub.relations) {
+            // attach relations in block data (we will read from blocksData when computing)
+          }
         });
+      } else if (b.checkboxName) {
+        const id = b.checkboxName;
+        const val = parseInt(b.price || 0, 10);
+        base[id] = val;
+        initial[id] = {
+          id,
+          value: val,
+          checked:
+            b.default === "yes" || b.default === "forever" ? true : false,
+          disabled: b.default === "forever",
+        };
+        if (b.require) reqs[id] = b.require;
+      }
+    });
 
-        setInputs(initial);
-        setBaseValues(base);
-        setRequirementsMap(reqs);
-    }, []);
+    setInputs(initial);
+    setBaseValues(base);
+    setRequirementsMap(reqs);
+  }, []);
 
-    const relationsBySource = useMemo(() => {
-        const map = {};
-        blocksData.forEach(b => {
-            if (b.relations && b.checkboxName) {
-                map[b.checkboxName] = b.relations.map(r => ({ id: r.id, change: parseInt(r.change,10) }));
-            }
-            if (b.subblocks && b.radioName) {
-                b.subblocks.forEach((sub, idx) => {
-                    if (sub.relations) {
-                        const id = `${b.radioName}-${idx + 1}`;
-                        map[id] = sub.relations.map(r => ({ id: r.id, change: parseInt(r.change,10) }));
-                    }
-                });
-            }
-        });
-        return map;
-    }, []);
-
-    const checkRequirements = (id) => {
-        const reqs = requirementsMap[id];
-        if (!reqs) return true;
-        let all = true;
-        reqs.forEach(({ id: neededId }) => {
-            if (!inputs[neededId]?.checked) all = false;
-        });
-        return all;
-    };
-
-    // Пересчитать текущие значения (применить relations суммируемо)
-    const computeCurrentValues = () => {
-        // start from baseValues
-        const current = { ...baseValues };
-        // apply relations from each checked input
-        Object.values(inputs).forEach(inp => {
-            if (!inp.checked) return;
-            const rels = relationsBySource[inp.id];
-            if (!rels) return;
-            rels.forEach(({ id: targetId, change }) => {
-                // ensure target exists in current map, если нет — создаём
-                current[targetId] = (current[targetId] || 0) + change;
-            });
-        });
-        return current;
-    };
-
-    const currentValues = computeCurrentValues();
-
-    // Сумма по локальным группам
-    const computeSummary = () => {
-        let total = BASE_PRICE;
-        const reportLines = [
-            "Стоимость домокомплекта МКЦ-08:",
-            "",
-            `Базовая стоимость  - ${BASE_PRICE.toLocaleString()} ₽`,
-            ""
-        ];
-        const localSums = {};
-
-        // build updated (reset inputs values based on currentValues)
-        Object.values(inputs).forEach(inp => {
-            const price = currentValues[inp.id] ?? inp.value ?? 0;
-            if (inp.checked) {
-                total += price;
-                const title = ( (function(){
-                    // try to find dataTitle from blocksData for nicer report
-                    for (let b of blocksData) {
-                        if (b.checkboxName === inp.id) return b.dataTitle || b.title;
-                        if (b.subblocks && b.radioName) {
-                            const idx = b.subblocks.findIndex((_,i) => `${b.radioName}-${i+1}` === inp.id);
-                            if (idx !== -1) return b.subblocks[idx].dataTitle;
-                        }
-                    }
-                    return inp.id;
-                })() );
-                reportLines.push(`- ${title} - ${price.toLocaleString()} ₽`);
-
-                // local sums
-                // find localSumName from blocksData
-                for (let b of blocksData) {
-                    if (b.checkboxName === inp.id && b.localSumName) {
-                        localSums[b.localSumName] = (localSums[b.localSumName] || BASE_PRICE) + price;
-                    }
-                    if (b.subblocks && b.radioName) {
-                        const idx = b.subblocks.findIndex((_,i) => `${b.radioName}-${i+1}` === inp.id);
-                        if (idx !== -1 && b.localSumName) {
-                            localSums[b.localSumName] = (localSums[b.localSumName] || BASE_PRICE) + price;
-                        }
-                    }
-                }
-            }
-        });
-
-        reportLines.push("", `Итого дом на участке с инженерией: ${total.toLocaleString()} ₽`);
-
-        return { total, reportText: encodeURIComponent(reportLines.join("\n")), localSums, reportLines };
-    };
-
-    const { total, reportText, localSums } = computeSummary();
-
-    // Обработчики изменений
-    const handleToggle = (id, checked) => {
-        // require-check
-        if (checked && !checkRequirements(id)) {
-            // блокируем выбор
-            return;
-        }
-
-        setInputs(prev => ({
-            ...prev,
-            [id]: {
-                ...prev[id],
-                checked
-            }
+  const relationsBySource = useMemo(() => {
+    const map = {};
+    blocksData.forEach((b) => {
+      if (b.relations && b.checkboxName) {
+        map[b.checkboxName] = b.relations.map((r) => ({
+          id: r.id,
+          change: parseInt(r.change, 10),
         }));
-    };
-
-    const handleRadioChange = (groupName, selectedId) => {
-        // Найдём все варианты этой группы
-        const group = blocksData.find(b => b.radioName === groupName);
-        if (!group) return;
-
-        // checkRequirements for selectedId
-        if (!checkRequirements(selectedId)) return;
-
-        setInputs(prev => {
-            const copy = { ...prev };
-            group.subblocks.forEach((_, idx) => {
-                const id = `${groupName}-${idx + 1}`;
-                copy[id] = { ...(copy[id] || {}), checked: id === selectedId };
-            });
-            return copy;
+      }
+      if (b.subblocks && b.radioName) {
+        b.subblocks.forEach((sub, idx) => {
+          if (sub.relations) {
+            const id = `${b.radioName}-${idx + 1}`;
+            map[id] = sub.relations.map((r) => ({
+              id: r.id,
+              change: parseInt(r.change, 10),
+            }));
+          }
         });
+      }
+    });
+    return map;
+  }, []);
+
+  const checkRequirements = (id) => {
+    const reqs = requirementsMap[id];
+    if (!reqs) return true;
+    let all = true;
+    reqs.forEach(({ id: neededId }) => {
+      if (!inputs[neededId]?.checked) all = false;
+    });
+    return all;
+  };
+
+  // Пересчитать текущие значения (применить relations суммируемо)
+  const computeCurrentValues = () => {
+    // start from baseValues
+    const current = { ...baseValues };
+    // apply relations from each checked input
+    Object.values(inputs).forEach((inp) => {
+      if (!inp.checked) return;
+      const rels = relationsBySource[inp.id];
+      if (!rels) return;
+      rels.forEach(({ id: targetId, change }) => {
+        // ensure target exists in current map, если нет — создаём
+        current[targetId] = (current[targetId] || 0) + change;
+      });
+    });
+    return current;
+  };
+
+  const currentValues = computeCurrentValues();
+
+  // Сумма по локальным группам
+  const computeSummary = () => {
+    let total = BASE_PRICE;
+    const reportLines = [
+      "Стоимость домокомплекта МКЦ-08:",
+      "",
+      `Базовая стоимость  - ${BASE_PRICE.toLocaleString()} ₽`,
+      "",
+    ];
+    const localSums = {};
+
+    // build updated (reset inputs values based on currentValues)
+    Object.values(inputs).forEach((inp) => {
+      const price = currentValues[inp.id] ?? inp.value ?? 0;
+      if (inp.checked) {
+        total += price;
+        const title = (function () {
+          // try to find dataTitle from blocksData for nicer report
+          for (let b of blocksData) {
+            if (b.checkboxName === inp.id) return b.dataTitle || b.title;
+            if (b.subblocks && b.radioName) {
+              const idx = b.subblocks.findIndex(
+                (_, i) => `${b.radioName}-${i + 1}` === inp.id,
+              );
+              if (idx !== -1) return b.subblocks[idx].dataTitle;
+            }
+          }
+          return inp.id;
+        })();
+        reportLines.push(`- ${title} - ${price.toLocaleString()} ₽`);
+
+        // local sums
+        // find localSumName from blocksData
+        for (let b of blocksData) {
+          if (b.checkboxName === inp.id && b.localSumName) {
+            localSums[b.localSumName] =
+              (localSums[b.localSumName] || BASE_PRICE) + price;
+          }
+          if (b.subblocks && b.radioName) {
+            const idx = b.subblocks.findIndex(
+              (_, i) => `${b.radioName}-${i + 1}` === inp.id,
+            );
+            if (idx !== -1 && b.localSumName) {
+              localSums[b.localSumName] =
+                (localSums[b.localSumName] || BASE_PRICE) + price;
+            }
+          }
+        }
+      }
+    });
+
+    reportLines.push(
+      "",
+      `Итого дом на участке с инженерией: ${total.toLocaleString()} ₽`,
+    );
+
+    return {
+      total,
+      reportText: encodeURIComponent(reportLines.join("\n")),
+      localSums,
+      reportLines,
     };
+  };
+
+  const { total, reportText, localSums } = computeSummary();
+
+  // Обработчики изменений
+  const handleToggle = (id, checked) => {
+    // require-check
+    if (checked && !checkRequirements(id)) {
+      // блокируем выбор
+      return;
+    }
+
+    setInputs((prev) => ({
+      ...prev,
+      [id]: {
+        ...prev[id],
+        checked,
+      },
+    }));
+  };
+
+  const handleRadioChange = (groupName, selectedId) => {
+    // Найдём все варианты этой группы
+    const group = blocksData.find((b) => b.radioName === groupName);
+    if (!group) return;
+
+    // checkRequirements for selectedId
+    if (!checkRequirements(selectedId)) return;
+
+    setInputs((prev) => {
+      const copy = { ...prev };
+      group.subblocks.forEach((_, idx) => {
+        const id = `${groupName}-${idx + 1}`;
+        copy[id] = { ...(copy[id] || {}), checked: id === selectedId };
+      });
+      return copy;
+    });
+  };
+
+  useEffect(() => {
+    // --- ПЛАНКЕН ---
+    if (isPlankenEnabled) {
+      // открыть вкладку
+      setActiveTab("balk");
+
+      // если ничего не выбрано — выбрать первый
+      if (!selectedParts.balk) {
+        const firstPlanken = CHOICE_IMAGES.find((s) => s.section === "balk")
+          ?.items?.[0]?.id;
+
+        if (firstPlanken) {
+          setSelectedParts((prev) => ({
+            ...prev,
+            balk: firstPlanken,
+          }));
+        }
+      }
+    } else {
+      // если выключили — сбросить
+      setSelectedParts((prev) => ({
+        ...prev,
+        balk: null,
+      }));
+
+      // если активная вкладка была balk — вернуть на фасад
+      if (activeTab === "balk") {
+        setActiveTab("fasad");
+      }
+    }
+
+    // --- ОКНА ---
+    if (isWindowsLaminated) {
+      setActiveTab("windows");
+
+      if (!selectedParts.windows) {
+        const firstWindow = CHOICE_IMAGES.find((s) => s.section === "windows")
+          ?.items?.[0]?.id;
+
+        if (firstWindow) {
+          setSelectedParts((prev) => ({
+            ...prev,
+            windows: firstWindow,
+          }));
+        }
+      }
+    } else {
+      setSelectedParts((prev) => ({
+        ...prev,
+        windows: null,
+      }));
+
+      if (activeTab === "windows") {
+        setActiveTab("fasad");
+      }
+    }
+  }, [isPlankenEnabled, isWindowsLaminated]);
 
   useEffect(() => {
     const images = containerRef.current.querySelectorAll(".sect-views__image");
@@ -761,7 +962,6 @@ const Calculator = () => {
   return (
     <section>
       {/* Core styles */}
-        <Image src={"/img/home/mkc-08__planken__walnut-gable.png"} alt={""} width={600} height={600} />
       <link rel="stylesheet" href="/css/settings.css" />
       <link rel="stylesheet" href="/css/global.css" />
       <link rel="stylesheet" href="/css/blocks.css" />
@@ -1027,511 +1227,175 @@ const Calculator = () => {
                 className="section-calculator-block__house"
                 id="colors-params"
               >
-                  {HOUSE_IMAGES.map((img) => {
-                      let isVisible = false;
+                {HOUSE_IMAGES.map((img) => {
+                  let isVisible = false;
 
-                      // базовая картинка
-                      if (img.id === "default" && currentRoof === "hip") {
-                          isVisible = true;
-                      }
+                  // базовая картинка
+                  if (img.id === "default" && currentRoof === "hip") {
+                    isVisible = true;
+                  }
 
-                      if (img.id === "default-gable" && currentRoof === "gable") {
-                          isVisible = true;
-                      }
+                  if (img.id === "default-gable" && currentRoof === "gable") {
+                    isVisible = true;
+                  }
 
-                      // фасад
-                      if (selectedParts.fasad) {
-                          if (img.id === withRoof(selectedParts.fasad)) {
-                              isVisible = true;
-                          }
-                      }
+                  // фасад
+                  if (selectedParts.fasad) {
+                    if (img.id === withRoof(selectedParts.fasad)) {
+                      isVisible = true;
+                    }
+                  }
 
-                      // планкен
-                      if (selectedParts.balk) {
-                          if (img.id === withRoof(selectedParts.balk)) {
-                              isVisible = true;
-                          }
-                      }
+                  // планкен
+                  if (selectedParts.balk) {
+                    if (img.id === withRoof(selectedParts.balk)) {
+                      isVisible = true;
+                    }
+                  }
 
-                      // окна
-                      if (selectedParts.windows) {
-                          if (img.id === withRoof(selectedParts.windows)) {
-                              isVisible = true;
-                          }
-                      }
+                  // окна
+                  if (selectedParts.windows) {
+                    if (img.id === withRoof(selectedParts.windows)) {
+                      isVisible = true;
+                    }
+                  }
 
-                      return (
-                          <Image
-                              key={img.id}
-                              src={img.src}
-                              alt={img.alt}
-                              width={400}
-                              height={400}
-                              className={`house__img ${isVisible ? "" : "hidden"}`}
-                          />
-                      );
-                  })}
-
+                  return (
+                    <Image
+                      key={img.id}
+                      src={img.src}
+                      alt={img.alt}
+                      width={400}
+                      height={400}
+                      className={`house__img ${isVisible ? "" : "hidden"}`}
+                    />
+                  );
+                })}
               </div>
 
               <div className="choice__wrapper p-t-20 p-d-20">
-                  <div className="choice-buttons">
-                      <button
-                          className={`choice-button ${activeTab === "fasad" ? "active" : ""}`}
-                          onClick={() => setActiveTab("fasad")}
-                      >
-                          Фасад
-                      </button>
+                <div className="choice-buttons">
+                  <button
+                    className={`choice-button ${activeTab === "fasad" ? "active" : ""}`}
+                    onClick={() => setActiveTab("fasad")}
+                  >
+                    Фасад
+                  </button>
 
-                      <button
-                          className={`choice-button ${activeTab === "balk" ? "active" : ""}`}
-                          onClick={() => setActiveTab("balk")}
-                      >
-                          Планкен
-                      </button>
+                  {isPlankenEnabled && (
+                    <button
+                      className={`choice-button ${activeTab === "balk" ? "active" : ""}`}
+                      onClick={() => setActiveTab("balk")}
+                    >
+                      Планкен
+                    </button>
+                  )}
 
-                      <button
-                          className={`choice-button ${activeTab === "windows" ? "active" : ""}`}
-                          onClick={() => setActiveTab("windows")}
-                      >
-                          Окна
-                      </button>
-                  </div>
+                  {isWindowsLaminated && (
+                    <button
+                      className={`choice-button ${activeTab === "windows" ? "active" : ""}`}
+                      onClick={() => setActiveTab("windows")}
+                    >
+                      Окна
+                    </button>
+                  )}
+                </div>
 
-
-                  <div className="choice-content">
-                      {CHOICE_IMAGES.map((section) => (
-                          <div
-                              key={section.section}
-                              className={`items ${
-                                  activeTab === section.section ? "" : "hidden"
-                              }`}
-                          >
-                              {section.items.map((item) => (
-                                  <div
-                                      key={item.id}
-                                      className={`item color__${item.color} ${
-                                          selectedParts[section.section] === item.id ? "active" : ""
-                                      }`}
-                                      onClick={() =>
-                                          setSelectedParts((prev) => ({
-                                              ...prev,
-                                              [section.section]: item.id,
-                                          }))
-                                      }
-                                  >
-                                      <Image
-                                          src={item.imgSrc}
-                                          alt={item.alt}
-                                          className="image"
-                                          width={400}
-                                          height={400}
-                                          style={{maxWidth: "none"}}
-                                      />
-                                      <span className="text">{item.description}</span>
-                                  </div>
-                              ))}
-                          </div>
+                <div className="choice-content">
+                  {CHOICE_IMAGES.map((section) => (
+                    <div
+                      key={section.section}
+                      className={`items ${
+                        activeTab === section.section ? "" : "hidden"
+                      }`}
+                    >
+                      {section.items.map((item) => (
+                        <div
+                          key={item.id}
+                          className={`item color__${item.color} ${
+                            selectedParts[section.section] === item.id
+                              ? "active"
+                              : ""
+                          }`}
+                          onClick={() =>
+                            setSelectedParts((prev) => ({
+                              ...prev,
+                              [section.section]: item.id,
+                            }))
+                          }
+                        >
+                          <Image
+                            src={item.imgSrc}
+                            alt={item.alt}
+                            className="image"
+                            width={400}
+                            height={400}
+                            style={{ maxWidth: "none" }}
+                          />
+                          <span className="text">{item.description}</span>
+                        </div>
                       ))}
-
-                  </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-              <div className="section-calculator__block calculator__block-choices">
-                  {blocksData.map(b => {
-                      // Если это radio group — передаём сам объект
-                      if (b.subblocks && b.radioName) {
-                          return (
-                              <CalculatorBlock
-                                  key={b.radioName}
-                                  block={b}
-                                  inputs={inputs}
-                                  onToggle={handleToggle}
-                                  onRadioChange={handleRadioChange}
-                                  currentValues={currentValues}
-                              />
-                          );
-                      } else {
-                          return (
-                              <CalculatorBlock
-                                  key={b.checkboxName}
-                                  block={b}
-                                  inputs={inputs}
-                                  onToggle={handleToggle}
-                                  onRadioChange={handleRadioChange}
-                                  currentValues={currentValues}
-                              />
-                          );
-                      }
-                  })}
-              </div>
-
-
-
+            <div className="section-calculator__block calculator__block-choices">
+              {blocksData.map((b) => {
+                // Если это radio group — передаём сам объект
+                if (b.subblocks && b.radioName) {
+                  return (
+                    <CalculatorBlock
+                      key={b.radioName}
+                      block={b}
+                      inputs={inputs}
+                      onToggle={handleToggle}
+                      onRadioChange={handleRadioChange}
+                      currentValues={currentValues}
+                    />
+                  );
+                } else {
+                  return (
+                    <CalculatorBlock
+                      key={b.checkboxName}
+                      block={b}
+                      inputs={inputs}
+                      onToggle={handleToggle}
+                      onRadioChange={handleRadioChange}
+                      currentValues={currentValues}
+                    />
+                  );
+                }
+              })}
+            </div>
           </div>
 
-          <div className="calculator-terrace-sliders__wrapper">
-            <div className="block-choice__title p-d-20">
-              <div className="block__price">
-                <h3 className="h4">ТЕРРАССА</h3>
-              </div>
-            </div>
-
-            <div className="calculator__terrace-sliders">
-              <div className="calculator__terrace-slide">
-                <Image
-                  src="/img/house_08_ultimate.jpg"
-                  alt=""
-                  className="calculator__terrace-slide-img p-d-10"
-                  width={400}
-                  height={400}
+          {blocksData2.map((b) => {
+            if (b.subblocks && b.radioName) {
+              return (
+                <CalculatorBlock
+                  key={b.radioName}
+                  block={b}
+                  inputs={inputs}
+                  onToggle={handleToggle}
+                  onRadioChange={handleRadioChange}
+                  currentValues={currentValues}
                 />
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script13"
-                >{` {
-                                            "dataTitle": "Террасса - крытая",
-                                            "title": "КРЫТАЯ",
-                                            "checkboxName": "terrace-close",
-                                            "subTitle": "",
-                                            "price": 775000,
-                                            "radio": "terrace",
-                                            "relations": [
-                                        {
-                                            "id": "house-montage",
-                                            "change": "140000"
-                                        },
-                                        {
-                                            "id": "house-delivery",
-                                            "change": "40000"
-                                        }
-                                            ]
-                                        }`}</Script>
-              </div>
-
-              <div className="calculator__terrace-slide">
-                <Image
-                  src="/img/house_08_open.png"
-                  alt=""
-                  className="calculator__terrace-slide-img p-d-10"
-                  width={400}
-                  height={400}
+              );
+            } else {
+              return (
+                <CalculatorBlock
+                  key={b.checkboxName}
+                  block={b}
+                  inputs={inputs}
+                  onToggle={handleToggle}
+                  onRadioChange={handleRadioChange}
+                  currentValues={currentValues}
                 />
-
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script14"
-                >{`{
-                                            "dataTitle": "Террасса - открытая",
-                                            "title": "ОТКРЫТАЯ",
-                                            "checkboxName": "terrace-open",
-                                            "subTitle": "",
-                                            "price": 230000,
-                                            "radio": "terrace",
-                                            "relations": [
-                                        {
-                                            "id": "house-montage",
-                                            "change": "40000"
-                                        },
-                                        {
-                                            "id": "house-delivery",
-                                            "change": "25000"
-                                        }
-                                            ]
-                                        }`}</Script>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div className="attention">
-            <h3 className="attention__text-big">
-              РАССЧИТЫВАЕТСЯ ИСХОДЯ ИЗ УЧАСТКА
-            </h3>
-
-            <p className="attention__text-small">
-              Приведены ориентировочные рассчеты на Хабаровский район. Итоговая
-              стоимость на ваш участок рассчитывает подрядчик, поставляющий до
-            </p>
-          </div>
-
-          <div className="calculator__blocks p-d-20">
-            <div className="calculator__column">
-              <h3 className="h4">ВНУТРЕННЯЯ ОТДЕЛКА</h3>
-
-              <div className="calculator__block">
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script15"
-                >{` {
-                                        "title": "ЭЛЕКТРОСНАБЖЕНИЕ",
-                                        "radioName": "energy",
-                                        "subTitle": "",
-
-                                        "subblocks": [
-                                    {
-                                        "dataTitle": "Базовое электроснабжение",
-                                        "optionTitle": "БАЗОВОЕ",
-                                        "optionPrice": 271000,
-                                        "optionText": ""
-                                    },
-                                    {
-                                        "dataTitle": "Оптимальное электроснабжение",
-                                        "optionTitle": "ОПТИМАЛЬНОЕ",
-                                        "optionPrice": 408000,
-                                        "optionText": ""
-                                    }
-                                        ]
-                                    }`}</Script>
-
-                <div id="alert_need_fundament" className="alert">
-                  <div className="alert__inner">
-                    <p className="alert__text">
-                      ДЛЯ ДАННОГО ТИПА ОТОПЛЕНИЯ ВЫБЕРЕТЕ ПЛИТНЫЙ ФУНДАМЕНТ
-                    </p>
-
-                    <div className="buttons buttons-right">
-                      <Link
-                        href="/#fundament-2"
-                        className="button button-yellow"
-                        onclick="this.closest('.alert').classList.remove('show');"
-                      >
-                        ОК
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script16"
-                >{` {
-                                        "title": "ОТОПЛЕНИЕ",
-                                        "radioName": "heat",
-                                        "subTitle": "",
-
-                                        "subblocks": [
-                                    {
-                                        "dataTitle": "Конвекторное отопление",
-                                        "optionTitle": "КОНВЕКТОРНОЕ",
-                                        "optionPrice": 121500,
-                                        "optionText": ""
-                                    },
-                                    {
-                                        "dataTitle": "Радиаторное котельное отопление",
-                                        "optionTitle": "РАДИАТОРНОЕ КОТЕЛЬНОЕ",
-                                        "optionPrice": 196000,
-                                        "optionText": ""
-                                    },
-                                    {
-                                        "dataTitle": "Отопление тёплым полом",
-                                        "optionTitle": "ТЁПЛЫЙ ПОЛ ВОДЯНОЙ",
-                                        "optionPrice": 1280500,
-                                        "optionText": "",
-                                        "require": [
-                                    {
-                                        "id": "fundament-2",
-                                        "alert": "alert_need_fundament"
-                                    }
-                                        ]
-                                    }
-                                        ]
-                                    }`}</Script>
-
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script17"
-                >{`{
-                                        "title": "ВОДОСНАБЖЕНИЕ",
-                                        "radioName": "water",
-                                        "subTitle": "",
-
-                                        "subblocks": [
-                                    {
-                                        "dataTitle": "Водоснабжение через PPR коллектор",
-                                        "optionTitle": "PPR КОЛЛЕКТОР",
-                                        "optionPrice": 57000,
-                                        "optionText": ""
-                                    },
-                                    {
-                                        "dataTitle": "Водоснабжение через металл коллектор",
-                                        "optionTitle": "МЕТАЛЛ КОЛЛЕКТОР",
-                                        "optionPrice": 114000,
-                                        "optionText": ""
-                                    }
-                                        ]
-                                    }`}</Script>
-
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script18"
-                >{` {
-                                        "title": "ВЕНТИЛЯЦИЯ",
-                                        "radioName": "air",
-                                        "subTitle": "",
-
-                                        "subblocks": [
-                                    {
-                                        "dataTitle": "Вентиляция",
-                                        "optionTitle": "БАЗОВАЯ",
-                                        "optionPrice": 26000,
-                                        "optionText": ""
-                                    }
-                                        ]
-                                    }`}</Script>
-              </div>
-            </div>
-
-            <div className="calculator__column">
-              <div className="calculator__block">
-                <div id="alert_need_platform" className="alert">
-                  <div className="alert__inner">
-                    <p className="alert__text">
-                      ПРИ МОНТАЖЕ НА СВАЙНЫЙ ФУНДАМЕНТ В КОМПЛЕКТАЦИИ ДОМА
-                      ВЫБЕРИТЕ ПЛАТФОРМУ.
-                    </p>
-
-                    <div className="buttons buttons-right">
-                      <Link
-                        href="/#platform"
-                        className="button button-yellow"
-                        onclick="this.closest('.alert').classList.remove('show');"
-                      >
-                        ОК
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                <div id="alert_not_fundament" className="alert">
-                  <div className="alert__inner">
-                    <p className="alert__text">
-                      ПРИ МОНТАЖЕ ДОМА НА ПЛИТНЫЙ ФУНДАМЕНТ В КОМПЛЕКТАЦИИ ДОМА
-                      УБЕРИТЕ ПЛАТФОРМУ.
-                    </p>
-
-                    <div className="buttons buttons-right">
-                      <Link
-                        href="/#platform"
-                        className="button button-yellow"
-                        onclick="this.closest('.alert').classList.remove('show');"
-                      >
-                        ОК
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script19"
-                >{`  {
-                                        "title": "ФУНДАМЕНТ",
-                                        "radioName": "fundament",
-                                        "subTitle": "",
-
-                                        "subblocks": [
-                                    {
-                                        "dataTitle": "Фундамент - ЖБ сваи",
-                                        "optionTitle": "ЖБ СВАИ",
-                                        "optionPrice": 240000,
-                                        "optionText": "",
-                                        "require": [
-                                    {
-                                        "id": "platform",
-                                        "alert": "alert_need_platform"
-                                    }
-                                        ]
-                                    },
-                                    {
-                                        "dataTitle": "Фундамент - ЖБ плита",
-                                        "optionTitle": "ЖБ ПЛИТА",
-                                        "optionPrice": 1120000,
-                                        "optionText": ""
-                                    }
-                                        ]
-                                    }`}</Script>
-              </div>
-
-              <h3 className="h4">ВНУТРЕННЯЯ ИНЖЕНЕРИЯ</h3>
-
-              <div className="calculator__block">
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script20"
-                >{` {
-                                        "title": "ВНУТРЕННЯЯ ОТДЕЛКА СТЕН",
-                                        "radioName": "walls",
-                                        "subTitle": "",
-
-                                        "subblocks": [
-                                    {
-                                        "dataTitle": "Отделка - ГКЛ/ГВЛ",
-                                        "optionTitle": "ГКЛ/ГВЛ",
-                                        "optionPrice": 338500,
-                                        "optionText": ""
-                                    },
-                                    {
-                                        "dataTitle": "Отделка - OSB + ГКЛ/ГВЛ",
-                                        "optionTitle": "OSB + ГКЛ/ГВЛ",
-                                        "optionPrice": 652000,
-                                        "optionText": ""
-                                    }
-                                        ]
-                                    }`}</Script>
-              </div>
-
-              <h3 className="h4">ВНЕШНЯЯ ИНЖЕНЕРИЯ</h3>
-
-              <div className="calculator__block">
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script21"
-                >{`  {
-                                        "dataTitle": "Водоснабжение",
-                                        "title": "ВОДОСНАБЖЕНИЕ",
-                                        "checkboxName": "engineer-water",
-                                        "subTitle": "Скважина 50м",
-                                        "price": 250000
-                                    }`}</Script>
-
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script22"
-                >{`  {
-                                        "dataTitle": "Канализация",
-                                        "title": "КАНАЛИЗАЦИЯ",
-                                        "checkboxName": "engineer-sewerage",
-                                        "subTitle": "ТОПАС 5 с монтажом",
-                                        "price": 270000
-                                    }`}</Script>
-
-                <Script
-                  data-block-template-checkbox
-                  type={"application/json"}
-                  id="my-script23"
-                >{` {
-                                        "dataTitle": "Электричество",
-                                        "title": "ЭЛЕКТРИЧЕСТВО",
-                                        "checkboxName": "engineer-energy",
-                                        "subTitle": "Подключение дома",
-                                        "price": 50000
-                                    }`}</Script>
-              </div>
-            </div>
-          </div>
+              );
+            }
+          })}
         </div>
 
         <div className="calculator__summary">
