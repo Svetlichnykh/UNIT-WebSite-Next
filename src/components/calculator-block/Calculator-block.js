@@ -1,96 +1,107 @@
-// components/CalculatorBlock.js
-import React, { useState, useEffect } from 'react';
+"use client";
 
-// Это компонент для одного блока калькулятора
-const CalculatorBlock = ({ data }) => {
-    const [selectedValue, setSelectedValue] = useState(null);
-    const [price, setPrice] = useState(0);
-    const [relationsMap, setRelationsMap] = useState({});
-    const [requirementsMap, setRequirementsMap] = useState({});
+import React from "react";
 
-    useEffect(() => {
-        // Заполнение зависимостей (relations) и требований (requirements)
-        const localRelationsMap = {};
-        const localRequirementsMap = {};
+/**
+ * Props:
+ * - block: original data object (checkbox or radio group)
+ * - inputs: object map { [id]: { id, value, checked, disabled } }
+ * - onToggle(id, checked) - called for checkbox
+ * - onRadioChange(groupName, selectedId) - called for radio group
+ * - currentValues - used to display computed values (after relations applied)
+ */
+export default function CalculatorBlock({
+                                            block,
+                                            inputs,
+                                            onToggle,
+                                            onRadioChange,
+                                            currentValues,
+                                        }) {
+    // Detect type
+    const isRadioGroup = !!block.radioName || !!block.subblocks;
+    if (isRadioGroup) {
+        const name = block.radioName;
+        // find selected input id
+        const options = block.subblocks || [];
+        const selected = options.map((_, i) => `${name}-${i + 1}`).find(id => inputs[id]?.checked);
 
-        if (data.relations) {
-            data.relations.forEach((relation) => {
-                localRelationsMap[relation.id] = relation.change;
-            });
-        }
+        const groupPriceDisplay = selected ? `+${(currentValues[selected] || inputs[selected]?.value || 0).toLocaleString()} ₽` : "+0 ₽";
 
-        if (data.require) {
-            data.require.forEach(({ id, alert }) => {
-                localRequirementsMap[id] = { alert };
-            });
-        }
+        return (
+            <div className="calculator__block-radio">
+                <div className="block-choice__title">
+                    <div className="block__price">
+                        <h4 className="h4">{block.title}</h4>
+                        <span className="h4 price-display">{groupPriceDisplay}</span>
+                    </div>
+                    <p className="text">{block.subTitle || ""}</p>
+                </div>
 
-        setRelationsMap(localRelationsMap);
-        setRequirementsMap(localRequirementsMap);
-    }, [data]);
+                {options.map((sub, idx) => {
+                    const inputId = `${name}-${idx + 1}`;
+                    const input = inputs[inputId] || {};
+                    const effectiveValue = currentValues[inputId] ?? input.value ?? 0;
+                    return (
+                        <div className="block-choice indent-30L" key={inputId}>
+                            <div className="block-choice__check">
+                                <input
+                                    type="radio"
+                                    name={name}
+                                    id={inputId}
+                                    value={sub.optionPrice}
+                                    data-title={sub.dataTitle}
+                                    checked={!!input.checked}
+                                    onChange={() => onRadioChange(name, inputId)}
+                                    data-local-sum-name={block.localSumName || undefined}
+                                />
+                                <label htmlFor={inputId}></label>
+                            </div>
 
-    // Проверка, удовлетворяют ли все требования
-    const checkRequirements = (input) => {
-        const requirements = requirementsMap[input.id];
-        if (!requirements) return true;
+                            <div className="block-choice__title">
+                                <div className="block__price">
+                                    <h5 className="h5">{sub.optionTitle}</h5>
+                                    <span className="h5 price-value">{`+${effectiveValue.toLocaleString()} ₽`}</span>
+                                </div>
+                                <p className="text">{sub.optionText}</p>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    }
 
-        let allMet = true;
-
-        Object.values(requirements).forEach(({ id, alert }) => {
-            const target = document.getElementById(id);
-            const alertElement = document.getElementById(alert);
-
-            if (!target?.checked) {
-                alertElement?.classList.add('show');
-                allMet = false;
-            } else {
-                alertElement?.classList.remove('show');
-            }
-        });
-
-        return allMet;
-    };
-
-    // Обработчик изменения радиокнопки или чекбокса
-    const handleChange = (e) => {
-        const { value, name, checked } = e.target;
-
-        if (checked && !checkRequirements(e.target)) {
-            e.preventDefault();
-            return;
-        }
-
-        setSelectedValue(value);
-
-        if (name === 'radioName') {
-            setPrice(parseInt(value, 10) || 0);
-        }
-    };
+    // checkbox block
+    const id = block.checkboxName;
+    const input = inputs[id] || {};
+    const effectiveValue = currentValues[id] ?? input.value ?? 0;
+    const isForever = block.default === "forever";
 
     return (
-        <div className="block-choice">
+        <div className="block-choice" key={id}>
             <div className="block-choice__check">
                 <input
-                    type={data.radio ? 'radio' : 'checkbox'}
-                    name={data.checkboxName || data.radioName}
-                    id={data.checkboxName}
-                    value={data.price}
-                    checked={selectedValue === data.price.toString()}
-                    onChange={handleChange}
-                    data-relations={JSON.stringify(data.relations)}
+                    type="checkbox"
+                    id={id}
+                    name={block.checkboxName}
+                    checked={!!input.checked}
+                    disabled={isForever}
+                    onChange={(e) => onToggle(id, e.target.checked)}
+                    value={block.price}
+                    data-title={block.dataTitle}
+                    data-local-sum-name={block.localSumName || undefined}
                 />
-                <label htmlFor={data.checkboxName}></label>
+                <label htmlFor={id}></label>
             </div>
 
             <div className="block-choice__title">
                 <div className="block__price">
-                    <h4>{data.title}</h4>
-                    <span className="price-value">+{price.toLocaleString()} ₽</span>
+                    <h4 className="h4">{block.title}</h4>
+                    <span className="h4 price-value">{`+${effectiveValue.toLocaleString()} ₽`}</span>
                 </div>
-                <p>{data.subTitle}</p>
+
+                <p className="text">{block.subTitle || ""}</p>
             </div>
         </div>
     );
-};
-
-export default CalculatorBlock;
+}
