@@ -9,7 +9,7 @@ const BannerVideo = () => {
       muted
       className="absolute inset-0 object-cover h-screen w-full"
     >
-      <source src="/video-3.mp4" type="video/mp4" />
+      <source src="/Banner-video.mp4" type="video/mp4" />
     </video>
   );
 };
