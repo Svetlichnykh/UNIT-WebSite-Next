@@ -1,6 +1,6 @@
-import img_1 from "@/assets/images/gallery-1.jpg";
-import img_2 from "@/assets/images/gallery-2.jpg";
-import img_3 from "@/assets/images/gallery-3.jpg";
+import img_1 from "@/assets/images/panel.jpg";
+import img_2 from "@/assets/images/suburban.jpg";
+import img_3 from "@/assets/images/bathrooms.jpg";
 
 export const galleryData = [
   {
