@@ -801,13 +801,6 @@ const Calculator = () => {
   // вкладка выбора
   const [activeTab, setActiveTab] = useState("fasad");
 
-  // выбранные элементы
-  const [selectedParts, setSelectedParts] = useState({
-    fasad: null,
-    balk: null,
-    windows: null,
-  });
-
   // helper для -gable
   const withRoof = (id) => (currentRoof === "gable" ? `${id}-gable` : id);
 
@@ -1019,28 +1012,91 @@ const Calculator = () => {
   const { total, reportText, localSums } = computeSummary();
 
   // Обработчики изменений
-  const handleToggle = (id, checked) => {
-    // require-check
-    if (checked && !checkRequirements(id)) {
-      // блокируем выбор
-      return;
-    }
+    const handleToggle = (id, checked) => {
+        if (checked && !checkRequirements(id)) return;
 
-    setInputs((prev) => ({
-      ...prev,
-      [id]: {
-        ...prev[id],
-        checked,
-      },
-    }));
-  };
+        setInputs((prev) => ({
+            ...prev,
+            [id]: {
+                ...prev[id],
+                checked,
+            },
+        }));
 
-  const handleRadioChange = (groupName, selectedId) => {
+        // === СИНХРОНИЗАЦИЯ С КАРТИНКАМИ ===
+
+        // снегозадержатели
+        if (id === "snow-holders") {
+            setSelectedParts((prev) => ({
+                ...prev,
+                snow: checked ? true : null,
+            }));
+        }
+
+        // входная группа
+        if (id === "inner-group") {
+            setSelectedParts((prev) => ({
+                ...prev,
+                entrance: checked ? true : null,
+            }));
+        }
+
+        // общая водосточная система
+        if (id === "water-sliv-system") {
+            setSelectedParts((prev) => ({
+                ...prev,
+                gutter: checked ? true : null,
+            }));
+        }
+
+        // фасадное освещение
+        if (id === "fasad-light") {
+            setSelectedParts((prev) => ({
+                ...prev,
+                fasadLight: checked ? true : null,
+            }));
+        }
+    };
+
+
+
+
+    // выбранные элементы
+    const [selectedParts, setSelectedParts] = useState({
+        fasad: null,
+        balk: null,
+        windows: null,
+        roof: "metal",
+        snow: null,
+        gutter: null,
+        entrance: null,
+        gutterEntrance: null,
+        fasadLight: null,
+    });
+
+
+
+    const handleRadioChange = (groupName, selectedId) => {
     // Найдём все варианты этой группы
     const group = blocksData.find((b) => b.radioName === groupName);
     if (!group) return;
 
-    // checkRequirements for selectedId
+
+        if (groupName === "roof") {
+            const index = Number(selectedId.split("-")[1]);
+
+            const value = index === 2 ? "fals" : "metal";
+
+            setSelectedParts((prev) => ({
+                ...prev,
+                roof: value,
+            }));
+        }
+
+
+
+
+        // checkRequirements for selectedId
     if (!checkRequirements(selectedId)) return;
 
     setInputs((prev) => {
@@ -1151,7 +1207,97 @@ const Calculator = () => {
     };
   }, [currentView, currentRoof]);
 
-  return (
+
+    const visibleImages = useMemo(() => {
+        const result = [];
+
+        // база
+        result.push(currentRoof === "gable" ? "default-gable" : "default");
+
+        // фасад
+        if (selectedParts.fasad) {
+            result.push(withRoof(selectedParts.fasad));
+        }
+
+        // планкен
+        if (selectedParts.balk) {
+            result.push(withRoof(selectedParts.balk));
+        }
+
+        // окна
+        if (selectedParts.windows) {
+            result.push(withRoof(selectedParts.windows));
+        }
+
+        // крыша
+        if (selectedParts.roof) {
+            result.push(
+                currentRoof === "gable"
+                    ? `roof__${selectedParts.roof}-gable`
+                    : `roof__${selectedParts.roof}`
+            );
+        }
+
+        // снегозадержатели
+        if (selectedParts.snow) {
+            result.push(
+                currentRoof === "gable"
+                    ? `snow-holders__${selectedParts.roof}-gable`
+                    : `snow-holders__${selectedParts.roof}`
+            );
+        }
+
+        // входная группа
+        if (selectedParts.entrance) {
+            result.push(
+                currentRoof === "gable"
+                    ? `inner-group__${selectedParts.roof}-gable`
+                    : `inner-group__${selectedParts.roof}`
+            );
+        }
+
+        // водосток входной группы
+        if (selectedParts.gutterEntrance) {
+            result.push(
+                currentRoof === "gable"
+                    ? "water-sliv-system__inner-group-gable"
+                    : "water-sliv-system__inner-group"
+            );
+        }
+
+        // фасадное освещение
+        if (selectedParts.fasadLight && selectedParts.fasad) {
+            result.push(
+                currentRoof === "gable"
+                    ? `fasad-light__${selectedParts.fasad}-gable`
+                    : `fasad-light__${selectedParts.fasad}`
+            );
+        }
+
+        // общая водосточка
+        if (selectedParts.gutter) {
+            result.push(
+                currentRoof === "gable"
+                    ? "water-sliv-system__base-gable"
+                    : "water-sliv-system__base"
+            );
+        }
+
+        // водосток входной группы (если и входная группа, и водосточка включены)
+        if (selectedParts.entrance && selectedParts.gutter) {
+            result.push(
+                currentRoof === "gable"
+                    ? "water-sliv-system__inner-group-gable"
+                    : "water-sliv-system__inner-group"
+            );
+        }
+
+        return result;
+    }, [selectedParts, currentRoof]);
+
+
+
+    return (
     <section>
       {/* Core styles */}
       <link rel="stylesheet" href="/css/settings.css" />
@@ -1419,50 +1565,19 @@ const Calculator = () => {
                 className="section-calculator-block__house"
                 id="colors-params"
               >
-                {HOUSE_IMAGES.map((img) => {
-                  let isVisible = false;
+                  {HOUSE_IMAGES.map((img) => (
+                      <Image
+                          key={img.id}
+                          src={img.src}
+                          alt={img.alt}
+                          width={400}
+                          height={400}
+                          className={`house__img ${
+                              visibleImages.includes(img.id) ? "" : "hidden"
+                          }`}
+                      />
+                  ))}
 
-                  // базовая картинка
-                  if (img.id === "default" && currentRoof === "hip") {
-                    isVisible = true;
-                  }
-
-                  if (img.id === "default-gable" && currentRoof === "gable") {
-                    isVisible = true;
-                  }
-
-                  // фасад
-                  if (selectedParts.fasad) {
-                    if (img.id === withRoof(selectedParts.fasad)) {
-                      isVisible = true;
-                    }
-                  }
-
-                  // планкен
-                  if (selectedParts.balk) {
-                    if (img.id === withRoof(selectedParts.balk)) {
-                      isVisible = true;
-                    }
-                  }
-
-                  // окна
-                  if (selectedParts.windows) {
-                    if (img.id === withRoof(selectedParts.windows)) {
-                      isVisible = true;
-                    }
-                  }
-
-                  return (
-                    <Image
-                      key={img.id}
-                      src={img.src}
-                      alt={img.alt}
-                      width={400}
-                      height={400}
-                      className={`house__img ${isVisible ? "" : "hidden"}`}
-                    />
-                  );
-                })}
               </div>
 
               <div className="choice__wrapper p-t-20 p-d-20">
