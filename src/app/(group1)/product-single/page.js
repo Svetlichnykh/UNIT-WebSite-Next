@@ -10,13 +10,12 @@ export const metadata = {
   title: "Architronix -- Product Single",
   description: "Architronix is a next js and tailwind css website",
 };
-let util = 1
-
+let util = 1;
 
 const ProductSingle = () => {
-    if (util) {
-        return (<></>)
-    }
+  if (util) {
+    return <></>;
+  }
   const findProduct = productData[0];
   return (
     <>

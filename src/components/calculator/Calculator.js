@@ -1,10 +1,9 @@
 "use client";
 //далее изменения
 import React, { useMemo } from "react";
-import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
-import { tns } from "tiny-slider/src/tiny-slider";
+// import { tns } from "tiny-slider/src/tiny-slider";
 import "tiny-slider/dist/tiny-slider.css";
 
 import { useEffect, useRef, useState } from "react";
@@ -513,198 +512,197 @@ const HOUSE_IMAGES = [
     width: 400,
     height: 400,
   },
-    // фасадное освещение (дополнение)
-    {
-        id: "fasad-light__gray",
-        src: "/img/home/mkc-08__fasad-light_gray.png",
-        alt: "фасадное освещение серое",
-        className: "house__img hidden",
-        dataGroup: "fasad-light",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "fasad-light__white-gable",
-        src: "/img/home/mkc-08__fasad-light_white-gable.png",
-        alt: "фасадное освещение белое двускатное",
-        className: "house__img hidden",
-        dataGroup: "fasad-light",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "fasad-light__gray-gable",
-        src: "/img/home/mkc-08__fasad-light_gray-gable.png",
-        alt: "фасадное освещение серое двускатное",
-        className: "house__img hidden",
-        dataGroup: "fasad-light",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "fasad-light__black-gable",
-        src: "/img/home/mkc-08__fasad-light_black-gable.png",
-        alt: "фасадное освещение чёрное двускатное",
-        className: "house__img hidden",
-        dataGroup: "fasad-light",
-        width: 400,
-        height: 400,
-    },
+  // фасадное освещение (дополнение)
+  {
+    id: "fasad-light__gray",
+    src: "/img/home/mkc-08__fasad-light_gray.png",
+    alt: "фасадное освещение серое",
+    className: "house__img hidden",
+    dataGroup: "fasad-light",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "fasad-light__white-gable",
+    src: "/img/home/mkc-08__fasad-light_white-gable.png",
+    alt: "фасадное освещение белое двускатное",
+    className: "house__img hidden",
+    dataGroup: "fasad-light",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "fasad-light__gray-gable",
+    src: "/img/home/mkc-08__fasad-light_gray-gable.png",
+    alt: "фасадное освещение серое двускатное",
+    className: "house__img hidden",
+    dataGroup: "fasad-light",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "fasad-light__black-gable",
+    src: "/img/home/mkc-08__fasad-light_black-gable.png",
+    alt: "фасадное освещение чёрное двускатное",
+    className: "house__img hidden",
+    dataGroup: "fasad-light",
+    width: 400,
+    height: 400,
+  },
 
-    // крыша
-    {
-        id: "roof__metal",
-        src: "/img/home/mkc-08__roof_metal.png",
-        alt: "крыша металл",
-        className: "house__img hidden",
-        dataGroup: "roof",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "roof__fals",
-        src: "/img/home/mkc-08__roof_fals.png",
-        alt: "крыша клик-фальц",
-        className: "house__img hidden",
-        dataGroup: "roof",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "roof__metal-gable",
-        src: "/img/home/mkc-08__roof_metal-gable.png",
-        alt: "крыша металл двускатная",
-        className: "house__img hidden",
-        dataGroup: "roof",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "roof__fals-gable",
-        src: "/img/home/mkc-08__roof_fals-gable.png",
-        alt: "крыша клик-фальц двускатная",
-        className: "house__img hidden",
-        dataGroup: "roof",
-        width: 400,
-        height: 400,
-    },
+  // крыша
+  {
+    id: "roof__metal",
+    src: "/img/home/mkc-08__roof_metal.png",
+    alt: "крыша металл",
+    className: "house__img hidden",
+    dataGroup: "roof",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "roof__fals",
+    src: "/img/home/mkc-08__roof_fals.png",
+    alt: "крыша клик-фальц",
+    className: "house__img hidden",
+    dataGroup: "roof",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "roof__metal-gable",
+    src: "/img/home/mkc-08__roof_metal-gable.png",
+    alt: "крыша металл двускатная",
+    className: "house__img hidden",
+    dataGroup: "roof",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "roof__fals-gable",
+    src: "/img/home/mkc-08__roof_fals-gable.png",
+    alt: "крыша клик-фальц двускатная",
+    className: "house__img hidden",
+    dataGroup: "roof",
+    width: 400,
+    height: 400,
+  },
 
-    // снегодержатели
-    {
-        id: "snow-holders__metal",
-        src: "/img/home/mkc-08__snow-holders_metal.png",
-        alt: "снегодержатели металл",
-        className: "house__img hidden",
-        dataGroup: "snow",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "snow-holders__fals",
-        src: "/img/home/mkc-08__snow-holders_fals.png",
-        alt: "снегодержатели фальц",
-        className: "house__img hidden",
-        dataGroup: "snow",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "snow-holders__metal-gable",
-        src: "/img/home/mkc-08__snow-holders_metal-gable.png",
-        alt: "снегодержатели металл двускатные",
-        className: "house__img hidden",
-        dataGroup: "snow",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "snow-holders__fals-gable",
-        src: "/img/home/mkc-08__snow-holders_fals-gable.png",
-        alt: "снегодержатели фальц двускатные",
-        className: "house__img hidden",
-        dataGroup: "snow",
-        width: 400,
-        height: 400,
-    },
+  // снегодержатели
+  {
+    id: "snow-holders__metal",
+    src: "/img/home/mkc-08__snow-holders_metal.png",
+    alt: "снегодержатели металл",
+    className: "house__img hidden",
+    dataGroup: "snow",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "snow-holders__fals",
+    src: "/img/home/mkc-08__snow-holders_fals.png",
+    alt: "снегодержатели фальц",
+    className: "house__img hidden",
+    dataGroup: "snow",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "snow-holders__metal-gable",
+    src: "/img/home/mkc-08__snow-holders_metal-gable.png",
+    alt: "снегодержатели металл двускатные",
+    className: "house__img hidden",
+    dataGroup: "snow",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "snow-holders__fals-gable",
+    src: "/img/home/mkc-08__snow-holders_fals-gable.png",
+    alt: "снегодержатели фальц двускатные",
+    className: "house__img hidden",
+    dataGroup: "snow",
+    width: 400,
+    height: 400,
+  },
 
-    // водосточная система
-    {
-        id: "water-sliv-system__base",
-        src: "/img/home/mkc-08__water-sliv-system_base.png",
-        alt: "водосточная система",
-        className: "house__img hidden",
-        dataGroup: "gutter",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "water-sliv-system__base-gable",
-        src: "/img/home/mkc-08__water-sliv-system_base-gable.png",
-        alt: "водосточная система двускатная",
-        className: "house__img hidden",
-        dataGroup: "gutter",
-        width: 400,
-        height: 400,
-    },
+  // водосточная система
+  {
+    id: "water-sliv-system__base",
+    src: "/img/home/mkc-08__water-sliv-system_base.png",
+    alt: "водосточная система",
+    className: "house__img hidden",
+    dataGroup: "gutter",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "water-sliv-system__base-gable",
+    src: "/img/home/mkc-08__water-sliv-system_base-gable.png",
+    alt: "водосточная система двускатная",
+    className: "house__img hidden",
+    dataGroup: "gutter",
+    width: 400,
+    height: 400,
+  },
 
-    // входная группа
-    {
-        id: "inner-group__metal",
-        src: "/img/home/mkc-08__inner-group_metal.png",
-        alt: "входная группа металл",
-        className: "house__img hidden",
-        dataGroup: "entrance",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "inner-group__fals",
-        src: "/img/home/mkc-08__inner-group_fals.png",
-        alt: "входная группа фальц",
-        className: "house__img hidden",
-        dataGroup: "entrance",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "inner-group__metal-gable",
-        src: "/img/home/mkc-08__inner-group_metal-gable.png",
-        alt: "входная группа металл двускатная",
-        className: "house__img hidden",
-        dataGroup: "entrance",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "inner-group__fals-gable",
-        src: "/img/home/mkc-08__inner-group_fals-gable.png",
-        alt: "входная группа фальц двускатная",
-        className: "house__img hidden",
-        dataGroup: "entrance",
-        width: 400,
-        height: 400,
-    },
+  // входная группа
+  {
+    id: "inner-group__metal",
+    src: "/img/home/mkc-08__inner-group_metal.png",
+    alt: "входная группа металл",
+    className: "house__img hidden",
+    dataGroup: "entrance",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "inner-group__fals",
+    src: "/img/home/mkc-08__inner-group_fals.png",
+    alt: "входная группа фальц",
+    className: "house__img hidden",
+    dataGroup: "entrance",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "inner-group__metal-gable",
+    src: "/img/home/mkc-08__inner-group_metal-gable.png",
+    alt: "входная группа металл двускатная",
+    className: "house__img hidden",
+    dataGroup: "entrance",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "inner-group__fals-gable",
+    src: "/img/home/mkc-08__inner-group_fals-gable.png",
+    alt: "входная группа фальц двускатная",
+    className: "house__img hidden",
+    dataGroup: "entrance",
+    width: 400,
+    height: 400,
+  },
 
-    // водосток входной группы
-    {
-        id: "water-sliv-system__inner-group",
-        src: "/img/home/mkc-08__water-sliv-system_inner-group.png",
-        alt: "водосток входной группы",
-        className: "house__img hidden",
-        dataGroup: "gutter-entrance",
-        width: 400,
-        height: 400,
-    },
-    {
-        id: "water-sliv-system__inner-group-gable",
-        src: "/img/home/mkc-08__water-sliv-system_inner-group-gable.png",
-        alt: "водосток входной группы двускатный",
-        className: "house__img hidden",
-        dataGroup: "gutter-entrance",
-        width: 400,
-        height: 400,
-    },
-
+  // водосток входной группы
+  {
+    id: "water-sliv-system__inner-group",
+    src: "/img/home/mkc-08__water-sliv-system_inner-group.png",
+    alt: "водосток входной группы",
+    className: "house__img hidden",
+    dataGroup: "gutter-entrance",
+    width: 400,
+    height: 400,
+  },
+  {
+    id: "water-sliv-system__inner-group-gable",
+    src: "/img/home/mkc-08__water-sliv-system_inner-group-gable.png",
+    alt: "водосток входной группы двускатный",
+    className: "house__img hidden",
+    dataGroup: "gutter-entrance",
+    width: 400,
+    height: 400,
+  },
 ];
 
 const CHOICE_IMAGES = [
@@ -815,17 +813,18 @@ const Calculator = () => {
 
       if (!slider || slider.dataset.initialized) return;
 
-      const instance = tns({
-        container: slider,
-        items: 1,
-        slideBy: 1,
-        mouseDrag: true,
-        controls: false,
-        nav: true,
-        navContainer: thumbs,
-        navAsThumbnails: true,
-        autoplayButtonOutput: false,
-      });
+      // const instance = tns({
+      //   container: slider,
+      //   items: 1,
+      //   slideBy: 1,
+      //   mouseDrag: true,
+      //   controls: false,
+      //   nav: true,
+      //   navContainer: thumbs,
+      //   navAsThumbnails: true,
+      //   autoplayButtonOutput: false,
+      // });
+
 
       slider.dataset.initialized = "true";
     });
@@ -1012,91 +1011,82 @@ const Calculator = () => {
   const { total, reportText, localSums } = computeSummary();
 
   // Обработчики изменений
-    const handleToggle = (id, checked) => {
-        if (checked && !checkRequirements(id)) return;
+  const handleToggle = (id, checked) => {
+    if (checked && !checkRequirements(id)) return;
 
-        setInputs((prev) => ({
-            ...prev,
-            [id]: {
-                ...prev[id],
-                checked,
-            },
-        }));
+    setInputs((prev) => ({
+      ...prev,
+      [id]: {
+        ...prev[id],
+        checked,
+      },
+    }));
 
-        // === СИНХРОНИЗАЦИЯ С КАРТИНКАМИ ===
+    // === СИНХРОНИЗАЦИЯ С КАРТИНКАМИ ===
 
-        // снегозадержатели
-        if (id === "snow-holders") {
-            setSelectedParts((prev) => ({
-                ...prev,
-                snow: checked ? true : null,
-            }));
-        }
+    // снегозадержатели
+    if (id === "snow-holders") {
+      setSelectedParts((prev) => ({
+        ...prev,
+        snow: checked ? true : null,
+      }));
+    }
 
-        // входная группа
-        if (id === "inner-group") {
-            setSelectedParts((prev) => ({
-                ...prev,
-                entrance: checked ? true : null,
-            }));
-        }
+    // входная группа
+    if (id === "inner-group") {
+      setSelectedParts((prev) => ({
+        ...prev,
+        entrance: checked ? true : null,
+      }));
+    }
 
-        // общая водосточная система
-        if (id === "water-sliv-system") {
-            setSelectedParts((prev) => ({
-                ...prev,
-                gutter: checked ? true : null,
-            }));
-        }
+    // общая водосточная система
+    if (id === "water-sliv-system") {
+      setSelectedParts((prev) => ({
+        ...prev,
+        gutter: checked ? true : null,
+      }));
+    }
 
-        // фасадное освещение
-        if (id === "fasad-light") {
-            setSelectedParts((prev) => ({
-                ...prev,
-                fasadLight: checked ? true : null,
-            }));
-        }
-    };
+    // фасадное освещение
+    if (id === "fasad-light") {
+      setSelectedParts((prev) => ({
+        ...prev,
+        fasadLight: checked ? true : null,
+      }));
+    }
+  };
 
+  // выбранные элементы
+  const [selectedParts, setSelectedParts] = useState({
+    fasad: null,
+    balk: null,
+    windows: null,
+    roof: "metal",
+    snow: null,
+    gutter: null,
+    entrance: null,
+    gutterEntrance: null,
+    fasadLight: null,
+  });
 
-
-
-    // выбранные элементы
-    const [selectedParts, setSelectedParts] = useState({
-        fasad: null,
-        balk: null,
-        windows: null,
-        roof: "metal",
-        snow: null,
-        gutter: null,
-        entrance: null,
-        gutterEntrance: null,
-        fasadLight: null,
-    });
-
-
-
-    const handleRadioChange = (groupName, selectedId) => {
+  const handleRadioChange = (groupName, selectedId) => {
     // Найдём все варианты этой группы
     const group = blocksData.find((b) => b.radioName === groupName);
     if (!group) return;
 
+    if (groupName === "roof") {
+      const index = Number(selectedId.split("-")[1]);
 
-        if (groupName === "roof") {
-            const index = Number(selectedId.split("-")[1]);
+      const value = index === 2 ? "fals" : "metal";
 
-            const value = index === 2 ? "fals" : "metal";
+      setSelectedParts((prev) => ({
+        ...prev,
+        roof: value,
+      }));
+    }
 
-            setSelectedParts((prev) => ({
-                ...prev,
-                roof: value,
-            }));
-        }
-
-
-
-
-        // checkRequirements for selectedId
+    // checkRequirements for selectedId
     if (!checkRequirements(selectedId)) return;
 
     setInputs((prev) => {
@@ -1207,108 +1197,106 @@ const Calculator = () => {
     };
   }, [currentView, currentRoof]);
 
-    const getFacadeColor = () => {
-        if (!selectedParts.fasad) return null;
+  const getFacadeColor = () => {
+    if (!selectedParts.fasad) return null;
 
-        // facade__white → white
-        return selectedParts.fasad.split("__")[1];
-    };
+    // facade__white → white
+    return selectedParts.fasad.split("__")[1];
+  };
 
-    const visibleImages = useMemo(() => {
-        const result = [];
+  const visibleImages = useMemo(() => {
+    const result = [];
 
-        // база
-        result.push(currentRoof === "gable" ? "default-gable" : "default");
+    // база
+    result.push(currentRoof === "gable" ? "default-gable" : "default");
 
-        // фасад
-        if (selectedParts.fasad) {
-            result.push(withRoof(selectedParts.fasad));
-        }
+    // фасад
+    if (selectedParts.fasad) {
+      result.push(withRoof(selectedParts.fasad));
+    }
 
-        // планкен
-        if (selectedParts.balk) {
-            result.push(withRoof(selectedParts.balk));
-        }
+    // планкен
+    if (selectedParts.balk) {
+      result.push(withRoof(selectedParts.balk));
+    }
 
-        // окна
-        if (selectedParts.windows) {
-            result.push(withRoof(selectedParts.windows));
-        }
+    // окна
+    if (selectedParts.windows) {
+      result.push(withRoof(selectedParts.windows));
+    }
 
-        // крыша
-        if (selectedParts.roof) {
-            result.push(
-                currentRoof === "gable"
-                    ? `roof__${selectedParts.roof}-gable`
-                    : `roof__${selectedParts.roof}`
-            );
-        }
+    // крыша
+    if (selectedParts.roof) {
+      result.push(
+        currentRoof === "gable"
+          ? `roof__${selectedParts.roof}-gable`
+          : `roof__${selectedParts.roof}`,
+      );
+    }
 
-        // снегозадержатели
-        if (selectedParts.snow) {
-            result.push(
-                currentRoof === "gable"
-                    ? `snow-holders__${selectedParts.roof}-gable`
-                    : `snow-holders__${selectedParts.roof}`
-            );
-        }
+    // снегозадержатели
+    if (selectedParts.snow) {
+      result.push(
+        currentRoof === "gable"
+          ? `snow-holders__${selectedParts.roof}-gable`
+          : `snow-holders__${selectedParts.roof}`,
+      );
+    }
 
-        // входная группа
-        if (selectedParts.entrance) {
-            result.push(
-                currentRoof === "gable"
-                    ? `inner-group__${selectedParts.roof}-gable`
-                    : `inner-group__${selectedParts.roof}`
-            );
-        }
+    // входная группа
+    if (selectedParts.entrance) {
+      result.push(
+        currentRoof === "gable"
+          ? `inner-group__${selectedParts.roof}-gable`
+          : `inner-group__${selectedParts.roof}`,
+      );
+    }
 
-        // водосток входной группы
-        if (selectedParts.gutterEntrance) {
-            result.push(
-                currentRoof === "gable"
-                    ? "water-sliv-system__inner-group-gable"
-                    : "water-sliv-system__inner-group"
-            );
-        }
+    // водосток входной группы
+    if (selectedParts.gutterEntrance) {
+      result.push(
+        currentRoof === "gable"
+          ? "water-sliv-system__inner-group-gable"
+          : "water-sliv-system__inner-group",
+      );
+    }
 
-        // фасадное освещение
-        // фасадное освещение
-        if (selectedParts.fasadLight && selectedParts.fasad) {
-            const color = getFacadeColor();
+    // фасадное освещение
+    // фасадное освещение
+    if (selectedParts.fasadLight && selectedParts.fasad) {
+      const color = getFacadeColor();
 
-            if (color) {
-                result.push(
-                    currentRoof === "gable"
-                        ? `fasad-light__${color}-gable`
-                        : `fasad-light__${color}`
-                );
-            }
-        }
+      if (color) {
+        result.push(
+          currentRoof === "gable"
+            ? `fasad-light__${color}-gable`
+            : `fasad-light__${color}`,
+        );
+      }
+    }
 
-        // общая водосточка
-        if (selectedParts.gutter) {
-            result.push(
-                currentRoof === "gable"
-                    ? "water-sliv-system__base-gable"
-                    : "water-sliv-system__base"
-            );
-        }
+    // общая водосточка
+    if (selectedParts.gutter) {
+      result.push(
+        currentRoof === "gable"
+          ? "water-sliv-system__base-gable"
+          : "water-sliv-system__base",
+      );
+    }
 
-        // водосток входной группы (если и входная группа, и водосточка включены)
-        if (selectedParts.entrance && selectedParts.gutter) {
-            result.push(
-                currentRoof === "gable"
-                    ? "water-sliv-system__inner-group-gable"
-                    : "water-sliv-system__inner-group"
-            );
-        }
+    // водосток входной группы (если и входная группа, и водосточка включены)
+    if (selectedParts.entrance && selectedParts.gutter) {
+      result.push(
+        currentRoof === "gable"
+          ? "water-sliv-system__inner-group-gable"
+          : "water-sliv-system__inner-group",
+      );
+    }
 
-        return result;
-    }, [selectedParts, currentRoof]);
+    return result;
+  }, [selectedParts, currentRoof]);
 
-
-
-    return (
+  return (
     <section>
       {/* Core styles */}
       <link rel="stylesheet" href="/css/settings.css" />
@@ -1483,42 +1471,6 @@ const Calculator = () => {
           </div>
         </div>
       </section>
-
-      <Script id="my-script1">{`document.addEventListener('DOMContentLoaded', function() {
-                const areas = document.querySelectorAll('.area');
-
-                areas.forEach(area => {
-                area.addEventListener('click', function() {
-                // Удаляем класс active у всех областей
-                areas.forEach(a => a.classList.remove('active'));
-                // Добавляем класс active только к выбранной области
-                this.classList.add('active');
-            });
-            });
-            });`}</Script>
-
-      <Script id="my-script2">{`let sliders = document.querySelectorAll('.visual-slider');
-
-                sliders.forEach(function(slider) {
-                let navContainer = slider.parentElement.querySelector('.visual-slider__thumbnails');
-
-                tns({
-                "container": slider,
-                "loop": true,
-                "items": 1,
-                "slideBy": 1,
-                "center": true,
-                "mouseDrag": true,
-                "arrowKeys": true,
-                "autoplay": false,
-                "controls": false,
-                "navAsThumbnails": true,
-                "navContainer": navContainer,
-                "autoplayButtonOutput": false,
-                "navPosition": "bottom"
-            });
-            });`}</Script>
-
       <div className="roof-switch">
         <button
           className={`roof-switch__btn left-button ${
@@ -1576,19 +1528,18 @@ const Calculator = () => {
                 className="section-calculator-block__house"
                 id="colors-params"
               >
-                  {HOUSE_IMAGES.map((img) => (
-                      <Image
-                          key={img.id}
-                          src={img.src}
-                          alt={img.alt}
-                          width={400}
-                          height={400}
-                          className={`house__img ${
-                              visibleImages.includes(img.id) ? "" : "hidden"
-                          }`}
-                      />
-                  ))}
-
+                {HOUSE_IMAGES.map((img) => (
+                  <Image
+                    key={img.id}
+                    src={img.src}
+                    alt={img.alt}
+                    width={400}
+                    height={400}
+                    className={`house__img ${
+                      visibleImages.includes(img.id) ? "" : "hidden"
+                    }`}
+                  />
+                ))}
               </div>
 
               <div className="choice__wrapper p-t-20 p-d-20">
@@ -1732,37 +1683,6 @@ const Calculator = () => {
           </div>
         </div>
       </section>
-
-      <Script id="my-script3">
-        {`function radioReset(name) {
-
-                var allRadios = document.getElementsByName(name);
-                var booRadio;
-                var x = 0;
-                for(x = 0; x < allRadios.length; x++){
-                allRadios[x].onclick = function() {
-                if(booRadio == this){
-                this.checked = false;
-                booRadio = null;
-            } else {
-                booRadio = this;
-            }
-            };
-            }
-
-            }
-                document.addEventListener('DOMContentLoaded', () => {
-
-                radioReset('energy')
-                radioReset('heat')
-                radioReset('water')
-                radioReset('air')
-                radioReset('walls')
-                radioReset('terrace')
-                radioReset('fundament')
-
-            })');`}
-      </Script>
     </section>
   );
 };
