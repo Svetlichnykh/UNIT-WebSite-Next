@@ -1207,6 +1207,12 @@ const Calculator = () => {
     };
   }, [currentView, currentRoof]);
 
+    const getFacadeColor = () => {
+        if (!selectedParts.fasad) return null;
+
+        // facade__white → white
+        return selectedParts.fasad.split("__")[1];
+    };
 
     const visibleImages = useMemo(() => {
         const result = [];
@@ -1266,12 +1272,17 @@ const Calculator = () => {
         }
 
         // фасадное освещение
+        // фасадное освещение
         if (selectedParts.fasadLight && selectedParts.fasad) {
-            result.push(
-                currentRoof === "gable"
-                    ? `fasad-light__${selectedParts.fasad}-gable`
-                    : `fasad-light__${selectedParts.fasad}`
-            );
+            const color = getFacadeColor();
+
+            if (color) {
+                result.push(
+                    currentRoof === "gable"
+                        ? `fasad-light__${color}-gable`
+                        : `fasad-light__${color}`
+                );
+            }
         }
 
         // общая водосточка
