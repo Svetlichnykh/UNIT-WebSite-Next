@@ -3,7 +3,6 @@
 import React, { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-// import { tns } from "tiny-slider/src/tiny-slider";
 import "tiny-slider/dist/tiny-slider.css";
 
 import { useEffect, useRef, useState } from "react";
@@ -796,6 +795,74 @@ const CHOICE_IMAGES = [
 ];
 
 const Calculator = () => {
+
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const initSlider = async () => {
+            const { tns } = await import("tiny-slider/src/tiny-slider");
+
+            slidersRef.current.forEach((sliderBlock) => {
+                if (!sliderBlock) return;
+
+                const slider = sliderBlock.querySelector(".visual-slider");
+                const thumbs = sliderBlock.querySelector(".visual-slider__thumbnails");
+
+                if (!slider || slider.dataset.initialized) return;
+
+                tns({
+                    container: slider,
+                    items: 1,
+                    slideBy: 1,
+                    mouseDrag: true,
+                    controls: false,
+                    nav: true,
+                    navContainer: thumbs,
+                    navAsThumbnails: true,
+                    autoplayButtonOutput: false,
+                });
+
+
+                if (!slidersRef.current.length) return;
+
+                slidersRef.current.forEach((sliderBlock) => {
+                    if (!sliderBlock) return;
+
+                    const slider = sliderBlock.querySelector(".visual-slider");
+                    const thumbs = sliderBlock.querySelector(".visual-slider__thumbnails");
+
+                    if (!slider || slider.dataset.initialized) return;
+
+                    if (tns) {
+
+                    }
+                    const instance = tns({
+                        container: slider,
+                        items: 1,
+                        slideBy: 1,
+                        mouseDrag: true,
+                        controls: false,
+                        nav: true,
+                        navContainer: thumbs,
+                        navAsThumbnails: true,
+                        autoplayButtonOutput: false,
+                    });
+
+
+                    slider.dataset.initialized = "true";
+                });
+
+                slider.dataset.initialized = "true";
+            });
+        };
+
+
+
+        initSlider();
+    }, []);
+
+
   // вкладка выбора
   const [activeTab, setActiveTab] = useState("fasad");
 
@@ -803,31 +870,7 @@ const Calculator = () => {
   const withRoof = (id) => (currentRoof === "gable" ? `${id}-gable` : id);
 
   useEffect(() => {
-    if (!slidersRef.current.length) return;
 
-    slidersRef.current.forEach((sliderBlock) => {
-      if (!sliderBlock) return;
-
-      const slider = sliderBlock.querySelector(".visual-slider");
-      const thumbs = sliderBlock.querySelector(".visual-slider__thumbnails");
-
-      if (!slider || slider.dataset.initialized) return;
-
-      // const instance = tns({
-      //   container: slider,
-      //   items: 1,
-      //   slideBy: 1,
-      //   mouseDrag: true,
-      //   controls: false,
-      //   nav: true,
-      //   navContainer: thumbs,
-      //   navAsThumbnails: true,
-      //   autoplayButtonOutput: false,
-      // });
-
-
-      slider.dataset.initialized = "true";
-    });
   }, []);
 
   const [activeSlider, setActiveSlider] = useState(4); // по умолчанию кухня (как у тебя showSlider(4))
@@ -1538,6 +1581,7 @@ const Calculator = () => {
                     className={`house__img ${
                       visibleImages.includes(img.id) ? "" : "hidden"
                     }`}
+                    priority={true}
                   />
                 ))}
               </div>
