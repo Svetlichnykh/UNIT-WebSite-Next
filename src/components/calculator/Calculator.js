@@ -1684,31 +1684,31 @@ const Calculator = () => {
             </div>
           </div>
 
-          {blocksData2.map((b) => {
-            if (b.subblocks && b.radioName) {
-              return (
-                <CalculatorBlock
-                  key={b.radioName}
-                  block={b}
-                  inputs={inputs}
-                  onToggle={handleToggle}
-                  onRadioChange={handleRadioChange}
-                  currentValues={currentValues}
-                />
-              );
-            } else {
-              return (
-                <CalculatorBlock
-                  key={b.checkboxName}
-                  block={b}
-                  inputs={inputs}
-                  onToggle={handleToggle}
-                  onRadioChange={handleRadioChange}
-                  currentValues={currentValues}
-                />
-              );
-            }
-          })}
+          {/*{blocksData2.map((b) => {*/}
+          {/*  if (b.subblocks && b.radioName) {*/}
+          {/*    return (*/}
+          {/*      <CalculatorBlock*/}
+          {/*        key={b.radioName}*/}
+          {/*        block={b}*/}
+          {/*        inputs={inputs}*/}
+          {/*        onToggle={handleToggle}*/}
+          {/*        onRadioChange={handleRadioChange}*/}
+          {/*        currentValues={currentValues}*/}
+          {/*      />*/}
+          {/*    );*/}
+          {/*  } else {*/}
+          {/*    return (*/}
+          {/*      <CalculatorBlock*/}
+          {/*        key={b.checkboxName}*/}
+          {/*        block={b}*/}
+          {/*        inputs={inputs}*/}
+          {/*        onToggle={handleToggle}*/}
+          {/*        onRadioChange={handleRadioChange}*/}
+          {/*        currentValues={currentValues}*/}
+          {/*      />*/}
+          {/*    );*/}
+          {/*  }*/}
+          {/*})}*/}
         </div>
 
         <div className="calculator__summary">
