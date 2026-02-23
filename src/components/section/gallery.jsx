@@ -35,7 +35,7 @@ const Gallery = ({ text_muted, bg_muted }) => {
           >
             {/* Контент */}
             <div
-              className="absolute inset-0 z-10 flex flex-col justify-between 2xl:pl-[30px] pl-5 pr-5 2xl:pr-[30px] py-[30px]
+              className="absolute inset-0 z-[1] flex flex-col justify-between 2xl:pl-[30px] pl-5 pr-5 2xl:pr-[30px] py-[30px]
               after:absolute after:left-0 after:bottom-0 after:contents-[''] after:w-full after:h-1/2 after:bg-bottom-liner after:z-[-1]"
             >
               <h3

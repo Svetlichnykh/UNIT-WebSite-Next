@@ -26,7 +26,7 @@ const VideoPlay = ({ img, videoSrc = "/video.mp4" }) => {
           alt="video preview"
           width={698}
           height={400}
-          className="w-full max-w-[698px] mx-auto h-full"
+          className="w-full max-w-[698px] mx-auto h-full object-cover object-top"
         />
 
         {/* Play button */}
@@ -49,7 +49,7 @@ const VideoPlay = ({ img, videoSrc = "/video.mp4" }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-black/70"
             onClick={() => setOpen(false)}
           >
             <motion.div

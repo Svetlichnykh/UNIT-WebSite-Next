@@ -55,7 +55,8 @@ export default function CalculatorBlock({
                   value={sub.optionPrice}
                   data-title={sub.dataTitle}
                   checked={!!input.checked}
-                  onChange={() => onRadioChange(name, inputId)}
+                  onClick={() => onRadioChange(name, inputId)}
+                  onChange={() => {}} // чтобы React не ругался
                   data-local-sum-name={block.localSumName || undefined}
                 />
                 <label htmlFor={inputId}></label>

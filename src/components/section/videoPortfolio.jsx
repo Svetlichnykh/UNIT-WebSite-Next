@@ -17,7 +17,7 @@ const VideoPortfolio = ({ text_muted, bg_muted, after_bg_muted }) => {
             ` relative after:contents-[""] after:absolute after:left-0 after:top-0 after:max-w-[1320px] after:w-full z-[1] after:h-full after:bg-primary ${after_bg_muted} pt-[90px] pb-[110px]`,
           )}
         >
-          <div className="container flex lg:flex-row flex-col justify-between relative z-10">
+          <div className="container flex lg:flex-row flex-col justify-between relative z-[90]">
             <div className="2xl:max-w-[637px] lg:max-w-[500px] w-full">
               <h4 className="text-white text-3xl 2sm:text-4xl font-bold leading-135">
                 Секрет качества наших домов
@@ -58,7 +58,7 @@ const VideoPortfolio = ({ text_muted, bg_muted, after_bg_muted }) => {
                 </ButtonOutline>
               </Link>
             </div>
-            <VideoPlay img={"/previewImage.png"} videoSrc="/video.mp4" />
+            <VideoPlay img={"/previewImage.png"} videoSrc="/UNIT-video.mp4" />
           </div>
         </div>
       </div>
