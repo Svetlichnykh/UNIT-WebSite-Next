@@ -352,7 +352,7 @@ const terraceBlock = {
   ],
 };
 
-const BASE_PRICE = 3_826_000;
+const BASE_PRICE = 5_150_000;
 
 const viewsOrder = ["back", "left", "front", "right"];
 
