@@ -1,5 +1,5 @@
 "use client";
-//далее изменения
+
 import React, { useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -916,11 +916,29 @@ const Calculator = () => {
   const flatCalculatorGroups = calculatorGroups.flatMap((col) =>
     col.sections.flatMap((section) => section.blocks),
   );
-
-  // отдельно создаём блок террасы
-
+  const [activeTab, setActiveTab] = useState("fasad");
+  // helper для -gable
+  const withRoof = (id) => (currentRoof === "gable" ? `${id}-gable` : id);
+  const [activeSlider, setActiveSlider] = useState(4); // по умолчанию кухня (как у тебя showSlider(4))
+  const slidersRef = useRef([]);
+  const containerRef = useRef(null);
+  const frameRef = useRef(null);
+  const [currentView, setCurrentView] = useState("front");
+  const [currentRoof, setCurrentRoof] = useState("hip");
+  // inputsState: { id: { id, value, checked, disabled } }
+  const [inputs, setInputs] = useState({});
+  // baseValues: original numbers (to recalc relations each time)
+  const [baseValues, setBaseValues] = useState({});
+  // requirements map (если нужно, берем из данных — в ваших JSON-ах нет require, но поддержка оставлена)
+  const [requirementsMap, setRequirementsMap] = useState({});
+  const [excludeMap, setExcludeMap] = useState({});
+  const isWindowsLaminated =
+    inputs["windows-2"]?.checked || inputs["windows-3"]?.checked;
+  const isPlankenEnabled = inputs["fasad-planken"]?.checked;
+  const excludes = {};
   // объединяем всё в один массив
   const allBlocks = [terraceBlock, ...blocksData, ...flatCalculatorGroups];
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -983,34 +1001,6 @@ const Calculator = () => {
     initSlider();
   }, []);
 
-  // вкладка выбора
-  const [activeTab, setActiveTab] = useState("fasad");
-
-  // helper для -gable
-  const withRoof = (id) => (currentRoof === "gable" ? `${id}-gable` : id);
-
-  useEffect(() => {}, []);
-
-  const [activeSlider, setActiveSlider] = useState(4); // по умолчанию кухня (как у тебя showSlider(4))
-  const slidersRef = useRef([]);
-
-  const containerRef = useRef(null);
-  const frameRef = useRef(null);
-
-  const [currentView, setCurrentView] = useState("front");
-  const [currentRoof, setCurrentRoof] = useState("hip");
-
-  // inputsState: { id: { id, value, checked, disabled } }
-  const [inputs, setInputs] = useState({});
-  // baseValues: original numbers (to recalc relations each time)
-  const [baseValues, setBaseValues] = useState({});
-  // requirements map (если нужно, берем из данных — в ваших JSON-ах нет require, но поддержка оставлена)
-  const [requirementsMap, setRequirementsMap] = useState({});
-  const [excludeMap, setExcludeMap] = useState({});
-  const isWindowsLaminated =
-    inputs["windows-2"]?.checked || inputs["windows-3"]?.checked;
-  const isPlankenEnabled = inputs["fasad-planken"]?.checked;
-  const excludes = {};
   useEffect(() => {
     const initial = {};
     const base = {};
@@ -1303,6 +1293,7 @@ const Calculator = () => {
 
   const firstFacade =
     CHOICE_IMAGES.find((s) => s.section === "fasad")?.items?.[0]?.id ?? null;
+
   // выбранные элементы
   const [selectedParts, setSelectedParts] = useState({
     fasad: firstFacade,
@@ -1317,63 +1308,64 @@ const Calculator = () => {
     terrace: null,
   });
 
-    const handleRadioChange = (groupName, selectedId) => {
-        const group = allBlocks.find((b) => b.radioName === groupName);
-        if (!group) return;
+  const handleRadioChange = (groupName, selectedId) => {
+    const group = allBlocks.find((b) => b.radioName === groupName);
+    if (!group) return;
 
-        const allowDeselect = group.allowDeselect === true;
-        const requirementCheck = checkRequirements(selectedId);
-        const excludeCheck = checkExcludes(selectedId);
+    const allowDeselect = group.allowDeselect === true;
+    const requirementCheck = checkRequirements(selectedId);
+    const excludeCheck = checkExcludes(selectedId);
 
-        if (!requirementCheck.ok) {
-            showAlert(requirementCheck.alertId);
-            return;
-        }
+    if (!requirementCheck.ok) {
+      showAlert(requirementCheck.alertId);
+      return;
+    }
 
-        if (!excludeCheck.ok) {
-            showAlert(excludeCheck.alertId);
-            return;
-        }
+    if (!excludeCheck.ok) {
+      showAlert(excludeCheck.alertId);
+      return;
+    }
 
-        setInputs((prev) => {
-            const copy = { ...prev };
-            const isAlreadySelected = prev[selectedId]?.checked;
+    setInputs((prev) => {
+      const copy = { ...prev };
+      const isAlreadySelected = prev[selectedId]?.checked;
 
-            if (allowDeselect && isAlreadySelected) {
-                // снимаем все в группе
-                group.subblocks.forEach((_, idx) => {
-                    const id = `${groupName}-${idx + 1}`;
-                    copy[id] = { ...(copy[id] || {}), checked: false };
-                });
-
-                // ✅ Обновляем selectedParts после deselect
-                if (groupName === "roof") {
-                    setSelectedParts((prev) => ({ ...prev, roof: null }));
-                }
-
-                return applyRelations(copy);
-            }
-
-            // обычное radio поведение
-            group.subblocks.forEach((_, idx) => {
-                const id = `${groupName}-${idx + 1}`;
-                copy[id] = { ...(copy[id] || {}), checked: id === selectedId };
-            });
-
-            return applyRelations(copy);
+      if (allowDeselect && isAlreadySelected) {
+        // снимаем все в группе
+        group.subblocks.forEach((_, idx) => {
+          const id = `${groupName}-${idx + 1}`;
+          copy[id] = { ...(copy[id] || {}), checked: false };
         });
 
-        // ✅ Если это крыша и не снятие, обновляем selectedParts
+        // ✅ Обновляем selectedParts после deselect
         if (groupName === "roof") {
-            const idx = parseInt(selectedId.split("-")[1], 10) - 1;
-            const option = group.subblocks[idx];
-            if (option) {
-                const roofName =
-                    option.dataTitle.toLowerCase().includes("клик-фальц") ? "fals" : "metal";
-                setSelectedParts((prev) => ({ ...prev, roof: roofName }));
-            }
+          setSelectedParts((prev) => ({ ...prev, roof: null }));
         }
-    };
+
+        return applyRelations(copy);
+      }
+
+      // обычное radio поведение
+      group.subblocks.forEach((_, idx) => {
+        const id = `${groupName}-${idx + 1}`;
+        copy[id] = { ...(copy[id] || {}), checked: id === selectedId };
+      });
+
+      return applyRelations(copy);
+    });
+
+    // ✅ Если это крыша и не снятие, обновляем selectedParts
+    if (groupName === "roof") {
+      const idx = parseInt(selectedId.split("-")[1], 10) - 1;
+      const option = group.subblocks[idx];
+      if (option) {
+        const roofName = option.dataTitle.toLowerCase().includes("клик-фальц")
+          ? "fals"
+          : "metal";
+        setSelectedParts((prev) => ({ ...prev, roof: roofName }));
+      }
+    }
+  };
 
   const closeAlert = (alertId) => {
     const el = document.getElementById(alertId);
@@ -1592,10 +1584,10 @@ const Calculator = () => {
     <section>
       {/* Core styles */}
       <link rel="stylesheet" href="/css/settings.css" />
-      <link rel="stylesheet" href="/css/global.css" />  
-      <link rel="stylesheet" href="/css/blocks.css" />  
-      <link rel="stylesheet" href="/css/text.css" />    
-      <link rel="stylesheet" href="/css/button.css" />  
+      <link rel="stylesheet" href="/css/global.css" />
+      <link rel="stylesheet" href="/css/blocks.css" />
+      <link rel="stylesheet" href="/css/text.css" />
+      <link rel="stylesheet" href="/css/button.css" />
 
       {/* Feature styles */}
       <link rel="stylesheet" href="/css/slider.css" />
