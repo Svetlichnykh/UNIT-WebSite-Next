@@ -911,6 +911,11 @@ const CHOICE_IMAGES = [
   },
 ];
 
+const AVAILABLE_ROOFS = [
+    { id: "hip", label: "Вальмовая кровля" },
+
+];
+
 const Calculator = () => {
   // разворачиваем второй массив в плоский
   const flatCalculatorGroups = calculatorGroups.flatMap((col) =>
@@ -924,7 +929,7 @@ const Calculator = () => {
   const containerRef = useRef(null);
   const frameRef = useRef(null);
   const [currentView, setCurrentView] = useState("front");
-  const [currentRoof, setCurrentRoof] = useState("hip");
+  const [currentRoof, setCurrentRoof] = useState(AVAILABLE_ROOFS[0].id);
   // inputsState: { id: { id, value, checked, disabled } }
   const [inputs, setInputs] = useState({});
   // baseValues: original numbers (to recalc relations each time)
@@ -1755,25 +1760,24 @@ const Calculator = () => {
           </div>
         </div>
       </section>
-      <div className="roof-switch">
-        <button
-          className={`roof-switch__btn left-button ${
-            currentRoof === "hip" ? "is-active" : ""
-          }`}
-          onClick={() => setCurrentRoof("hip")}
-        >
-          Вальмовая кровля
-        </button>
-
-        <button
-          className={`roof-switch__btn right-button ${
-            currentRoof === "gable" ? "is-active" : ""
-          }`}
-          onClick={() => setCurrentRoof("gable")}
-        >
-          Двускатная кровля
-        </button>
-      </div>
+        <div className="roof-switch">
+            {AVAILABLE_ROOFS.map((roof) => (
+                <button
+                    key={roof.id}
+                    className={`roof-switch__btn ${
+                        currentRoof === roof.id ? "is-active" : ""
+                    }`}
+                    onClick={() => {
+                        if (AVAILABLE_ROOFS.length > 1) {
+                            setCurrentRoof(roof.id);
+                        }
+                    }}
+                    disabled={AVAILABLE_ROOFS.length === 1}
+                >
+                    {roof.label}
+                </button>
+            ))}
+        </div>
 
       <section className="section sect-views">
         <div className="section__inner">

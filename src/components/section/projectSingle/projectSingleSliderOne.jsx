@@ -13,30 +13,12 @@ import Image from "next/image";
 import { staticBluarDataUrl } from "@/lib/staticBluarDataUrl";
 
 const projectImgList = [
-  {
-    id: 1,
-    img: project_img_3,
-  },
-  {
-    id: 2,
-    img: project_img_4,
-  },
-  {
-    id: 3,
-    img: project_img_5,
-  },
-  {
-    id: 4,
-    img: project_img_3,
-  },
-  {
-    id: 5,
-    img: project_img_4,
-  },
-  {
-    id: 6,
-    img: project_img_5,
-  },
+    "/images/projects/project-image-3.jpg",
+    "/images/projects/project-image-4.jpg",
+    "/images/projects/project-image-5.jpg",
+    "/images/projects/project-image-3.jpg",
+    "/images/projects/project-image-4.jpg",
+    "/images/projects/project-image-5.jpg",
 ];
 const ProjectSingleS = () => {
   const pagination = {
@@ -67,20 +49,18 @@ const ProjectSingleS = () => {
         loop={true}
         modules={[Pagination, Navigation]}
       >
-        {projectImgList.map(({ id, img }) => {
-          return (
-            <SwiperSlide key={id}>
-              <Image
-                src={img}
-                loading="lazy"
-                placeholder="blur"
-                blurDataURL={staticBluarDataUrl}
-                alt="img"
-                className="w-full h-full min-h-[250px] max-h-[250px]  md:min-h-16 md:max-h-full"
-              />
-            </SwiperSlide>
-          );
-        })}
+          {projectImgList.map((src, index) => (
+              <SwiperSlide key={index}>
+                  <Image
+                      src={src}
+                      alt={`project-${index + 1}`}
+                      width={600}
+                      height={400}
+                      loading="lazy"
+                      className="w-full h-full min-h-[250px] max-h-[250px] md:min-h-16 md:max-h-full object-cover"
+                  />
+              </SwiperSlide>
+          ))}
 
         <div className="container">
           <ProgressAndNatigation />
