@@ -1,3 +1,5 @@
+import React from "react";
+
 export const Categories = {
   "panel-houses": {
     title: "Панельно-каркасные дома",
@@ -9,17 +11,39 @@ export const Categories = {
         slug: "mkc-06",
         project_name: "МКЦ-06",
         project_img: "/categories-photos/МКЦ-06.webp",
-        project_desc: "Краткое описание",
+        project_desc: "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
         project_area: "66.3",
-        project_bedrooms: "2",
-        project_bathrooms: "1",
+        project_details: [
+            {
+                label: "Количество спален",
+                render: <>2 шт.</>
+            },
+            {
+                label: "Количество санузлов",
+                render: <>1 шт.</>
+            },
+            {
+                label: "Площадь помещений",
+                render: <>60.4 м<sup>2</sup></>
+            },
+            {
+                label: "Площадь регистрационная",
+                render: <>66.3 м<sup>2</sup></>
+            },
+        ],
         project_price: "5 150 000",
-        small_description: "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
+        small_description: "Уют за городом",
         long_description: "Небольшой и уютный проект, аналог трёхкомнатной квартиры. В компактной планировке уместились помимо гостиной, кухни, 2х спален и санузла - также прачечная и кладовая в кухне! Отлично подойдёт для возрастной пары, которая хочет тишины и уюта за городом, где вторая спальня для гостей или кабинета. Но также популярен у молодых семей.",
         sliderImages: [
-          ""
+          "/images/projects/project-image-3.jpg",
+          "/images/projects/project-image-4.jpg",
+          "/images/projects/project-image-5.jpg",
+          "/images/projects/project-image-3.jpg",
+          "/images/projects/project-image-4.jpg",
+          "/images/projects/project-image-5.jpg",
         ],
-
+        project_seo_title: "МКЦ-06 - Уют за городом. UNIT DV",
+        project_seo_descr: "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи"
       },
 
       {

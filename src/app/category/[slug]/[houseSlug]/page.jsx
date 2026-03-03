@@ -10,6 +10,38 @@ import {productData} from "@/lib/fackData/productData";
 import Feedback from "@/components/section/feedback";
 import React from "react";
 
+export async function generateMetadata({ params }) {
+    const { slug, houseSlug } = params;
+
+    const category = Categories[slug];
+
+    if (!category) {
+        return {};
+    }
+
+    const house = category.houses.find(
+        (item) => item.slug === houseSlug
+    );
+
+    if (!house) {
+        return {};
+    }
+
+    return {
+        title: `${house.project_name} | ${category.title}`,
+        description: house.long_description,
+        openGraph: {
+            title: house.project_name,
+            description: house.long_description,
+            images: [
+                {
+                    url: house.sliderImages?.[0] || "/default-image.jpg",
+                },
+            ],
+        },
+    };
+}
+
 export default async function HousePage({ params }) {
     const { slug, houseSlug } = await params;
 
@@ -52,58 +84,30 @@ export default async function HousePage({ params }) {
                         <div className=" bg-primary py-15 sm:px-[38px] px-5 lg:-mt-[410px] ">
                             <Title
                                 title_text={house.project_name}
-                                className={"text-secondary-foreground mt-10 2sm:text-7xl "}
+                                className={"text-secondary-foreground mt-10 2sm:text-7xl text-white"}
                             />
                             <ul className="pb-7.5 pt-[75px] flex lg:flex-col flex-row flex-wrap lg:flex-nowrap gap-x-7 lg:gap-x-0 gap-7">
-                                <li>
-                                    <strong className="text-secondary-foreground block text-2xl mb-1.5">
-                                        Количество санузлов: {house.project_bedrooms}
-                                    </strong>
-                                </li>
-                                <li>
-                                    <strong className="text-secondary-foreground block text-2xl mb-1.5">
-                                        Количество санузлов: {house.project_bathrooms}
-                                    </strong>
-                                </li>
-                                <li>
-                                    <strong className="text-secondary-foreground block text-2xl mb-1.5">
-                                        Площадь помещений:
-                                    </strong>
-                                    <span className="text-secondary-foreground block">
-                      70.4 м<sup>2</sup>
-                    </span>
-                                </li>
-                                <li>
-                                    <strong className="text-secondary-foreground block text-2xl mb-1.5">
-                                        Площадь регистрационная:
-                                    </strong>
-                                    <span className="text-secondary-foreground block">
-                      75 м<sup>2</sup>
-                    </span>
-                                </li>
-                                <li>
-                                    <strong className="text-secondary-foreground block text-2xl mb-1.5">
-                                        Площадь с крыльцом и террасой:
-                                    </strong>
-                                    <span className="text-secondary-foreground block">
-                      111 м<sup>2</sup>
-                    </span>
-                                </li>
-                                <li>
-                                    <strong className="text-secondary-foreground block text-2xl mb-1.5">
-                                        Площадь регистрационная с крыльцом:
-                                    </strong>
-                                    <span className="text-secondary-foreground block">
-                      84 м<sup>2</sup>
-                    </span>
-                                </li>
+                                {
+                                    house.project_details && house.project_details
+                                        .filter(item => item.render)
+                                        .map((item, index) => (
+                                            <li key={index}>
+                                                <strong className="text-secondary-foreground block text-2xl mb-1.5 text-white">
+                                                    {item.label}:
+                                                </strong>
+                                                <span className="text-secondary-foreground block text-2xl text-white">
+                                                {item.render}
+                                            </span>
+                                            </li>
+                                        ))
+                                }
                             </ul>
                         </div>
                     </div>
                 </div>
 
                 <Calculator />
-                <ProjectSingleSliderOne />
+                <ProjectSingleSliderOne projectImgList={house.sliderImages} />
 
                 <ShopSlider data={productData} />
             </div>

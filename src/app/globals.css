@@ -5,6 +5,11 @@
 html {
   scroll-behavior: smooth;
 }
+
+::selection {
+    background-color: #FBB900; /* Yellow highlight background */
+    color: #000;            /* Black text */
+}
 /* eslint-disable */
 @font-face {
   font-family: "Montserrat-bold";
