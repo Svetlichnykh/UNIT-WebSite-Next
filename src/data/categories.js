@@ -11,10 +11,9 @@ export const Categories = {
         slug: "mkc-06",
         project_name: "МКЦ-06",
         project_img: "/categories-photos/МКЦ-06.webp",
-        project_desc:
-          "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
+        project_desc: "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
         project_area: "66.3",
-          project_bedrooms: 2,
+        project_bedrooms: 2,
         project_details: [
           {
             label: "Количество спален",
@@ -43,15 +42,14 @@ export const Categories = {
         ],
         project_price: "5 150 000",
         small_description: "Уют за городом",
-        long_description:
-          "Небольшой и уютный проект, аналог трёхкомнатной квартиры. В компактной планировке уместились помимо гостиной, кухни, 2х спален и санузла - также прачечная и кладовая в кухне! Отлично подойдёт для возрастной пары, которая хочет тишины и уюта за городом, где вторая спальня для гостей или кабинета. Но также популярен у молодых семей.",
-          bannerImages: [
+        long_description: "Небольшой и уютный проект, аналог трёхкомнатной квартиры. В компактной планировке уместились помимо гостиной, кухни, 2х спален и санузла - также прачечная и кладовая в кухне! Отлично подойдёт для возрастной пары, которая хочет тишины и уюта за городом, где вторая спальня для гостей или кабинета. Но также популярен у молодых семей.",
+        bannerImages: [
               "/house-images/mkc/mkc-06/banner-images/banner-image-1.jpg",
               "/house-images/mkc/mkc-06/banner-images/banner-image-2.jpg",
               "/house-images/mkc/mkc-06/banner-images/banner-image-3.jpg",
               "/house-images/mkc/mkc-06/banner-images/banner-image-4.jpg",
           ],
-          sliderImages: [
+        sliderImages: [
               "/house-images/mkc/mkc-06/slider-images/slider-image-1.jpg",
               "/house-images/mkc/mkc-06/slider-images/slider-image-2.jpg",
               "/house-images/mkc/mkc-06/slider-images/slider-image-3.jpg",
@@ -89,8 +87,7 @@ export const Categories = {
               "/house-images/mkc/mkc-06/slider-images/slider-image-35.jpg",
           ],
         project_seo_title: "МКЦ-06 | Панельно-каркасные дома | UNIT DV",
-        project_seo_descr:
-          "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
+        project_seo_descr: "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
         calculatorData: {
           base_price: 5150000,
           available_roofs: [{ id: "hip", label: "Вальмовая кровля" }],
@@ -102,7 +99,7 @@ export const Categories = {
               right: "/house-images/mkc/mkc-06/views/right.png",
             },
           },
-            planImage: "/house-images/mkc/mkc-06/layout/layout.png",
+          planImage: "/house-images/mkc/mkc-06/layout/layout.png",
           rooms: [
 
               {
@@ -323,6 +320,227 @@ export const Categories = {
         project_area: "75",
         project_bedrooms: "3",
         project_price: "5 550 000",
+          calculatorData: {
+              base_price: 5150000,
+              available_roofs: [{ id: "hip", label: "Вальмовая кровля" }],
+              roofImages: {
+                  hip: {
+                      back: "/house-images/mkc/mkc-06/views/back.png",
+                      left: "/house-images/mkc/mkc-06/views/left.png",
+                      front: "/house-images/mkc/mkc-06/views/front.png",
+                      right: "/house-images/mkc/mkc-06/views/right.png",
+                  },
+              },
+              planImage: "/house-images/mkc/mkc-06/layout/layout.png",
+              rooms: [
+
+                  {
+                      id: "kitchen",
+                      label: "Кухня-Гостиная",
+                      area: "9.2 + 14.1 м²",
+                      polygon: [
+                          [18.792, 10.318],
+                          [65.542, 10.318],
+                          [65.542, 54.227],
+                          [43, 54.227],
+                          [43, 31.318],
+                          [41.917, 31.318],
+                          [41.917, 39.273],
+                          [18.792, 39.273],
+                      ],
+                      images: [
+                          "/img/renders/kitchen__01.jpg",
+                          "/img/renders/kitchen__02.jpg",
+                          "/img/renders/kitchen__03.jpg",
+                          "/img/renders/kitchen__04.jpg",
+                          "/img/renders/kitchen__05.jpg",
+                          "/img/renders/kitchen__06.jpg",
+                          "/img/renders/kitchen__07.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__kitchen__01.png",
+                          "/img/thumbnail/thamb__kitchen__02.png",
+                          "/img/thumbnail/thamb__kitchen__03.png",
+                          "/img/thumbnail/thamb__kitchen__04.png",
+                          "/img/thumbnail/thamb__kitchen__05.png",
+                          "/img/thumbnail/thamb__kitchen__06.png",
+                          "/img/thumbnail/thamb__kitchen__07.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_one",
+                      label: "Детская",
+                      area: "10 м²",
+                      polygon: [
+                          [43, 55.591],
+                          [65.542, 55.591],
+                          [65.542, 87.727],
+                          [43, 87.727],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_one__01.jpg",
+                          "/img/renders/bedroom_one__02.jpg",
+                          "/img/renders/bedroom_one__03.jpg",
+                          "/img/renders/bedroom_one__04.jpg",
+                          "/img/renders/bedroom_one__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_one__01.png",
+                          "/img/thumbnail/thamb__bedroom_one__02.png",
+                          "/img/thumbnail/thamb__bedroom_one__03.png",
+                          "/img/thumbnail/thamb__bedroom_one__04.png",
+                          "/img/thumbnail/thamb__bedroom_one__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_two",
+                      label: "Спальня",
+                      area: "10.3 м²",
+                      polygon: [
+                          [67.583, 10.318],
+                          [89.708, 10.318],
+                          [89.708, 44.318],
+                          [67.583, 44.318],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_two__01.jpg",
+                          "/img/renders/bedroom_two__02.jpg",
+                          "/img/renders/bedroom_two__03.jpg",
+                          "/img/renders/bedroom_two__04.jpg",
+                          "/img/renders/bedroom_two__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_two__01.png",
+                          "/img/thumbnail/thamb__bedroom_two__02.png",
+                          "/img/thumbnail/thamb__bedroom_two__03.png",
+                          "/img/thumbnail/thamb__bedroom_two__04.png",
+                          "/img/thumbnail/thamb__bedroom_two__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_three",
+                      label: "Вторая спальня",
+                      area: "12.8 м²",
+                      polygon: [
+                          [67.583, 45.682],
+                          [89.708, 45.682],
+                          [89.708, 87.727],
+                          [67.583, 87.727],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_three__01.jpg",
+                          "/img/renders/bedroom_three__02.jpg",
+                          "/img/renders/bedroom_three__03.jpg",
+                          "/img/renders/bedroom_three__04.jpg",
+                          "/img/renders/bedroom_three__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_three__01.png",
+                          "/img/thumbnail/thamb__bedroom_three__02.png",
+                          "/img/thumbnail/thamb__bedroom_three__03.png",
+                          "/img/thumbnail/thamb__bedroom_three__04.png",
+                          "/img/thumbnail/thamb__bedroom_three__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "hall",
+                      label: "Коридор",
+                      area: "3.9 м²",
+                      polygon: [
+                          [31.667, 40.636],
+                          [41, 40.636],
+                          [41, 70.773],
+                          [31.667, 70.773],
+                      ],
+                      images: [
+                          "/img/renders/hall__01.jpg",
+                          "/img/renders/hall__02.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__hall__01.png",
+                          "/img/thumbnail/thamb__hall__02.png",
+                      ],
+                  },
+
+                  {
+                      id: "tambur",
+                      label: "Тамбур",
+                      area: "2 м²",
+                      polygon: [
+                          [18.792, 40.636],
+                          [30.417, 40.636],
+                          [30.417, 53],
+                          [18.792, 53],
+                      ],
+                      images: [
+                          "/img/renders/tambur__01.jpg",
+                          "/img/renders/tambur__02.jpg",
+                          "/img/renders/tambur__03.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__tambur__01.png",
+                          "/img/thumbnail/thamb__tambur__02.png",
+                          "/img/thumbnail/thamb__tambur__03.png",
+                      ],
+                  },
+
+                  {
+                      id: "tech",
+                      label: "Тех. помещение",
+                      area: "2.6 м²",
+                      polygon: [
+                          [18.792, 54.364],
+                          [30.417, 54.364],
+                          [30.417, 70.773],
+                          [18.792, 70.773],
+                      ],
+                      images: [
+                          "/img/renders/tech__01.jpg",
+                          "/img/renders/tech__02.jpg",
+                          "/img/renders/tech__03.jpg",
+                          "/img/renders/tech__04.jpg",
+                          "/img/renders/tech__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__tech__01.png",
+                          "/img/thumbnail/thamb__tech__02.png",
+                          "/img/thumbnail/thamb__tech__03.png",
+                          "/img/thumbnail/thamb__tech__04.png",
+                          "/img/thumbnail/thamb__tech__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "toilet",
+                      label: "Туалет",
+                      area: "4.7 м²",
+                      polygon: [
+                          [18.792, 72.182],
+                          [40.917, 72.182],
+                          [40.917, 87.728],
+                          [18.792, 87.728],
+                      ],
+                      images: [
+                          "/img/renders/toilet__01.jpg",
+                          "/img/renders/toilet__02.jpg",
+                          "/img/renders/toilet__03.jpg",
+                          "/img/renders/toilet__04.jpg",
+                          "/img/renders/toilet__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__toilet__01.png",
+                          "/img/thumbnail/thamb__toilet__02.png",
+                          "/img/thumbnail/thamb__toilet__03.png",
+                          "/img/thumbnail/thamb__toilet__04.png",
+                          "/img/thumbnail/thamb__toilet__05.png",
+                      ],
+                  },
+              ],
+          },
       },
       {
         id: 3,
@@ -333,6 +551,227 @@ export const Categories = {
         project_area: "86.5",
         project_bedrooms: "3",
         project_price: "6 070 000",
+          calculatorData: {
+              base_price: 5150000,
+              available_roofs: [{ id: "hip", label: "Вальмовая кровля" }],
+              roofImages: {
+                  hip: {
+                      back: "/house-images/mkc/mkc-06/views/back.png",
+                      left: "/house-images/mkc/mkc-06/views/left.png",
+                      front: "/house-images/mkc/mkc-06/views/front.png",
+                      right: "/house-images/mkc/mkc-06/views/right.png",
+                  },
+              },
+              planImage: "/house-images/mkc/mkc-06/layout/layout.png",
+              rooms: [
+
+                  {
+                      id: "kitchen",
+                      label: "Кухня-Гостиная",
+                      area: "9.2 + 14.1 м²",
+                      polygon: [
+                          [18.792, 10.318],
+                          [65.542, 10.318],
+                          [65.542, 54.227],
+                          [43, 54.227],
+                          [43, 31.318],
+                          [41.917, 31.318],
+                          [41.917, 39.273],
+                          [18.792, 39.273],
+                      ],
+                      images: [
+                          "/img/renders/kitchen__01.jpg",
+                          "/img/renders/kitchen__02.jpg",
+                          "/img/renders/kitchen__03.jpg",
+                          "/img/renders/kitchen__04.jpg",
+                          "/img/renders/kitchen__05.jpg",
+                          "/img/renders/kitchen__06.jpg",
+                          "/img/renders/kitchen__07.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__kitchen__01.png",
+                          "/img/thumbnail/thamb__kitchen__02.png",
+                          "/img/thumbnail/thamb__kitchen__03.png",
+                          "/img/thumbnail/thamb__kitchen__04.png",
+                          "/img/thumbnail/thamb__kitchen__05.png",
+                          "/img/thumbnail/thamb__kitchen__06.png",
+                          "/img/thumbnail/thamb__kitchen__07.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_one",
+                      label: "Детская",
+                      area: "10 м²",
+                      polygon: [
+                          [43, 55.591],
+                          [65.542, 55.591],
+                          [65.542, 87.727],
+                          [43, 87.727],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_one__01.jpg",
+                          "/img/renders/bedroom_one__02.jpg",
+                          "/img/renders/bedroom_one__03.jpg",
+                          "/img/renders/bedroom_one__04.jpg",
+                          "/img/renders/bedroom_one__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_one__01.png",
+                          "/img/thumbnail/thamb__bedroom_one__02.png",
+                          "/img/thumbnail/thamb__bedroom_one__03.png",
+                          "/img/thumbnail/thamb__bedroom_one__04.png",
+                          "/img/thumbnail/thamb__bedroom_one__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_two",
+                      label: "Спальня",
+                      area: "10.3 м²",
+                      polygon: [
+                          [67.583, 10.318],
+                          [89.708, 10.318],
+                          [89.708, 44.318],
+                          [67.583, 44.318],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_two__01.jpg",
+                          "/img/renders/bedroom_two__02.jpg",
+                          "/img/renders/bedroom_two__03.jpg",
+                          "/img/renders/bedroom_two__04.jpg",
+                          "/img/renders/bedroom_two__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_two__01.png",
+                          "/img/thumbnail/thamb__bedroom_two__02.png",
+                          "/img/thumbnail/thamb__bedroom_two__03.png",
+                          "/img/thumbnail/thamb__bedroom_two__04.png",
+                          "/img/thumbnail/thamb__bedroom_two__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_three",
+                      label: "Вторая спальня",
+                      area: "12.8 м²",
+                      polygon: [
+                          [67.583, 45.682],
+                          [89.708, 45.682],
+                          [89.708, 87.727],
+                          [67.583, 87.727],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_three__01.jpg",
+                          "/img/renders/bedroom_three__02.jpg",
+                          "/img/renders/bedroom_three__03.jpg",
+                          "/img/renders/bedroom_three__04.jpg",
+                          "/img/renders/bedroom_three__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_three__01.png",
+                          "/img/thumbnail/thamb__bedroom_three__02.png",
+                          "/img/thumbnail/thamb__bedroom_three__03.png",
+                          "/img/thumbnail/thamb__bedroom_three__04.png",
+                          "/img/thumbnail/thamb__bedroom_three__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "hall",
+                      label: "Коридор",
+                      area: "3.9 м²",
+                      polygon: [
+                          [31.667, 40.636],
+                          [41, 40.636],
+                          [41, 70.773],
+                          [31.667, 70.773],
+                      ],
+                      images: [
+                          "/img/renders/hall__01.jpg",
+                          "/img/renders/hall__02.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__hall__01.png",
+                          "/img/thumbnail/thamb__hall__02.png",
+                      ],
+                  },
+
+                  {
+                      id: "tambur",
+                      label: "Тамбур",
+                      area: "2 м²",
+                      polygon: [
+                          [18.792, 40.636],
+                          [30.417, 40.636],
+                          [30.417, 53],
+                          [18.792, 53],
+                      ],
+                      images: [
+                          "/img/renders/tambur__01.jpg",
+                          "/img/renders/tambur__02.jpg",
+                          "/img/renders/tambur__03.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__tambur__01.png",
+                          "/img/thumbnail/thamb__tambur__02.png",
+                          "/img/thumbnail/thamb__tambur__03.png",
+                      ],
+                  },
+
+                  {
+                      id: "tech",
+                      label: "Тех. помещение",
+                      area: "2.6 м²",
+                      polygon: [
+                          [18.792, 54.364],
+                          [30.417, 54.364],
+                          [30.417, 70.773],
+                          [18.792, 70.773],
+                      ],
+                      images: [
+                          "/img/renders/tech__01.jpg",
+                          "/img/renders/tech__02.jpg",
+                          "/img/renders/tech__03.jpg",
+                          "/img/renders/tech__04.jpg",
+                          "/img/renders/tech__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__tech__01.png",
+                          "/img/thumbnail/thamb__tech__02.png",
+                          "/img/thumbnail/thamb__tech__03.png",
+                          "/img/thumbnail/thamb__tech__04.png",
+                          "/img/thumbnail/thamb__tech__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "toilet",
+                      label: "Туалет",
+                      area: "4.7 м²",
+                      polygon: [
+                          [18.792, 72.182],
+                          [40.917, 72.182],
+                          [40.917, 87.728],
+                          [18.792, 87.728],
+                      ],
+                      images: [
+                          "/img/renders/toilet__01.jpg",
+                          "/img/renders/toilet__02.jpg",
+                          "/img/renders/toilet__03.jpg",
+                          "/img/renders/toilet__04.jpg",
+                          "/img/renders/toilet__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__toilet__01.png",
+                          "/img/thumbnail/thamb__toilet__02.png",
+                          "/img/thumbnail/thamb__toilet__03.png",
+                          "/img/thumbnail/thamb__toilet__04.png",
+                          "/img/thumbnail/thamb__toilet__05.png",
+                      ],
+                  },
+              ],
+          },
       },
       {
         id: 4,
@@ -343,6 +782,227 @@ export const Categories = {
         project_area: "105.5",
         project_bedrooms: "3",
         project_price: "100 000",
+          calculatorData: {
+              base_price: 5150000,
+              available_roofs: [{ id: "hip", label: "Вальмовая кровля" }],
+              roofImages: {
+                  hip: {
+                      back: "/house-images/mkc/mkc-06/views/back.png",
+                      left: "/house-images/mkc/mkc-06/views/left.png",
+                      front: "/house-images/mkc/mkc-06/views/front.png",
+                      right: "/house-images/mkc/mkc-06/views/right.png",
+                  },
+              },
+              planImage: "/house-images/mkc/mkc-06/layout/layout.png",
+              rooms: [
+
+                  {
+                      id: "kitchen",
+                      label: "Кухня-Гостиная",
+                      area: "9.2 + 14.1 м²",
+                      polygon: [
+                          [18.792, 10.318],
+                          [65.542, 10.318],
+                          [65.542, 54.227],
+                          [43, 54.227],
+                          [43, 31.318],
+                          [41.917, 31.318],
+                          [41.917, 39.273],
+                          [18.792, 39.273],
+                      ],
+                      images: [
+                          "/img/renders/kitchen__01.jpg",
+                          "/img/renders/kitchen__02.jpg",
+                          "/img/renders/kitchen__03.jpg",
+                          "/img/renders/kitchen__04.jpg",
+                          "/img/renders/kitchen__05.jpg",
+                          "/img/renders/kitchen__06.jpg",
+                          "/img/renders/kitchen__07.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__kitchen__01.png",
+                          "/img/thumbnail/thamb__kitchen__02.png",
+                          "/img/thumbnail/thamb__kitchen__03.png",
+                          "/img/thumbnail/thamb__kitchen__04.png",
+                          "/img/thumbnail/thamb__kitchen__05.png",
+                          "/img/thumbnail/thamb__kitchen__06.png",
+                          "/img/thumbnail/thamb__kitchen__07.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_one",
+                      label: "Детская",
+                      area: "10 м²",
+                      polygon: [
+                          [43, 55.591],
+                          [65.542, 55.591],
+                          [65.542, 87.727],
+                          [43, 87.727],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_one__01.jpg",
+                          "/img/renders/bedroom_one__02.jpg",
+                          "/img/renders/bedroom_one__03.jpg",
+                          "/img/renders/bedroom_one__04.jpg",
+                          "/img/renders/bedroom_one__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_one__01.png",
+                          "/img/thumbnail/thamb__bedroom_one__02.png",
+                          "/img/thumbnail/thamb__bedroom_one__03.png",
+                          "/img/thumbnail/thamb__bedroom_one__04.png",
+                          "/img/thumbnail/thamb__bedroom_one__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_two",
+                      label: "Спальня",
+                      area: "10.3 м²",
+                      polygon: [
+                          [67.583, 10.318],
+                          [89.708, 10.318],
+                          [89.708, 44.318],
+                          [67.583, 44.318],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_two__01.jpg",
+                          "/img/renders/bedroom_two__02.jpg",
+                          "/img/renders/bedroom_two__03.jpg",
+                          "/img/renders/bedroom_two__04.jpg",
+                          "/img/renders/bedroom_two__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_two__01.png",
+                          "/img/thumbnail/thamb__bedroom_two__02.png",
+                          "/img/thumbnail/thamb__bedroom_two__03.png",
+                          "/img/thumbnail/thamb__bedroom_two__04.png",
+                          "/img/thumbnail/thamb__bedroom_two__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "bedroom_three",
+                      label: "Вторая спальня",
+                      area: "12.8 м²",
+                      polygon: [
+                          [67.583, 45.682],
+                          [89.708, 45.682],
+                          [89.708, 87.727],
+                          [67.583, 87.727],
+                      ],
+                      images: [
+                          "/img/renders/bedroom_three__01.jpg",
+                          "/img/renders/bedroom_three__02.jpg",
+                          "/img/renders/bedroom_three__03.jpg",
+                          "/img/renders/bedroom_three__04.jpg",
+                          "/img/renders/bedroom_three__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__bedroom_three__01.png",
+                          "/img/thumbnail/thamb__bedroom_three__02.png",
+                          "/img/thumbnail/thamb__bedroom_three__03.png",
+                          "/img/thumbnail/thamb__bedroom_three__04.png",
+                          "/img/thumbnail/thamb__bedroom_three__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "hall",
+                      label: "Коридор",
+                      area: "3.9 м²",
+                      polygon: [
+                          [31.667, 40.636],
+                          [41, 40.636],
+                          [41, 70.773],
+                          [31.667, 70.773],
+                      ],
+                      images: [
+                          "/img/renders/hall__01.jpg",
+                          "/img/renders/hall__02.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__hall__01.png",
+                          "/img/thumbnail/thamb__hall__02.png",
+                      ],
+                  },
+
+                  {
+                      id: "tambur",
+                      label: "Тамбур",
+                      area: "2 м²",
+                      polygon: [
+                          [18.792, 40.636],
+                          [30.417, 40.636],
+                          [30.417, 53],
+                          [18.792, 53],
+                      ],
+                      images: [
+                          "/img/renders/tambur__01.jpg",
+                          "/img/renders/tambur__02.jpg",
+                          "/img/renders/tambur__03.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__tambur__01.png",
+                          "/img/thumbnail/thamb__tambur__02.png",
+                          "/img/thumbnail/thamb__tambur__03.png",
+                      ],
+                  },
+
+                  {
+                      id: "tech",
+                      label: "Тех. помещение",
+                      area: "2.6 м²",
+                      polygon: [
+                          [18.792, 54.364],
+                          [30.417, 54.364],
+                          [30.417, 70.773],
+                          [18.792, 70.773],
+                      ],
+                      images: [
+                          "/img/renders/tech__01.jpg",
+                          "/img/renders/tech__02.jpg",
+                          "/img/renders/tech__03.jpg",
+                          "/img/renders/tech__04.jpg",
+                          "/img/renders/tech__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__tech__01.png",
+                          "/img/thumbnail/thamb__tech__02.png",
+                          "/img/thumbnail/thamb__tech__03.png",
+                          "/img/thumbnail/thamb__tech__04.png",
+                          "/img/thumbnail/thamb__tech__05.png",
+                      ],
+                  },
+
+                  {
+                      id: "toilet",
+                      label: "Туалет",
+                      area: "4.7 м²",
+                      polygon: [
+                          [18.792, 72.182],
+                          [40.917, 72.182],
+                          [40.917, 87.728],
+                          [18.792, 87.728],
+                      ],
+                      images: [
+                          "/img/renders/toilet__01.jpg",
+                          "/img/renders/toilet__02.jpg",
+                          "/img/renders/toilet__03.jpg",
+                          "/img/renders/toilet__04.jpg",
+                          "/img/renders/toilet__05.jpg",
+                      ],
+                      thumbnails: [
+                          "/img/thumbnail/thamb__toilet__01.png",
+                          "/img/thumbnail/thamb__toilet__02.png",
+                          "/img/thumbnail/thamb__toilet__03.png",
+                          "/img/thumbnail/thamb__toilet__04.png",
+                          "/img/thumbnail/thamb__toilet__05.png",
+                      ],
+                  },
+              ],
+          },
       },
     ],
   },
