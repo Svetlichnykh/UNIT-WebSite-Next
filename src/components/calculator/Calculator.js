@@ -1594,7 +1594,7 @@ const Calculator = ({ calculatorData }) => {
 
 
 
-              {rooms.map((room) => (
+              {rooms && rooms.map((room) => (
                 <div
                   key={room.id}
                   className={`visualization-scheme area ${

@@ -46,7 +46,7 @@ const ProjectSingleS = ({ projectImgList = null }) => {
               width={600}
               height={400}
               loading="lazy"
-              className="w-full h-full min-h-[250px] max-h-[250px] md:min-h-16 md:max-h-full object-cover"
+              className="w-full h-full min-h-[250px] max-h-[250px] md:min-h-16 md:max-h-[650px] object-cover"
             />
           </SwiperSlide>
         ))}

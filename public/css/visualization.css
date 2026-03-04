@@ -28,7 +28,7 @@
   position: relative;
 }
 .visualization-scheme {
-  background-image: url("../img/plan_08_legacy.png");
+    background-color: rgba(0, 0, 0, 0);
   background-size: cover;
   width: 100%;
   aspect-ratio: 12 / 11;
@@ -37,10 +37,10 @@
 
 .area:hover {
   cursor: pointer;
-  filter: sepia(0.9) brightness(0.95);
+  background-color: rgba(255, 219, 0, 0.5);
 }
 .area.active {
-  filter: sepia(0.9) brightness(0.95);
+    background-color: rgba(255, 219, 0, 0.5);
 }
 
 .area-kitchen {
