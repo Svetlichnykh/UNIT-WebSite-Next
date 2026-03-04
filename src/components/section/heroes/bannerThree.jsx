@@ -5,7 +5,14 @@ import ButtonFill from "@/components/ui/buttons/buttonFill";
 import RightArrow from "@/assets/icons/rightArrow";
 import BannerVideo from "@/components/section/heroes/BannerVideo";
 
-const BannerThree = ({ text, textArray, button, buttonText, buttonHref, video }) => {
+const BannerThree = ({
+  text,
+  textArray,
+  button,
+  buttonText,
+  buttonHref,
+  video,
+}) => {
   return (
     <div className="relative overflow-x-hidden">
       <div className="bg-hero-section bg-no-repeat h-screen bg-center bg-cover">

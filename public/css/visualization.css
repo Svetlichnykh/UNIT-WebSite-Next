@@ -136,3 +136,16 @@
     order: 2;
   }
 }
+
+.visualization-slider {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  inset: 0;
+}
+
+.visualization-slider.active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}

@@ -7,8 +7,8 @@ html {
 }
 
 ::selection {
-    background-color: #FBB900; /* Yellow highlight background */
-    color: #000;            /* Black text */
+  background-color: #fbb900; /* Yellow highlight background */
+  color: #000; /* Black text */
 }
 /* eslint-disable */
 @font-face {

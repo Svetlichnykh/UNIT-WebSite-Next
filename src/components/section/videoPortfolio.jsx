@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import RightArrow from "@/assets/icons/rightArrow";
@@ -60,7 +60,10 @@ const VideoPortfolio = ({ text_muted, bg_muted, after_bg_muted }) => {
                 </ButtonOutline>
               </Link>
             </div>
-            <VideoPlay img={"/previewImage.png"} videoSrc="/UNIT-video-process.mp4" />
+            <VideoPlay
+              img={"/previewImage.png"}
+              videoSrc="/UNIT-video-process.mp4"
+            />
           </div>
         </div>
       </div>

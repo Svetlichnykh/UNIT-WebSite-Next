@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import React from "react";
 
-const BannerVideo = ({video}) => {
+const BannerVideo = ({ video }) => {
   return (
     <video
       autoPlay

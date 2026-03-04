@@ -352,25 +352,6 @@ const terraceBlock = {
   ],
 };
 
-const BASE_PRICE = 5_150_000;
-
-const viewsOrder = ["back", "left", "front", "right"];
-
-const roofImages = {
-  hip: {
-    back: "/img/views/view_08_back.png",
-    left: "/img/views/view_08_left.png",
-    front: "/img/views/view_08_front.png",
-    right: "/img/views/view_08_right.png",
-  },
-  gable: {
-    back: "/img/views/view_09_back.png",
-    left: "/img/views/view_09_left.png",
-    front: "/img/views/view_09_front.png",
-    right: "/img/views/view_09_right.png",
-  },
-};
-
 const HOUSE_IMAGES = [
   // default
   {
@@ -911,37 +892,31 @@ const CHOICE_IMAGES = [
   },
 ];
 
-const AVAILABLE_ROOFS = [
-    { id: "hip", label: "Вальмовая кровля" },
+const Calculator = ({ calculatorData }) => {
 
-];
-
-const Calculator = () => {
-  // разворачиваем второй массив в плоский
+  const roofImages = calculatorData.roofImages;
+  const AVAILABLE_ROOFS = calculatorData.available_roofs;
+  const BASE_PRICE = calculatorData.base_price;
+  const viewsOrder = ["back", "left", "front", "right"];
   const flatCalculatorGroups = calculatorGroups.flatMap((col) =>
     col.sections.flatMap((section) => section.blocks),
   );
   const [activeTab, setActiveTab] = useState("fasad");
-  // helper для -gable
   const withRoof = (id) => (currentRoof === "gable" ? `${id}-gable` : id);
-  const [activeSlider, setActiveSlider] = useState(4); // по умолчанию кухня (как у тебя showSlider(4))
-  const slidersRef = useRef([]);
+  const rooms = calculatorData.rooms;
+  const [activeRoom, setActiveRoom] = useState(rooms[0].id);
   const containerRef = useRef(null);
   const frameRef = useRef(null);
   const [currentView, setCurrentView] = useState("front");
   const [currentRoof, setCurrentRoof] = useState(AVAILABLE_ROOFS[0].id);
-  // inputsState: { id: { id, value, checked, disabled } }
   const [inputs, setInputs] = useState({});
-  // baseValues: original numbers (to recalc relations each time)
   const [baseValues, setBaseValues] = useState({});
-  // requirements map (если нужно, берем из данных — в ваших JSON-ах нет require, но поддержка оставлена)
   const [requirementsMap, setRequirementsMap] = useState({});
   const [excludeMap, setExcludeMap] = useState({});
-  const isWindowsLaminated =
-    inputs["windows-2"]?.checked || inputs["windows-3"]?.checked;
+  const isWindowsLaminated = inputs["windows-2"]?.checked || inputs["windows-3"]?.checked;
   const isPlankenEnabled = inputs["fasad-planken"]?.checked;
   const excludes = {};
-  // объединяем всё в один массив
+  const [hasInteracted, setHasInteracted] = useState(false);
   const allBlocks = [terraceBlock, ...blocksData, ...flatCalculatorGroups];
 
   useEffect(() => {
@@ -950,13 +925,14 @@ const Calculator = () => {
     const initSlider = async () => {
       const { tns } = await import("tiny-slider/src/tiny-slider");
 
-      slidersRef.current.forEach((sliderBlock) => {
-        if (!sliderBlock) return;
+      const sliders = document.querySelectorAll(".visual-slider");
 
-        const slider = sliderBlock.querySelector(".visual-slider");
-        const thumbs = sliderBlock.querySelector(".visual-slider__thumbnails");
+      sliders.forEach((slider) => {
+        if (slider.dataset.initialized) return;
 
-        if (!slider || slider.dataset.initialized) return;
+        const thumbs = slider.parentElement.querySelector(
+          ".visual-slider__thumbnails",
+        );
 
         tns({
           container: slider,
@@ -968,35 +944,6 @@ const Calculator = () => {
           navContainer: thumbs,
           navAsThumbnails: true,
           autoplayButtonOutput: false,
-        });
-
-        if (!slidersRef.current.length) return;
-
-        slidersRef.current.forEach((sliderBlock) => {
-          if (!sliderBlock) return;
-
-          const slider = sliderBlock.querySelector(".visual-slider");
-          const thumbs = sliderBlock.querySelector(
-            ".visual-slider__thumbnails",
-          );
-
-          if (!slider || slider.dataset.initialized) return;
-
-          if (tns) {
-          }
-          const instance = tns({
-            container: slider,
-            items: 1,
-            slideBy: 1,
-            mouseDrag: true,
-            controls: false,
-            nav: true,
-            navContainer: thumbs,
-            navAsThumbnails: true,
-            autoplayButtonOutput: false,
-          });
-
-          slider.dataset.initialized = "true";
         });
 
         slider.dataset.initialized = "true";
@@ -1615,144 +1562,89 @@ const Calculator = () => {
           <div className="visualization-block">
             <div className="visualization-scheme__wrapper">
               <div
-                className="visualization-scheme area area-bedroom-1"
-                data-tooltip="Детская\n( 10 м² )"
-                onClick={() => setActiveSlider(0)}
-              ></div>
-
-              <div
-                className="visualization-scheme area area-bedroom-2"
-                data-tooltip="Спальня\n( 10.3 м² )"
-                onClick={() => setActiveSlider(1)}
-              ></div>
-
-              <div
-                className="visualization-scheme area area-bedroom-3"
-                data-tooltip="Вторая спальня\n( 12.8 м² )"
-                onClick={() => setActiveSlider(2)}
-              ></div>
-
-              <div
-                className="visualization-scheme area area-hall"
-                data-tooltip="Коридор\n( 3.9 м² )"
-                onClick={() => setActiveSlider(3)}
-              ></div>
-
-              <div
-                className="visualization-scheme area area-kitchen"
-                data-tooltip="Кухня-Гостиная\n( 9.2 + 14.1 м² )"
-                onClick={() => setActiveSlider(4)}
-              ></div>
-
-              <div
-                className="visualization-scheme area area-tambur"
-                data-tooltip="Тамбур\n( 2 м² )"
-                onClick={() => setActiveSlider(5)}
-              ></div>
-
-              <div
-                className="visualization-scheme area area-tech"
-                data-tooltip="Тех. помещение\n( 2.6 м² )"
-                onClick={() => setActiveSlider(6)}
-              ></div>
-
-              <div
-                className="visualization-scheme area area-toilet"
-                data-tooltip="Туалет\n( 4.7 м² )"
-                onClick={() => setActiveSlider(7)}
-              ></div>
-
-              <div className="visualization-scheme"></div>
-
-              <nav
-                className="home-plan__nav"
-                aria-label="Навигация по плану дома"
+                className="visualization-scheme"
+                style={{
+                  backgroundImage: `url(${calculatorData.planImage})`,
+                }}
               >
-                {viewsOrder.map((view) => (
-                  <button
-                    key={view}
-                    className={`home-plan__arrow home-plan__arrow--${view} ${
-                      currentView === view ? "home-plan__arrow--active" : ""
-                    }`}
-                    onClick={() => setCurrentView(view)}
+                  <nav
+                      className="home-plan__nav"
+                      aria-label="Навигация по плану дома"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 42 36"
-                      width="42"
-                      height="36"
-                    >
-                      <path d="M21 36L41.7846 0H0.215393L21 36Z" />
-                    </svg>
-                  </button>
-                ))}
-              </nav>
+                      {viewsOrder.map((view) => (
+                          <button
+                              key={view}
+                              className={`home-plan__arrow home-plan__arrow--${view} ${
+                                  currentView === view ? "home-plan__arrow--active" : ""
+                              }`}
+                              onClick={() => setCurrentView(view)}
+                          >
+                              <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 42 36"
+                                  width="42"
+                                  height="36"
+                              >
+                                  <path d="M21 36L41.7846 0H0.215393L21 36Z" />
+                              </svg>
+                          </button>
+                      ))}
+                  </nav>
+              </div>
+
+
+
+              {rooms.map((room) => (
+                <div
+                  key={room.id}
+                  className={`visualization-scheme area ${
+                    hasInteracted && activeRoom === room.id ? "active" : ""
+                  }`}
+                  style={{
+                    clipPath: `polygon(${room.polygon
+                      .map(([x, y]) => `${x}% ${y}%`)
+                      .join(",")})`,
+                  }}
+                  data-tooltip={`${room.label}\n( ${room.area} )`}
+                  onClick={() => {
+                    setActiveRoom(room.id);
+                    setHasInteracted(true);
+                  }}
+                />
+              ))}
             </div>
 
             <div className="visualization-sliders__wrapper">
-              {[
-                "bedroom_one",
-                "bedroom_two",
-                "bedroom_three",
-                "hall",
-                "kitchen",
-                "tambur",
-                "tech",
-                "toilet",
-              ].map((room, index) => (
+              {rooms.map((room) => (
                 <div
-                  key={room}
-                  className="visualization-slider"
-                  style={{ display: activeSlider === index ? "block" : "none" }}
-                  ref={(el) => (slidersRef.current[index] = el)}
+                  key={room.id}
+                  className={`visualization-slider ${
+                    activeRoom === room.id ? "active" : ""
+                  }`}
                 >
                   <div className="visual-slider">
-                    {Array.from(
-                      {
-                        length:
-                          room === "hall"
-                            ? 2
-                            : room === "tambur"
-                              ? 3
-                              : room === "kitchen"
-                                ? 7
-                                : 5,
-                      },
-                      (_, i) => (
-                        <Image
-                          key={i}
-                          src={`/img/renders/${room}__0${i + 1}.jpg`}
-                          alt=""
-                          className="slider__slide"
-                          width={400}
-                          height={400}
-                        />
-                      ),
-                    )}
+                    {room.images.map((src, i) => (
+                      <Image
+                        key={i}
+                        src={src}
+                        alt={room.label}
+                        width={400}
+                        height={400}
+                        className="slider__slide"
+                      />
+                    ))}
                   </div>
 
                   <div className="visual-slider__thumbnails">
-                    {Array.from(
-                      {
-                        length:
-                          room === "hall"
-                            ? 2
-                            : room === "tambur"
-                              ? 3
-                              : room === "kitchen"
-                                ? 7
-                                : 5,
-                      },
-                      (_, i) => (
-                        <Image
-                          key={i}
-                          src={`/img/thumbnail/thamb__${room}__0${i + 1}.png`}
-                          alt=""
-                          width={400}
-                          height={400}
-                        />
-                      ),
-                    )}
+                    {room.thumbnails.map((src, i) => (
+                      <Image
+                        key={i}
+                        src={src}
+                        alt={room.label}
+                        width={120}
+                        height={120}
+                      />
+                    ))}
                   </div>
                 </div>
               ))}
@@ -1760,24 +1652,24 @@ const Calculator = () => {
           </div>
         </div>
       </section>
-        <div className="roof-switch">
-            {AVAILABLE_ROOFS.map((roof) => (
-                <button
-                    key={roof.id}
-                    className={`roof-switch__btn ${
-                        currentRoof === roof.id ? "is-active" : ""
-                    }`}
-                    onClick={() => {
-                        if (AVAILABLE_ROOFS.length > 1) {
-                            setCurrentRoof(roof.id);
-                        }
-                    }}
-                    disabled={AVAILABLE_ROOFS.length === 1}
-                >
-                    {roof.label}
-                </button>
-            ))}
-        </div>
+      <div className="roof-switch">
+        {AVAILABLE_ROOFS.map((roof) => (
+          <button
+            key={roof.id}
+            className={`roof-switch__btn ${
+              currentRoof === roof.id ? "is-active" : ""
+            }`}
+            onClick={() => {
+              if (AVAILABLE_ROOFS.length > 1) {
+                setCurrentRoof(roof.id);
+              }
+            }}
+            disabled={AVAILABLE_ROOFS.length === 1}
+          >
+            {roof.label}
+          </button>
+        ))}
+      </div>
 
       <section className="section sect-views">
         <div className="section__inner">

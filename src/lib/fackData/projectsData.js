@@ -1,4 +1,3 @@
-
 import special_motel from "@/assets/images/special-motel.jpg";
 import special_house from "@/assets/images/special-house.jpg";
 import special_pension from "@/assets/images/special-pension.jpg";
@@ -16,7 +15,7 @@ export const projectsData = [
     area: "2 этажа",
     project_year: "910 м²",
     project_type: "Гостиничный бизнес",
-    link: "/project-single"
+    link: "/project-single",
   },
 
   {
@@ -29,7 +28,7 @@ export const projectsData = [
     area: "3 этажа",
     project_year: "476 м²",
     project_type: "Девелопмент",
-    link: "/project-single"
+    link: "/project-single",
   },
 
   {
@@ -42,7 +41,7 @@ export const projectsData = [
     area: "1 этаж",
     project_year: "163 м²",
     project_type: "Социальное",
-    link: "/project-single"
+    link: "/project-single",
   },
 
   {
@@ -55,19 +54,19 @@ export const projectsData = [
     area: "1 этаж",
     project_year: "69 м²",
     project_type: "Социальное",
-    link: "/project-single"
+    link: "/project-single",
   },
 
-    {
-        id: 5,
-        project_name: "Дуплекс",
-        project_img: special_duplex,
-        project_desc:
-            "Идеально подходит для туристических комплексов, арендного бизнеса или точечной застройки частного сектора.",
-        client: "2 квартиры",
-        area: "1 этаж",
-        project_year: "59 м²",
-        project_type: "Туризм / арендный бизнес",
-        link: "/project-single"
-    },
+  {
+    id: 5,
+    project_name: "Дуплекс",
+    project_img: special_duplex,
+    project_desc:
+      "Идеально подходит для туристических комплексов, арендного бизнеса или точечной застройки частного сектора.",
+    client: "2 квартиры",
+    area: "1 этаж",
+    project_year: "59 м²",
+    project_type: "Туризм / арендный бизнес",
+    link: "/project-single",
+  },
 ];
