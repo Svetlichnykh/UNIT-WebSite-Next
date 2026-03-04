@@ -5,8 +5,6 @@ import {
     Carousel,
     CarouselContent,
     CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
 } from "@/components/ui/carousel"
 import Image from "next/image"
 import Autoplay from "embla-carousel-autoplay"
@@ -14,7 +12,7 @@ import Autoplay from "embla-carousel-autoplay"
 const BannerCarousel = ({ bannerImages }) => {
     const autoplay = useRef(
         Autoplay({
-            delay: 2000,
+            delay: 5000,
             stopOnInteraction: false,
         })
     )
@@ -39,9 +37,6 @@ const BannerCarousel = ({ bannerImages }) => {
                     </CarouselItem>
                 ))}
             </CarouselContent>
-
-            <CarouselPrevious />
-            <CarouselNext />
         </Carousel>
     )
 }

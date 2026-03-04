@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import RightArrow from "@/assets/icons/rightArrow";
 import { cn } from "@/lib/utils";
