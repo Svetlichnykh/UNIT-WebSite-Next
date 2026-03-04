@@ -30,6 +30,7 @@ const Home3 = () => {
           "Без  стройки",
           "В  любой  сезон",
         ]}
+        video={"/Main-video-banner.mp4"}
       />
       <AboutOne />
       <Counter />

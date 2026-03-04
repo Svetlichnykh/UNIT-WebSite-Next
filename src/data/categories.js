@@ -5,6 +5,7 @@ export const Categories = {
     title: "Панельно-каркасные дома",
     description: "Home Version 3 description",
     heroImage: "/img/home-3.webp",
+      banner: "/Category-mkc.mp4",
     houses: [
       {
         id: 1,
@@ -42,8 +43,15 @@ export const Categories = {
           "/images/projects/project-image-4.jpg",
           "/images/projects/project-image-5.jpg",
         ],
-        project_seo_title: "МКЦ-06 - Уют за городом. UNIT DV",
-        project_seo_descr: "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи"
+        project_seo_title: "МКЦ-06 | Панельно-каркасные дома | UNIT DV",
+        project_seo_descr: "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
+          bannerImages: [
+              "/mkc-08.webp",
+              "/images/projects/project-image-3.jpg",
+              "/mkc-08.webp",
+              "/mkc-08.webp",
+              "/mkc-08.webp",
+          ],
       },
 
       {
@@ -82,6 +90,7 @@ export const Categories = {
     title: "Загородные дома",
     description: "Описание для первой страницы",
     heroImage: "/img/home-1.webp",
+      banner: "/Category-md.mp4",
     houses: [
       {
         id: 1,
@@ -159,6 +168,7 @@ export const Categories = {
     title: "Банные дома",
     description: "Bathrooms category",
     heroImage: "/img/bathrooms.webp",
+      banner: "/Category-mb.mp4",
     houses: [
       {
         id: 1,

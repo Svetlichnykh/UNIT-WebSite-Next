@@ -32,7 +32,7 @@ export default async function Home3({ params }) {
 
   return (
     <>
-      <BannerThree text={data.title} />
+      <BannerThree text={data.title} video={data.banner} />
       <section>
         <div className="container-fluid ">
           <SectionTitle

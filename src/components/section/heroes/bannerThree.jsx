@@ -5,11 +5,11 @@ import ButtonFill from "@/components/ui/buttons/buttonFill";
 import RightArrow from "@/assets/icons/rightArrow";
 import BannerVideo from "@/components/section/heroes/BannerVideo";
 
-const BannerThree = ({ text, textArray, button, buttonText, buttonHref }) => {
+const BannerThree = ({ text, textArray, button, buttonText, buttonHref, video }) => {
   return (
     <div className="relative overflow-x-hidden">
       <div className="bg-hero-section bg-no-repeat h-screen bg-center bg-cover">
-        <BannerVideo />
+        <BannerVideo video={video} />
         <div className="container">
           <div className="absolute top-1/2 -translate-y-1/2">
             <h1 className="text-white [font-size:_clamp(60px,10vw,150px)] font-extrabold leading-[90%]">

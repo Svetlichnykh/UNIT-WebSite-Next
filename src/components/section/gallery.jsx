@@ -59,9 +59,10 @@ const Gallery = ({ text_muted, bg_muted }) => {
   max-w-60 2xl:min-w-56 min-w-48
   underline underline-offset-8 decoration-2
   decoration-transparent
-  transition-[text-decoration-color] duration-300 ease-out
+  transition duration-300 ease-out
   delay-150
-  group-hover:decoration-white
+  group-hover:decoration-[#FBB900]
+  group-hover:text-[#FBB900]
 "
                 >
                   {img_title}
@@ -87,7 +88,7 @@ const Gallery = ({ text_muted, bg_muted }) => {
               placeholder="blur"
               blurDataURL={staticBluarDataUrl}
               fill
-              className="object-cover"
+              className={`object-cover duration-300 ${expendItem === id ? "" : "grayscale"}`}
             />
           </Link>
         ))}

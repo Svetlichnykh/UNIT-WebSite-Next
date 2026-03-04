@@ -1,65 +1,73 @@
-import project_img_1 from "@/assets/images/project-overview-img-1.jpg";
 
-import project_img_2 from "@/assets/images/project-overview-img-2.jpg";
-
-import project_img_3 from "@/assets/images/project-overview-img-3.jpg";
-
-import project_img_4 from "@/assets/images/project-overview-img-4.jpg";
+import special_motel from "@/assets/images/special-motel.jpg";
+import special_house from "@/assets/images/special-house.jpg";
+import special_pension from "@/assets/images/special-pension.jpg";
+import special_medicine from "@/assets/images/special-medicine.jpg";
+import special_duplex from "@/assets/images/special-duplex.jpg";
 
 export const projectsData = [
   {
     id: 1,
-    project_name: "Pixel House",
-    project_img: project_img_2,
+    project_name: "Гостиница",
+    project_img: special_motel,
     project_desc:
-      "At the heart of the e+ project, made of natural anodised aluminium, glazing, sandstone and granite, the lobby  ...see more",
-    client: "Sogeprom",
-    area: "14,891 m²",
-    project_year: "2020",
-    project_type: "Interior design",
-    link: "/project-single",
-    location: "Sao Paulo, Brazil",
+      "Продуманная планировка на 36–38 номеров позволяет быстро запустить доходный объект для туристических потоков, командировок или баз отдыха.",
+    client: "36–38 номеров",
+    area: "2 этажа",
+    project_year: "910 м²",
+    project_type: "Гостиничный бизнес",
+    link: "/project-single"
   },
 
   {
     id: 2,
-    project_name: "La Fuente",
-    project_img: project_img_3,
+    project_name: "Многоквартирный дом",
+    project_img: special_house,
     project_desc:
-      "At the heart of the e+ project, made of natural anodised aluminium, glazing, sandstone and granite, the lobby  ...see more",
-    client: "Sogeprom",
-    area: "14,891 m²",
-    project_year: "2022",
-    project_type: "Interior design",
-    link: "/project-single",
-    location: "US",
+      "Оптимальное решение для малоэтажной застройки: позволяет эффективно использовать землю и запускать продажи или аренду уже на этапе строительства.",
+    client: "18 квартир",
+    area: "3 этажа",
+    project_year: "476 м²",
+    project_type: "Девелопмент",
+    link: "/project-single"
   },
 
   {
     id: 3,
-    project_name: "Bovio House",
-    project_img: project_img_1,
+    project_name: "Пансионат",
+    project_img: special_pension,
     project_desc:
-      "At the heart of the e+ project, made of natural anodised aluminium, glazing, sandstone and granite, the lobby  ...see more",
-    client: "Sogeprom",
-    area: "14,891 m²",
-    project_year: "2021",
-    project_type: "Interior design",
-    link: "/project-single",
-    location: "UK",
+      "Подходит для создания частного дома ухода, реабилитационного центра или социального объекта с оптимальными затратами на строительство.",
+    client: "6 комнат",
+    area: "1 этаж",
+    project_year: "163 м²",
+    project_type: "Социальное",
+    link: "/project-single"
   },
 
   {
     id: 4,
-    project_name: "MFA Lakeside",
-    project_img: project_img_4,
+    project_name: "Фельдшерско-акушерский пункт",
+    project_img: special_medicine,
     project_desc:
-      "At the heart of the e+ project, made of natural anodised aluminium, glazing, sandstone and granite, the lobby  ...see more",
-    client: "Sogeprom",
-    area: "14,891 m²",
-    project_year: "2022",
-    project_type: "Private House",
-    link: "/project-single",
-    location: "US",
+      "Функциональное решение для обеспечения доступной медицины в малых населённых пунктах в рамках государственных и муниципальных программ.",
+    client: "6 кабинетов",
+    area: "1 этаж",
+    project_year: "69 м²",
+    project_type: "Социальное",
+    link: "/project-single"
   },
+
+    {
+        id: 5,
+        project_name: "Дуплекс",
+        project_img: special_duplex,
+        project_desc:
+            "Идеально подходит для туристических комплексов, арендного бизнеса или точечной застройки частного сектора.",
+        client: "2 квартиры",
+        area: "1 этаж",
+        project_year: "59 м²",
+        project_type: "Туризм / арендный бизнес",
+        link: "/project-single"
+    },
 ];

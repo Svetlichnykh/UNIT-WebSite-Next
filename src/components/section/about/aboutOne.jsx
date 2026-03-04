@@ -47,7 +47,7 @@ const AboutOne = ({ text_muted, bg_muted }) => {
         />
         <div
           className={cn(
-            `bg-secondary xl:mt-[220px] lg:mt-25 md:mt-44 mt-[540px] xl:mb-20 mb-0 ${bg_muted}`,
+            `bg-secondary bg-[#DDDDDD] xl:mt-[220px] lg:mt-25 md:mt-44 mt-[540px] xl:mb-20 mb-0 ${bg_muted}`,
           )}
         >
           <div className="container">

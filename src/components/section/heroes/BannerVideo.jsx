@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-const BannerVideo = () => {
+const BannerVideo = ({video}) => {
   return (
     <video
       autoPlay
@@ -9,7 +9,7 @@ const BannerVideo = () => {
       muted
       className="absolute inset-0 object-cover h-screen w-full"
     >
-      <source src="/Banner-video.mp4" type="video/mp4" />
+      <source src={video} type="video/mp4" />
     </video>
   );
 };
