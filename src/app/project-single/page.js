@@ -92,7 +92,6 @@ const ProjectSingle = () => {
             </div>
           </div>
 
-          <Calculator />
           <ProjectSingleSliderOne />
 
           <ShopSlider data={productData} />
