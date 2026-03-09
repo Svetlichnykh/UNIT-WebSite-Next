@@ -8,6 +8,8 @@ import { productData } from "@/lib/fackData/productData";
 import Feedback from "@/components/section/feedback";
 import React from "react";
 import BannerCarousel from "@/components/banner-carousel/banner-carousel";
+import SectionTitle from "@/components/ui/sectionTitle";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({ params }) {
   const { slug, houseSlug } = await params;
@@ -97,12 +99,12 @@ export default async function HousePage({ params }) {
           </div>
 
           <Calculator calculatorData={house.calculatorData} />
+          <Feedback />
           <ProjectSingleSliderOne projectImgList={house.sliderImages} />
 
           <ShopSlider data={productData} />
         </div>
       </section>
-      <Feedback />
     </>
   );
 }

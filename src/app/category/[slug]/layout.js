@@ -43,7 +43,6 @@ export default function RootLayout({ children }) {
           <LayoutChildren>
             <HeaderThree />
             {children}
-            <Footer />
           </LayoutChildren>
         </div>
       </body>
