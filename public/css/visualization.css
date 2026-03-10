@@ -149,3 +149,34 @@
   visibility: visible;
   position: relative;
 }
+
+
+
+
+.visualization-scheme {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.plan {
+    padding: 40px 0;
+    margin: 0 auto;
+    max-width: 1700px;
+}
+
+@media screen and (max-width: 1800px) {
+    .plan {
+        max-width: calc(100vw - 100px);
+    }
+}
+@media screen and (max-width: 1000px) {
+    .plan {
+        max-width: calc(100vw - 60px);
+    }
+}
+@media screen and (max-width: 600px) {
+    .plan {
+        max-width: calc(100vw - 30px);
+    }
+}

@@ -676,7 +676,7 @@ const Calculator = ({ calculatorData }) => {
       <link rel="stylesheet" href="/css/lib/pannellum.css" />
 
       <section className="section">
-        <div className="section__inner">
+        <div className="section__inner plan">
           <h2 className="h2 p-d-20">Планировка дома</h2>
 
           <div className="visualization-block">

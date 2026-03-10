@@ -102,7 +102,7 @@ export const Categories = {
               right: "/house-images/mkc/mkc-06/views/right.png",
             },
           },
-          planImage: "/house-images/mkc/mkc-06/layout/layout.png",
+          planImage: "/img/testing2.png",
           rooms: [
             {
               id: "kitchen",
