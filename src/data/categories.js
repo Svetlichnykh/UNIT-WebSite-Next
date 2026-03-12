@@ -93,7 +93,10 @@ export const Categories = {
           "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
         calculatorData: {
           base_price: 5150000,
-          available_roofs: [{ id: "hip", label: "Вальмовая кровля" }],
+            available_roofs: [
+                { id: "hip", label: "Вальмовая кровля" },
+                { id: "gable", label: "Двускатная кровля" }
+            ],
           roofImages: {
             hip: {
               back: "/house-images/mkc/mkc-06/views/back.png",
@@ -101,6 +104,12 @@ export const Categories = {
               front: "/house-images/mkc/mkc-06/views/front.png",
               right: "/house-images/mkc/mkc-06/views/right.png",
             },
+              gable: {
+                  back: "/house-images/mkc/mkc-06/views/back.png",
+                  left: "/house-images/mkc/mkc-06/views/left.png",
+                  front: "/house-images/mkc/mkc-06/views/front.png",
+                  right: "/house-images/mkc/mkc-06/views/right.png",
+              },
           },
           planImage: "/img/testing2.png",
           rooms: [
