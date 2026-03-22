@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import SectionTitle from "../ui/sectionTitle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -14,9 +13,9 @@ const ShopSlider = ({ data, text_muted, bg_muted }) => {
     type: "progressbar",
   };
   return (
-    <section className="pt-20">
+    <section className="pb-20">
       <div className="container-fluid ">
-        <div className="lg:pt-30 2sm:pt-20 pt-14">
+        <div className="lg:pt-10 2sm:pt-10 pt-12">
           <Swiper
             spaceBetween={30}
             breakpoints={{

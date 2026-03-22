@@ -344,3 +344,9 @@ h4 {
     width: 1800px;
   }
 }
+@media (max-width: 768px) {
+    .banner_cont {
+        width: 95vw !important;
+        max-width: none !important;
+    }
+}

@@ -17,29 +17,27 @@ export const Categories = {
         project_bedrooms: 2,
         project_details: [
           {
-            label: "Количество спален",
-            render: <>2 шт.</>,
+            label: "спальни",
+            render: <>2</>,
           },
           {
-            label: "Количество санузлов",
-            render: <>1 шт.</>,
+            label: "cанузел",
+            render: <>1</>,
+          },
+        ],
+        project_areas: [
+          {
+            label: "помещений",
+            render: <>60.5</>,
           },
           {
-            label: "Площадь помещений",
-            render: (
-              <>
-                60.4 м<sup>2</sup>
-              </>
-            ),
+            label: "регистрационная",
+            render: <>90.1</>,
           },
-          {
-            label: "Площадь регистрационная",
-            render: (
-              <>
-                66.3 м<sup>2</sup>
-              </>
-            ),
-          },
+            {
+                label: "застройки",
+                render: <>90.1</>,
+            },
         ],
         project_price: "5 150 000",
         small_description: "Уют за городом",
@@ -93,7 +91,10 @@ export const Categories = {
           "Компактный дом формата 3-комнатной квартиры для комфортной загородной жизни семьи",
         calculatorData: {
           base_price: 5150000,
-          available_roofs: [{ id: "hip", label: "Вальмовая кровля" }],
+          available_roofs: [
+            { id: "hip", label: "Вальмовая кровля" },
+            { id: "gable", label: "Двускатная кровля" },
+          ],
           roofImages: {
             hip: {
               back: "/house-images/mkc/mkc-06/views/back.png",
@@ -101,8 +102,15 @@ export const Categories = {
               front: "/house-images/mkc/mkc-06/views/front.png",
               right: "/house-images/mkc/mkc-06/views/right.png",
             },
+            gable: {
+              back: "/img/views/view_09_back.png",
+              left: "/img/views/view_09_left.png",
+              front: "/img/views/view_09_front.png",
+              right: "/img/views/view_09_right.png",
+            },
           },
-          planImage: "/img/testing2.png",
+          // planImage: "/img/testing2.png",
+          planImage: "/house-images/mkc/mkc-06/layout/layout.png",
           rooms: [
             {
               id: "kitchen",
@@ -444,188 +452,71 @@ export const Categories = {
             {
               column: 1,
               sections: [
-                {
-                  title: "ВНУТРЕННЯЯ ОТДЕЛКА",
-                  blocks: [
-                    {
-                      title: "ЭЛЕКТРОСНАБЖЕНИЕ",
-                      radioName: "energy",
-                      allowDeselect: true,
-                      subTitle: "",
-                      subblocks: [
-                        {
-                          dataTitle: "Базовое электроснабжение",
-                          optionTitle: "БАЗОВОЕ",
-                          optionPrice: 271000,
-                          optionText: "",
-                        },
-                        {
-                          dataTitle: "Оптимальное электроснабжение",
-                          optionTitle: "ОПТИМАЛЬНОЕ",
-                          optionPrice: 408000,
-                          optionText: "",
-                        },
+                  {
+                      title: "",
+                      blocks: [
+                          {
+                              title: "ВНУТРЕННЯЯ ОТДЕЛКА СТЕН",
+                              radioName: "walls",
+                              allowDeselect: false,
+                              default: 1,
+                              subTitle: "",
+                              subblocks: [
+                                  {
+                                      dataTitle: "ГКЛ/ГВЛ",
+                                      optionTitle: "ГКЛ/ГВЛ",
+                                      optionPrice: 0,
+                                      optionText: "",
+                                  },
+                                  {
+                                      dataTitle: "OSB + ГКЛ/ГВЛ",
+                                      optionTitle: "OSB + ГКЛ/ГВЛ",
+                                      optionPrice: 100000,
+                                      optionText: "",
+                                  },
+                                  {
+                                      dataTitle: "ГКЛ + ГКЛ/ГВЛ",
+                                      optionTitle: "ГКЛ + ГКЛ/ГВЛ",
+                                      optionPrice: 100000,
+                                      optionText: "",
+                                  },
+                              ],
+                          },
                       ],
-                    },
-                    {
-                      title: "ОТОПЛЕНИЕ",
-                      radioName: "heat",
-                      allowDeselect: true,
-                      subTitle: "",
-                      subblocks: [
-                        {
-                          dataTitle: "Конвекторное отопление",
-                          optionTitle: "КОНВЕКТОРНОЕ",
-                          optionPrice: 121500,
-                          optionText: "",
-                        },
-                        {
-                          dataTitle: "Радиаторное котельное отопление",
-                          optionTitle: "РАДИАТОРНОЕ КОТЕЛЬНОЕ",
-                          optionPrice: 196000,
-                          optionText: "",
-                        },
-                        {
-                          dataTitle: "Отопление тёплым полом",
-                          optionTitle: "ТЁПЛЫЙ ПОЛ ВОДЯНОЙ",
-                          optionPrice: 1280500,
-                          optionText: "",
-                          require: [
-                            {
-                              id: "fundament-2",
-                              alert: "alert_need_fundament",
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                    {
-                      title: "ВОДОСНАБЖЕНИЕ",
-                      radioName: "water",
-                      allowDeselect: true,
-                      subTitle: "",
-                      subblocks: [
-                        {
-                          dataTitle: "Водоснабжение через PPR коллектор",
-                          optionTitle: "PPR КОЛЛЕКТОР",
-                          optionPrice: 57000,
-                          optionText: "",
-                        },
-                        {
-                          dataTitle: "Водоснабжение через металл коллектор",
-                          optionTitle: "МЕТАЛЛ КОЛЛЕКТОР",
-                          optionPrice: 114000,
-                          optionText: "",
-                        },
-                      ],
-                    },
-
-                    {
-                      dataTitle: "Вентиляция",
-                      title: "ВЕНТИЛЯЦИЯ",
-                      checkboxName: "air",
-                      price: 26000,
-                    },
-                  ],
-                },
+                  },
               ],
             },
-
-            {
-              column: 2,
-              sections: [
-                {
-                  title: "ФУНДАМЕНТ",
-                  blocks: [
-                    {
-                      title: "ФУНДАМЕНТ",
-                      radioName: "fundament",
-                      allowDeselect: true,
-                      subTitle: "",
-                      subblocks: [
-                        {
-                          dataTitle: "Фундамент - ЖБ сваи",
-                          optionTitle: "ЖБ СВАИ",
-                          optionPrice: 240000,
-                          optionText: "",
-                          require: [
-                            {
-                              id: "platform",
-                              alert: "alert_need_platform",
-                            },
+              {
+                  column: 2,
+                  sections: [
+                      {
+                          title: "",
+                          blocks: [
+                              {
+                                  title: "ИНЖЕНЕРИЯ",
+                                  radioName: "tech",
+                                  allowDeselect: false,
+                                  subTitle: "",
+                                  default: 1,
+                                  subblocks: [
+                                      {
+                                          dataTitle: "СКРЫТАЯ ИНЖЕНЕРИЯ В ПАНЕЛЯХ",
+                                          optionTitle: "СКРЫТАЯ ИНЖЕНЕРИЯ В ПАНЕЛЯХ",
+                                          optionPrice: 0,
+                                          optionText: "",
+                                      },
+                                      {
+                                          dataTitle: "НА МОНТАЖЕ",
+                                          optionTitle: "НА МОНТАЖЕ",
+                                          optionPrice: 100000,
+                                          optionText: "",
+                                      },
+                                  ],
+                              },
                           ],
-                        },
-                        {
-                          dataTitle: "Фундамент - ЖБ плита",
-                          optionTitle: "ЖБ ПЛИТА",
-                          optionPrice: 1120000,
-                          optionText: "",
-                          exclude: [
-                            {
-                              id: "platform", // если платформа включена
-                              alert: "alert_not_fundament", // показать alert
-                            },
-                          ],
-                        },
-                      ],
-                    },
+                      },
                   ],
-                },
-
-                {
-                  title: "ВНУТРЕННЯЯ ИНЖЕНЕРИЯ",
-                  blocks: [
-                    {
-                      title: "ВНУТРЕННЯЯ ОТДЕЛКА СТЕН",
-                      radioName: "walls",
-                      allowDeselect: true,
-                      subTitle: "",
-                      subblocks: [
-                        {
-                          dataTitle: "Отделка - ГКЛ/ГВЛ",
-                          optionTitle: "ГКЛ/ГВЛ",
-                          optionPrice: 338500,
-                          optionText: "",
-                        },
-                        {
-                          dataTitle: "Отделка - OSB + ГКЛ/ГВЛ",
-                          optionTitle: "OSB + ГКЛ/ГВЛ",
-                          optionPrice: 652000,
-                          optionText: "",
-                        },
-                      ],
-                    },
-                  ],
-                },
-
-                {
-                  title: "ВНЕШНЯЯ ИНЖЕНЕРИЯ",
-                  blocks: [
-                    {
-                      dataTitle: "Водоснабжение",
-                      title: "ВОДОСНАБЖЕНИЕ",
-                      checkboxName: "engineer-water",
-                      subTitle: "Скважина 50м",
-                      price: 250000,
-                    },
-                    {
-                      dataTitle: "Канализация",
-                      title: "КАНАЛИЗАЦИЯ",
-                      checkboxName: "engineer-sewerage",
-                      subTitle: "ТОПАС 5 с монтажом",
-                      price: 270000,
-                    },
-                    {
-                      dataTitle: "Электричество",
-                      title: "ЭЛЕКТРИЧЕСТВО",
-                      checkboxName: "engineer-energy",
-                      subTitle: "Подключение дома",
-                      price: 50000,
-                    },
-                  ],
-                },
-              ],
-            },
+              },
           ],
           terraceBlock: {
             radioName: "terrace",

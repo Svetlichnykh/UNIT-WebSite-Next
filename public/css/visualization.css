@@ -150,33 +150,38 @@
   position: relative;
 }
 
-
-
-
 .visualization-scheme {
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .plan {
-    padding: 40px 0;
-    margin: 0 auto;
-    max-width: 1700px;
+  padding: 0 0 40px 0;
+  margin: 0 auto;
+  max-width: 1700px;
 }
 
 @media screen and (max-width: 1800px) {
-    .plan {
-        max-width: calc(100vw - 100px);
-    }
+  .plan {
+    max-width: calc(100vw - 100px);
+  }
 }
 @media screen and (max-width: 1000px) {
-    .plan {
-        max-width: calc(100vw - 60px);
-    }
+  .plan {
+    max-width: calc(100vw - 60px);
+  }
 }
 @media screen and (max-width: 600px) {
-    .plan {
-        max-width: calc(100vw - 30px);
-    }
+  .plan {
+    max-width: calc(100vw - 30px);
+  }
+}
+
+.section-calculator__inner {
+    padding: 0 0 40px 0;
+}
+
+.sec_plan {
+    margin: 0 0 60px 0;
 }

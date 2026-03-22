@@ -6,6 +6,7 @@ import Link from "next/link";
 import "tiny-slider/dist/tiny-slider.css";
 import { useEffect, useRef, useState } from "react";
 import CalculatorBlock from "@/components/calculator-block/Calculator-block";
+import SectionTitle from "@/components/ui/sectionTitle";
 
 const Calculator = ({ calculatorData }) => {
   const blocksData = calculatorData.blocksData;
@@ -653,7 +654,7 @@ const Calculator = ({ calculatorData }) => {
   }, [selectedParts, currentRoof]);
 
   return (
-    <section>
+    <section className={`overflow-x-hidden`}>
       {/* Core styles */}
       <link rel="stylesheet" href="/css/settings.css" />
       <link rel="stylesheet" href="/css/global.css" />
@@ -675,10 +676,16 @@ const Calculator = ({ calculatorData }) => {
       <link rel="stylesheet" href="/css/lib/tooltips.css" />
       <link rel="stylesheet" href="/css/lib/pannellum.css" />
 
-      <section className="section">
-        <div className="section__inner plan">
-          <h2 className="h2 p-d-20">Планировка дома</h2>
 
+        <SectionTitle
+            sectionName={"План"}
+            sectionTitle={"План"}
+            no_line={true}
+            no_descr={true}
+        />
+      <section className="section sec_plan">
+        <div className="section__inner plan">
+          {/*<h2 className="h2 p-d-20">Планировка дома</h2>*/}
           <div className="visualization-block">
             <div className="visualization-scheme__wrapper">
               <div
@@ -771,55 +778,166 @@ const Calculator = ({ calculatorData }) => {
           </div>
         </div>
       </section>
-      <div className="roof-switch">
-        {AVAILABLE_ROOFS.map((roof) => (
-          <button
-            key={roof.id}
-            className={`roof-switch__btn ${
-              currentRoof === roof.id ? "is-active" : ""
-            }`}
-            onClick={() => {
-              if (AVAILABLE_ROOFS.length > 1) {
-                setCurrentRoof(roof.id);
-              }
-            }}
-            disabled={AVAILABLE_ROOFS.length === 1}
-          >
-            {roof.label}
-          </button>
-        ))}
-      </div>
 
-      <section className="section sect-views">
-        <div className="section__inner">
-          <div
-            className="sect-views__frame"
-            id="views-frame"
-            ref={containerRef}
-          >
-            <div className="active-frame" id="active-frame" ref={frameRef} />
 
-            <div className="sect-views__slider">
-              {viewsOrder.map((view) => (
-                <Image
-                  key={view}
-                  src={roofImages[currentRoof][view]}
-                  alt=""
-                  className="sect-views__image"
-                  data-view={view}
-                  width={400}
-                  height={400}
-                  onClick={() => setCurrentView(view)}
-                />
-              ))}
+
+
+
+
+
+
+
+
+        <SectionTitle
+            sectionName={"Фасады"}
+            sectionTitle={"Фасады"}
+            no_line={true}
+            no_descr={true}
+        />
+
+
+
+        <section className="section sect-views">
+            <div className=" section__inner">
+
+                {/* БОЛЬШАЯ КАРТИНКА */}
+                <div className={`flex max-2sm:flex-col max-2sm:items-center`} >
+                    <div className={`w-1/2 max-2sm:w-4/5`}>
+                        <div className="visualization-scheme__wrapper">
+                            <div
+                                className="visualization-scheme"
+                                style={{
+                                    backgroundImage: `url(${calculatorData.planImage})`,
+                                }}
+                            >
+                                <nav
+                                    className="home-plan__nav"
+                                    aria-label="Навигация по плану дома"
+                                >
+                                    {viewsOrder.map((view) => (
+                                        <button
+                                            key={view}
+                                            className={`home-plan__arrow home-plan__arrow--${view} ${
+                                                currentView === view ? "home-plan__arrow--active" : ""
+                                            }`}
+                                            onClick={() => setCurrentView(view)}
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 42 36"
+                                                width="42"
+                                                height="36"
+                                            >
+                                                <path d="M21 36L41.7846 0H0.215393L21 36Z" />
+                                            </svg>
+                                        </button>
+                                    ))}
+                                </nav>
+                            </div>
+
+                            {rooms &&
+                                rooms.map((room) => (
+                                    <div
+                                        key={room.id}
+                                        className={`visualization-scheme area ${
+                                            hasInteracted && activeRoom === room.id ? "active" : ""
+                                        }`}
+                                        style={{
+                                            clipPath: `polygon(${room.polygon
+                                                .map(([x, y]) => `${x}% ${y}%`)
+                                                .join(",")})`,
+                                        }}
+                                        data-tooltip={`${room.label}\n( ${room.area} )`}
+                                        onClick={() => {
+                                            setActiveRoom(room.id);
+                                            setHasInteracted(true);
+                                        }}
+                                    />
+                                ))}
+                        </div>
+                    </div>
+                    <div className="max-2sm:w-4/5 sect-views__preview w-1/2 flex justify-center items-center">
+                        <Image
+                            src={roofImages[currentRoof][currentView]}
+                            alt=""
+                            className="sect-views__preview-image"
+                            width={900}
+                            height={600}
+                            priority
+                        />
+                    </div>
+                </div>
+
+                <div className="roof-switch mt-8">
+                    {AVAILABLE_ROOFS.map((roof) => (
+                        <button
+                            key={roof.id}
+                            className={`roof-switch__btn ${
+                                currentRoof === roof.id ? "is-active" : ""
+                            }`}
+                            onClick={() => {
+                                if (AVAILABLE_ROOFS.length > 1) {
+                                    setCurrentRoof(roof.id);
+                                }
+                            }}
+                            disabled={AVAILABLE_ROOFS.length === 1}
+                        >
+                            {roof.label}
+                        </button>
+                    ))}
+                </div>
+                <div className={`py-8 relative`}>
+                    <div className={`absolute w-full bg-[#909090] h-full -translate-y-8 rounded-2xl`}></div>
+                        <div
+                            className="sect-views__frame "
+                            id="views-frame"
+                            ref={containerRef}
+                        >
+                            <div className="active-frame" id="active-frame" ref={frameRef} />
+
+                            {/* СЛАЙДЕР СНИЗУ */}
+                            <div className="sect-views__slider">
+                                {viewsOrder.map((view) => (
+                                    <Image
+                                        key={view}
+                                        src={roofImages[currentRoof][view]}
+                                        alt=""
+                                        className={`sect-views__image ${
+                                            currentView === view ? "is-active" : ""
+                                        }`}
+                                        data-view={view}
+                                        width={120}
+                                        height={120}
+                                        onClick={() => setCurrentView(view)}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
+
+
+
+
+
+
 
       <section className="section section-calculator">
         <div className="section__inner section-calculator__inner">
-          <h2 className="h2 p-d-20">Домокомплект</h2>
+          {/*<h2 className="h2 p-d-20">Домокомплект</h2>*/}
+          <SectionTitle
+            sectionName={"Домокомплект"}
+            sectionTitle={"Домокомплект"}
+            no_line={true}
+            no_over={true}
+            no_descr={true}
+          />
 
           <div className="section-calculator__section">
             <div className="section-calculator__block calculator__block-house">
@@ -940,6 +1058,31 @@ const Calculator = ({ calculatorData }) => {
             </div>
           </div>
 
+            <div className="calculator__blocks p-d-20 pt-5">
+                {calculatorGroups.map((col, colIndex) => (
+                    <div className="calculator__column" key={colIndex}>
+                        {col.sections.map((section, sectionIndex) => (
+                            <div key={sectionIndex}>
+                                {section.title && <h3 className="h4">{section.title}</h3>}
+
+                                <div className="calculator__block">
+                                    {section.blocks.map((block) => (
+                                        <CalculatorBlock
+                                            key={block.radioName || block.checkboxName}
+                                            block={block}
+                                            inputs={inputs}
+                                            onToggle={handleToggle}
+                                            onRadioChange={handleRadioChange}
+                                            currentValues={currentValues}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ))}
+            </div>
+
           <div className="calculator-terrace-sliders__wrapper">
             <div className="block-choice__title p-d-20">
               <div className="block__price">
@@ -1015,41 +1158,7 @@ const Calculator = ({ calculatorData }) => {
             </div>
           </div>
 
-          <div className="attention">
-            <h3 className="attention__text-big">
-              РАССЧИТЫВАЕТСЯ ИСХОДЯ ИЗ УЧАСТКА
-            </h3>
 
-            <p className="attention__text-small">
-              Приведены ориентировочные рассчеты на Хабаровский район. Итоговая
-              стоимость на ваш участок рассчитывает подрядчик, поставляющий до
-            </p>
-          </div>
-
-          <div className="calculator__blocks p-d-20">
-            {calculatorGroups.map((col, colIndex) => (
-              <div className="calculator__column" key={colIndex}>
-                {col.sections.map((section, sectionIndex) => (
-                  <div key={sectionIndex}>
-                    {section.title && <h3 className="h4">{section.title}</h3>}
-
-                    <div className="calculator__block">
-                      {section.blocks.map((block) => (
-                        <CalculatorBlock
-                          key={block.radioName || block.checkboxName}
-                          block={block}
-                          inputs={inputs}
-                          onToggle={handleToggle}
-                          onRadioChange={handleRadioChange}
-                          currentValues={currentValues}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
         </div>
 
         <div className="calculator__summary">

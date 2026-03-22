@@ -14,6 +14,9 @@ const SectionTitle = ({
   bg_muted,
   link,
   button_text,
+  no_line = false,
+  no_over = false,
+  no_descr = false,
 }) => {
   const [scroll, setScroll] = useState(false);
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -51,11 +54,11 @@ const SectionTitle = ({
 
   return (
     <>
-      <div ref={containerRef} className="overflow-x-hidden">
+      <div ref={containerRef} className={`${!no_over && "overflow-x-hidden"} pointer-events-none`}>
         <motion.div
           style={{ translateX: scrollValue, transitionDuration: "1s" }}
         >
-          <h1 className="text-transparent webkit-text-stroke-width-1 webkit-text-stroke-primary opacity-20 xl:text-[324px] lg:text-[200px] md:text-[170px] sm:text-[140px] text-[100px] whitespace-nowrap font-extrabold leading-135">
+          <h1 className="text-transparent webkit-text-stroke-width-1 webkit-text-stroke-primary opacity-20 xl:text-[324px] lg:text-[200px] md:text-[170px] sm:text-[140px] text-[100px] whitespace-nowrap font-extrabold leading-135 select-none pointer-events-none">
             {sectionName}
           </h1>
         </motion.div>
@@ -64,7 +67,7 @@ const SectionTitle = ({
       <div className="container relative">
         <div
           className={cn(
-            `xl:-mt-52 -mt-16 xl:ml-12.5 lg:ml-9 md:ml-7 ml-3 after:contents-[""] after:absolute after:left-[12px] after:top-0 after:w-[5px] after:h-full after:bg-secondary`,
+            `xl:-mt-52 -mt-16 xl:ml-12.5 lg:ml-9 md:ml-7 ml-3 ${!no_line && 'after:contents-[""] after:absolute after:left-[12px] after:top-0 after:w-[5px] after:h-full after:bg-secondary'}`,
           )}
         >
           <h2
@@ -73,36 +76,42 @@ const SectionTitle = ({
             )}
             dangerouslySetInnerHTML={{ __html: sectionTitle }}
           />
-          <span className={cn(`block w-[300px] h-[5px]  bg-secondary`)}></span>
-          <div className="flex md:flex-row flex-col justify-between md:items-center">
-            <h5
-              className={cn(
-                `text-primary-foreground lg:text-[35px] sm:text-3xl text-2xl font-semibold mt-4 max-w-[690px] md:mb-0 mb-7 !leading-160 ${text_muted}`,
-              )}
-            >
-              {Array.isArray(sectionDesc)
-                ? sectionDesc.map((text, i) => (
-                    <span key={i}>
+          {!no_line && (
+            <span
+              className={cn(`block w-[300px] h-[5px]  bg-secondary`)}
+            ></span>
+          )}
+            {!no_descr && (
+                <div className="flex md:flex-row flex-col justify-between md:items-center">
+                    <h5
+                        className={cn(
+                            `text-primary-foreground lg:text-[35px] sm:text-3xl text-2xl font-semibold mt-4 max-w-[690px] md:mb-0 mb-7 !leading-160 ${text_muted}`,
+                        )}
+                    >
+                        {Array.isArray(sectionDesc)
+                            ? sectionDesc.map((text, i) => (
+                                <span key={i}>
                       {text}
-                      <br />
+                                    <br />
                     </span>
-                  ))
-                : sectionDesc}
-            </h5>
+                            ))
+                            : sectionDesc}
+                    </h5>
 
-            {button_text && (
-              <Link href={link}>
-                <ButtonOutline
-                  className={cn(
-                    `2sm:px-10 px-3 after:left-0 after:${bg_muted}`,
-                  )}
-                >
-                  {button_text}
-                  <RightArrow height={"22"} width={"35"} />
-                </ButtonOutline>
-              </Link>
+                    {button_text && (
+                        <Link href={link}>
+                            <ButtonOutline
+                                className={cn(
+                                    `2sm:px-10 px-3 after:left-0 after:${bg_muted}`,
+                                )}
+                            >
+                                {button_text}
+                                <RightArrow height={"22"} width={"35"} />
+                            </ButtonOutline>
+                        </Link>
+                    )}
+                </div>
             )}
-          </div>
         </div>
       </div>
     </>
