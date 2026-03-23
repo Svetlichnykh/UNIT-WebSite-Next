@@ -95,6 +95,11 @@ export const Categories = {
             { id: "hip", label: "Вальмовая кровля" },
             { id: "gable", label: "Двускатная кровля" },
           ],
+            available_layouts: [
+                { picture: "/img/testing1.png", label: "План типовой" },
+                { picture: "/img/testing2.png", label: "План вариант 2" },
+                { picture: "/img/testing3.png", label: "План вариант 3" },
+            ],
           roofImages: {
             hip: {
               back: "/house-images/mkc/mkc-06/views/back.png",

@@ -13,9 +13,10 @@
   margin-bottom: 0;
 }
 .section__inner {
-  padding: 40px 0;
+  padding: 40px;
   margin: 0 auto;
   max-width: 1300px;
+  border-radius: 16px;
 }
 
 @media screen and (max-width: 1400px) {

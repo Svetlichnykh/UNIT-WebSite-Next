@@ -16,6 +16,7 @@ const Calculator = ({ calculatorData }) => {
   const CHOICE_IMAGES = calculatorData.CHOICE_IMAGES;
   const roofImages = calculatorData.roofImages;
   const AVAILABLE_ROOFS = calculatorData.available_roofs;
+  const AVAILABLE_LAYOUTS = calculatorData.available_layouts;
   const BASE_PRICE = calculatorData.base_price;
   const viewsOrder = ["back", "left", "front", "right"];
   const flatCalculatorGroups = calculatorGroups.flatMap((col) =>
@@ -29,6 +30,7 @@ const Calculator = ({ calculatorData }) => {
   const frameRef = useRef(null);
   const [currentView, setCurrentView] = useState("front");
   const [currentRoof, setCurrentRoof] = useState(AVAILABLE_ROOFS[0].id);
+  const [currentLayout, setCurrentLayout] = useState(AVAILABLE_LAYOUTS[0].picture);
   const [inputs, setInputs] = useState({});
   const [baseValues, setBaseValues] = useState({});
   const [requirementsMap, setRequirementsMap] = useState({});
@@ -653,6 +655,96 @@ const Calculator = ({ calculatorData }) => {
     return result;
   }, [selectedParts, currentRoof]);
 
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const activeRoomData = rooms.find(r => r.id === activeRoom);
+
+    const startX = useRef(0);
+    const isDragging = useRef(false);
+
+    useEffect(() => {
+        if (!lightboxOpen) return;
+
+        const handleStart = (x) => {
+            startX.current = x;
+            isDragging.current = true;
+        };
+
+        const handleEnd = (x) => {
+            if (!isDragging.current || !activeRoomData) return;
+
+            const diff = x - startX.current;
+
+            if (Math.abs(diff) > 50) {
+                if (diff < 0) {
+                    // свайп влево → вперед
+                    setCurrentImageIndex((prev) =>
+                        (prev + 1) % activeRoomData.images.length
+                    );
+                } else {
+                    // свайп вправо → назад
+                    setCurrentImageIndex((prev) =>
+                        prev === 0
+                            ? activeRoomData.images.length - 1
+                            : prev - 1
+                    );
+                }
+            }
+
+            isDragging.current = false;
+        };
+
+        // TOUCH
+        const onTouchStart = (e) =>
+            handleStart(e.touches[0].clientX);
+
+        const onTouchEnd = (e) =>
+            handleEnd(e.changedTouches[0].clientX);
+
+        // MOUSE
+        const onMouseDown = (e) => handleStart(e.clientX);
+        const onMouseUp = (e) => handleEnd(e.clientX);
+
+        window.addEventListener("touchstart", onTouchStart);
+        window.addEventListener("touchend", onTouchEnd);
+        window.addEventListener("mousedown", onMouseDown);
+        window.addEventListener("mouseup", onMouseUp);
+
+        return () => {
+            window.removeEventListener("touchstart", onTouchStart);
+            window.removeEventListener("touchend", onTouchEnd);
+            window.removeEventListener("mousedown", onMouseDown);
+            window.removeEventListener("mouseup", onMouseUp);
+        };
+    }, [lightboxOpen, activeRoom]);
+
+
+    useEffect(() => {
+        if (!lightboxOpen || !activeRoomData) return;
+
+        const handleKey = (e) => {
+            if (e.key === "Escape") setLightboxOpen(false);
+
+            if (e.key === "ArrowRight") {
+                setCurrentImageIndex((prev) =>
+                    (prev + 1) % activeRoomData.images.length
+                );
+            }
+
+            if (e.key === "ArrowLeft") {
+                setCurrentImageIndex((prev) =>
+                    prev === 0
+                        ? activeRoomData.images.length - 1
+                        : prev - 1
+                );
+            }
+        };
+
+        window.addEventListener("keydown", handleKey);
+        return () => window.removeEventListener("keydown", handleKey);
+    }, [lightboxOpen, activeRoom]);
+
+
   return (
     <section className={`overflow-x-hidden`}>
       {/* Core styles */}
@@ -683,103 +775,172 @@ const Calculator = ({ calculatorData }) => {
             no_line={true}
             no_descr={true}
         />
-      <section className="section sec_plan">
-        <div className="section__inner plan">
-          {/*<h2 className="h2 p-d-20">Планировка дома</h2>*/}
-          <div className="visualization-block">
-            <div className="visualization-scheme__wrapper">
-              <div
-                className="visualization-scheme"
-                style={{
-                  backgroundImage: `url(${calculatorData.planImage})`,
-                }}
-              >
-                <nav
-                  className="home-plan__nav"
-                  aria-label="Навигация по плану дома"
-                >
-                  {viewsOrder.map((view) => (
-                    <button
-                      key={view}
-                      className={`home-plan__arrow home-plan__arrow--${view} ${
-                        currentView === view ? "home-plan__arrow--active" : ""
-                      }`}
-                      onClick={() => setCurrentView(view)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 42 36"
-                        width="42"
-                        height="36"
-                      >
-                        <path d="M21 36L41.7846 0H0.215393L21 36Z" />
-                      </svg>
-                    </button>
-                  ))}
-                </nav>
-              </div>
 
-              {rooms &&
-                rooms.map((room) => (
-                  <div
-                    key={room.id}
-                    className={`visualization-scheme area ${
-                      hasInteracted && activeRoom === room.id ? "active" : ""
+        {/* ROOF SWITCH */}
+        <div className="roof-switch mt-8 switch-layouts">
+            {AVAILABLE_LAYOUTS.map((layout) => (
+                <button
+                    key={layout.label}
+                    className={`roof-switch__btn ${
+                        currentLayout === layout.picture ? "is-active" : ""
                     }`}
-                    style={{
-                      clipPath: `polygon(${room.polygon
-                        .map(([x, y]) => `${x}% ${y}%`)
-                        .join(",")})`,
-                    }}
-                    data-tooltip={`${room.label}\n( ${room.area} )`}
                     onClick={() => {
-                      setActiveRoom(room.id);
-                      setHasInteracted(true);
+                        if (AVAILABLE_LAYOUTS.length > 1) {
+                            setCurrentLayout(layout.picture);
+                        }
                     }}
-                  />
-                ))}
-            </div>
-
-            <div className="visualization-sliders__wrapper">
-              {rooms.map((room) => (
-                <div
-                  key={room.id}
-                  className={`visualization-slider ${
-                    activeRoom === room.id ? "active" : ""
-                  }`}
+                    disabled={AVAILABLE_LAYOUTS.length === 1}
                 >
-                  <div className="visual-slider">
-                    {room.images.map((src, i) => (
-                      <Image
-                        key={i}
-                        src={src}
-                        alt={room.label}
-                        width={400}
-                        height={400}
-                        className="slider__slide"
-                      />
-                    ))}
-                  </div>
-
-                  <div className="visual-slider__thumbnails">
-                    {room.thumbnails.map((src, i) => (
-                      <Image
-                        key={i}
-                        src={src}
-                        alt={room.label}
-                        width={120}
-                        height={120}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+                    {layout.label}
+                </button>
+            ))}
         </div>
-      </section>
 
+        <section className="section sec_plan">
+            <div className="section__inner plan">
+                <div className="flex flex-col gap-6 items-center">
 
+                    {/* ПЛАН */}
+                    <div className="visualization-scheme__wrapper max-lg:w-[calc(100vw - 100px)] w-[800px]">
+                        <div
+                            className="visualization-scheme"
+                            style={{
+                                backgroundImage: `url(${currentLayout})`,
+                            }}
+                        />
+
+                        {rooms.map((room) => (
+                            <div
+                                key={room.id}
+                                className={`visualization-scheme area ${
+                                    hasInteracted && activeRoom === room.id ? "active" : ""
+                                }`}
+                                style={{
+                                    clipPath: `polygon(${room.polygon
+                                        .map(([x, y]) => `${x}% ${y}%`)
+                                        .join(",")})`,
+                                }}
+                                data-tooltip={`${room.label}\n( ${room.area} )`}
+                                onClick={() => {
+                                    setActiveRoom(room.id);
+                                    setHasInteracted(true);
+                                }}
+                            />
+                        ))}
+                    </div>
+
+                    {/* НАХОДИМ АКТИВНУЮ КОМНАТУ */}
+                    {(() => {
+                        const activeRoomData =
+                            rooms.find((r) => r.id === activeRoom) || rooms[0];
+
+                        return (
+                            <div className="w-full">
+
+                                {/* ROOM SWITCH (НОВЫЙ) */}
+                                <div className="roof-switch switch-cont-spec flex flex-wrap gap-2 justify-center">
+                                    {rooms.map((room) => (
+                                        <button
+                                            key={room.id}
+                                            className={`roof-switch__btn switch-spec ${
+                                                activeRoomData.id === room.id ? "is-active" : ""
+                                            }`}
+                                            onClick={() => {
+                                                setActiveRoom(room.id);
+                                                setHasInteracted(true);
+                                            }}
+                                        >
+                                            {room.label}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/* ГАЛЕРЕЯ */}
+                                <div className=" p-10 bg-[#909090] rounded-xl">
+                                    <div className="flex gap-4 flex-wrap pb-2">
+                                        {activeRoomData.images.map((src, i) => (
+                                            <Image
+                                                key={i}
+                                                src={src}
+                                                alt={activeRoomData.label}
+                                                width={220}
+                                                height={160}
+                                                className="rounded-xl cursor-pointer shrink-0 hover:opacity-80 transition"
+                                                onClick={() => {
+                                                    setCurrentImageIndex(i);
+                                                    setLightboxOpen(true);
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+
+                            </div>
+                        );
+                    })()}
+                </div>
+            </div>
+        </section>
+
+        {lightboxOpen && activeRoomData && (
+            <div
+                className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center select-none"
+                onClick={() => setLightboxOpen(false)}
+            >
+                {/* ЗАКРЫТЬ */}
+                <button
+                    className="absolute top-6 right-6 text-white text-4xl z-50"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setLightboxOpen(false);
+                    }}
+                >
+                    ✕
+                </button>
+
+                {/* ЛЕВАЯ ЗОНА (большой хитбокс) */}
+                <div
+                    className="absolute left-0 top-0 h-full w-1/2 cursor-pointer flex items-center pl-6"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex((prev) =>
+                            prev === 0
+                                ? activeRoomData.images.length - 1
+                                : prev - 1
+                        );
+                    }}
+                >
+      <span className="text-white text-6xl opacity-70 hover:opacity-100 transition">
+        ‹
+      </span>
+                </div>
+
+                {/* ПРАВАЯ ЗОНА */}
+                <div
+                    className="absolute right-0 top-0 h-full w-1/2 cursor-pointer flex items-center justify-end pr-6"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex((prev) =>
+                            (prev + 1) % activeRoomData.images.length
+                        );
+                    }}
+                >
+      <span className="text-white text-6xl opacity-70 hover:opacity-100 transition">
+        ›
+      </span>
+                </div>
+
+                {/* КАРТИНКА */}
+                <Image
+                    src={activeRoomData.images[currentImageIndex]}
+                    alt="preview"
+                    width={1400}
+                    height={900}
+                    draggable={false}
+                    className="max-h-[90vh] w-auto object-contain pointer-events-none"
+                />
+            </div>
+        )}
 
 
 
@@ -835,25 +996,6 @@ const Calculator = ({ calculatorData }) => {
                                 </nav>
                             </div>
 
-                            {rooms &&
-                                rooms.map((room) => (
-                                    <div
-                                        key={room.id}
-                                        className={`visualization-scheme area ${
-                                            hasInteracted && activeRoom === room.id ? "active" : ""
-                                        }`}
-                                        style={{
-                                            clipPath: `polygon(${room.polygon
-                                                .map(([x, y]) => `${x}% ${y}%`)
-                                                .join(",")})`,
-                                        }}
-                                        data-tooltip={`${room.label}\n( ${room.area} )`}
-                                        onClick={() => {
-                                            setActiveRoom(room.id);
-                                            setHasInteracted(true);
-                                        }}
-                                    />
-                                ))}
                         </div>
                     </div>
                     <div className="max-2sm:w-4/5 sect-views__preview w-1/2 flex justify-center items-center">
