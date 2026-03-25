@@ -954,12 +954,13 @@ const Calculator = ({ calculatorData }) => {
             sectionTitle={"Фасады"}
             no_line={true}
             no_descr={true}
+            c
         />
 
 
 
         <section className="section sect-views">
-            <div className=" section__inner">
+            <div className="section__inner inner-spec">
 
                 {/* БОЛЬШАЯ КАРТИНКА */}
                 <div className={`flex max-2sm:flex-col max-2sm:items-center`} >
@@ -1073,16 +1074,17 @@ const Calculator = ({ calculatorData }) => {
       <section className="section section-calculator">
         <div className="section__inner section-calculator__inner">
           {/*<h2 className="h2 p-d-20">Домокомплект</h2>*/}
-          <SectionTitle
-            sectionName={"Домокомплект"}
-            sectionTitle={"Домокомплект"}
-            no_line={true}
-            no_over={true}
-            no_descr={true}
-          />
+                <SectionTitle
+                    sectionName={"Домокомплект"}
+                    sectionTitle={"Домокомплект"}
+                    no_line={true}
+                    no_over={true}
+                    no_descr={true}
+                />
+
 
           <div className="section-calculator__section">
-            <div className="section-calculator__block calculator__block-house">
+            <div className="section-calculator__block calculator__block-house ">
               <div
                 className="section-calculator-block__house"
                 id="colors-params"

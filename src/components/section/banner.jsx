@@ -1,5 +1,5 @@
 import React from "react";
-import banner_bg from "@/assets/images/special-motel.jpg"; // поставь свою картинку
+import banner_bg from "@/assets/images/bannerPhoto.png"; // поставь свою картинку
 import ButtonFill from "../ui/buttons/buttonFill";
 
 const HouseBanner = () => {
@@ -8,8 +8,8 @@ const HouseBanner = () => {
             <div className="relative rounded-xl overflow-hidden">
                 {/* Фон */}
                 <div
-                    className="bg-cover bg-center bg-no-repeat max-lg:min-h-[500px] min-h-[320px] lg:min-h-[420px]"
-                    style={{ backgroundImage: `url(${banner_bg.src})` }}
+                    className="bg-cover bg-center bg-no-repeat max-lg:min-h-[500px] min-h-[320px] lg:min-h-[420px] lg:bg-contain"
+                    style={{ backgroundImage: `url(${banner_bg.src})`, backgroundRepeat: "no-repeat", backgroundPosition: "left" }}
                 />
 
                 {/* Затемнение / градиент */}

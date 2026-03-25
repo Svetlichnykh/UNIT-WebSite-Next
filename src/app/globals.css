@@ -350,3 +350,16 @@ h4 {
         max-width: none !important;
     }
 }
+
+@media (max-width: 768px) {
+    .cont-spec {
+        margin: 0;
+
+    }
+}
+
+@media (max-width: 768px) {
+    .inner-spec {
+        padding: 40px 0 !important;
+    }
+}
