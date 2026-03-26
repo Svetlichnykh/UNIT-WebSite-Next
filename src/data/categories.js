@@ -96,9 +96,9 @@ export const Categories = {
             { id: "gable", label: "Двускатная кровля" },
           ],
             available_layouts: [
-                { picture: "/img/testing1.png", label: "План типовой" },
-                { picture: "/img/testing2.png", label: "План вариант 2" },
-                { picture: "/img/testing3.png", label: "План вариант 3" },
+                { picture: "/house-images/mkc/mkc-06/layout/layout-main.png", label: "Главный" },
+                { picture: "/house-images/mkc/mkc-06/layout/layout-2.png", label: "Вариант 2" },
+                { picture: "/house-images/mkc/mkc-06/layout/layout-terraces.png", label: "С террасами" },
             ],
           roofImages: {
             hip: {
@@ -115,7 +115,7 @@ export const Categories = {
             },
           },
           // planImage: "/img/testing2.png",
-          planImage: "/house-images/mkc/mkc-06/layout/layout.png",
+          planImage: "/house-images/mkc/mkc-06/views/layout-facades.png",
           rooms: [
             {
               id: "kitchen",

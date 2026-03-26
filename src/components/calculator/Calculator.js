@@ -743,7 +743,11 @@ const Calculator = ({ calculatorData }) => {
         window.addEventListener("keydown", handleKey);
         return () => window.removeEventListener("keydown", handleKey);
     }, [lightboxOpen, activeRoom]);
+    const [isMainLayout, setMainLayout] = useState(true);
 
+    useEffect(() => {
+        setMainLayout(currentLayout === AVAILABLE_LAYOUTS[0].picture)
+    }, [currentLayout])
 
   return (
     <section className={`overflow-x-hidden`}>
@@ -777,11 +781,11 @@ const Calculator = ({ calculatorData }) => {
         />
 
         {/* ROOF SWITCH */}
-        <div className="roof-switch mt-8 switch-layouts">
+        <div className="roof-switch switch-cont-spec-2 flex flex-wrap gap-2 justify-center">
             {AVAILABLE_LAYOUTS.map((layout) => (
                 <button
                     key={layout.label}
-                    className={`roof-switch__btn ${
+                    className={`roof-switch__btn switch-spec-2 ${
                         currentLayout === layout.picture ? "is-active" : ""
                     }`}
                     onClick={() => {
@@ -801,7 +805,7 @@ const Calculator = ({ calculatorData }) => {
                 <div className="flex flex-col gap-6 items-center">
 
                     {/* ПЛАН */}
-                    <div className="visualization-scheme__wrapper max-lg:w-[calc(100vw - 100px)] w-[800px]">
+                    <div className="visualization-scheme__wrapper max-lg:w-[calc(100vw - 100px)] w-[800px] layout-cont">
                         <div
                             className="visualization-scheme"
                             style={{
@@ -809,35 +813,37 @@ const Calculator = ({ calculatorData }) => {
                             }}
                         />
 
-                        {rooms.map((room) => (
-                            <div
-                                key={room.id}
-                                className={`visualization-scheme area ${
-                                    hasInteracted && activeRoom === room.id ? "active" : ""
-                                }`}
-                                style={{
-                                    clipPath: `polygon(${room.polygon
-                                        .map(([x, y]) => `${x}% ${y}%`)
-                                        .join(",")})`,
-                                }}
-                                data-tooltip={`${room.label}\n( ${room.area} )`}
-                                onClick={() => {
-                                    setActiveRoom(room.id);
-                                    setHasInteracted(true);
-                                }}
-                            />
-                        ))}
+                        {/* ❌ overlay только для первого плана */}
+                        {isMainLayout &&
+                            rooms.map((room) => (
+                                <div
+                                    key={room.id}
+                                    className={`visualization-scheme area ${
+                                        hasInteracted && activeRoom === room.id ? "active" : ""
+                                    }`}
+                                    style={{
+                                        clipPath: `polygon(${room.polygon
+                                            .map(([x, y]) => `${x}% ${y}%`)
+                                            .join(",")})`,
+                                    }}
+                                    data-tooltip={`${room.label}\n( ${room.area} )`}
+                                    onClick={() => {
+                                        setActiveRoom(room.id);
+                                        setHasInteracted(true);
+                                    }}
+                                />
+                            ))}
                     </div>
 
-                    {/* НАХОДИМ АКТИВНУЮ КОМНАТУ */}
-                    {(() => {
+                    {/* ❌ блок с кнопками и галереей только для первого плана */}
+                    {isMainLayout && (() => {
                         const activeRoomData =
                             rooms.find((r) => r.id === activeRoom) || rooms[0];
 
                         return (
                             <div className="w-full">
 
-                                {/* ROOM SWITCH (НОВЫЙ) */}
+                                {/* ROOM SWITCH */}
                                 <div className="roof-switch switch-cont-spec flex flex-wrap gap-2 justify-center">
                                     {rooms.map((room) => (
                                         <button
@@ -856,8 +862,8 @@ const Calculator = ({ calculatorData }) => {
                                 </div>
 
                                 {/* ГАЛЕРЕЯ */}
-                                <div className=" p-10 bg-[#909090] rounded-xl">
-                                    <div className="flex gap-4 flex-wrap pb-2">
+                                <div className="p-10 bg-[#909090] rounded-b-xl">
+                                    <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4 pb-2">
                                         {activeRoomData.images.map((src, i) => (
                                             <Image
                                                 key={i}
@@ -865,7 +871,7 @@ const Calculator = ({ calculatorData }) => {
                                                 alt={activeRoomData.label}
                                                 width={220}
                                                 height={160}
-                                                className="rounded-xl cursor-pointer shrink-0 hover:opacity-80 transition"
+                                                className="w-full h-auto rounded-xl cursor-pointer hover:opacity-80 transition"
                                                 onClick={() => {
                                                     setCurrentImageIndex(i);
                                                     setLightboxOpen(true);
@@ -878,6 +884,7 @@ const Calculator = ({ calculatorData }) => {
                             </div>
                         );
                     })()}
+
                 </div>
             </div>
         </section>
