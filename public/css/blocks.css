@@ -269,28 +269,36 @@
 }
 
 /* Позиционирование стрелок */
-.home-plan__arrow--front {
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%) rotate(270deg);
+.home-plan__arrow {
+    position: absolute;
 }
 
-.home-plan__arrow--left {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
+/* ↑ BACK (сверху) */
 .home-plan__arrow--back {
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
+/* ↓ FRONT (снизу) */
+.home-plan__arrow--front {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+}
+
+/* ← LEFT */
+.home-plan__arrow--left {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+/* → RIGHT */
 .home-plan__arrow--right {
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) rotate(180deg);
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%) rotate(90deg);
 }
 
 @media screen and (max-width: 1400px) {
