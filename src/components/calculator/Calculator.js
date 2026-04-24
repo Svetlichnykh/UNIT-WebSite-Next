@@ -7,6 +7,13 @@ import "tiny-slider/dist/tiny-slider.css";
 import { useEffect, useRef, useState } from "react";
 import CalculatorBlock from "@/components/calculator-block/Calculator-block";
 import SectionTitle from "@/components/ui/sectionTitle";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const Calculator = ({ calculatorData }) => {
   const blocksData = calculatorData.blocksData;
@@ -862,23 +869,36 @@ const Calculator = ({ calculatorData }) => {
                                 </div>
 
                                 {/* ГАЛЕРЕЯ */}
-                                <div className="p-10 bg-[#909090] rounded-b-xl">
-                                    <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4 pb-2">
-                                        {activeRoomData.images.map((src, i) => (
-                                            <Image
-                                                key={i}
-                                                src={src}
-                                                alt={activeRoomData.label}
-                                                width={220}
-                                                height={160}
-                                                className="w-full h-auto rounded-xl cursor-pointer hover:opacity-80 transition"
-                                                onClick={() => {
-                                                    setCurrentImageIndex(i);
-                                                    setLightboxOpen(true);
-                                                }}
-                                            />
-                                        ))}
-                                    </div>
+
+                                <div className="p-10 max-sm:p-5 bg-[#909090] rounded-b-xl overflow-hidden">
+                                    <Carousel
+                                        opts={{
+                                            align: "start",
+                                            dragFree: true,
+                                        }}
+                                        className="w-full"
+                                    >
+                                        <CarouselContent className="-ml-6">
+                                            {activeRoomData.images.map((src, i) => (
+                                                <CarouselItem
+                                                    key={i}
+                                                    className="pl-6 basis-[240px] sm:basis-[280px] shrink-0"
+                                                >
+                                                    <Image
+                                                        src={src}
+                                                        alt={activeRoomData.label}
+                                                        width={280}
+                                                        height={200}
+                                                        className="w-full h-auto rounded-xl cursor-pointer hover:opacity-80 transition"
+                                                        onClick={() => {
+                                                            setCurrentImageIndex(i);
+                                                            setLightboxOpen(true);
+                                                        }}
+                                                    />
+                                                </CarouselItem>
+                                            ))}
+                                        </CarouselContent>
+                                    </Carousel>
                                 </div>
 
                             </div>
